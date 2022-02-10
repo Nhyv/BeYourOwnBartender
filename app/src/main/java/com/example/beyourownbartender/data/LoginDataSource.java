@@ -4,7 +4,6 @@ import com.example.beyourownbartender.data.model.LoggedInUser;
 
 import java.io.IOException;
 
-// We will do the database stuff here.
 public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {

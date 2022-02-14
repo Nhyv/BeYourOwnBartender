@@ -2,6 +2,8 @@ package com.example.beyourownbartender.data;
 
 import com.example.beyourownbartender.data.model.LoggedInUser;
 
+import java.io.IOException;
+
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
@@ -43,7 +45,7 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password) throws IOException {
         // handle login
         Result<LoggedInUser> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {

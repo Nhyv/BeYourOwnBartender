@@ -11,6 +11,8 @@ import com.example.beyourownbartender.data.Result;
 import com.example.beyourownbartender.data.model.LoggedInUser;
 import com.example.beyourownbartender.R;
 
+import java.io.IOException;
+
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
@@ -29,7 +31,7 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password) throws IOException {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
 
@@ -65,6 +67,6 @@ public class LoginViewModel extends ViewModel {
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null;
     }
 }

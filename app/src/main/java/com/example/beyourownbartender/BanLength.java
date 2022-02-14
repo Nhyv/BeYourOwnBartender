@@ -1,5 +1,7 @@
 package com.example.beyourownbartender;
 
+import com.google.gson.annotations.SerializedName;
+
 public class BanLength {
 
     @SerializedName("ticks")

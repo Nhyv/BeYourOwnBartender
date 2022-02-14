@@ -1,5 +1,7 @@
 package com.example.beyourownbartender;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.OffsetDateTime;
 
 public class Image {

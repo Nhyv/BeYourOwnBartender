@@ -39,7 +39,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
         holder.tvRecipeName.setText(recipe.getName());
-        if (recipe.authorid != 0) {
+        if (recipe.authorId != 7) {
             holder.tvAuthor.setText("TODO");
         }
         else {

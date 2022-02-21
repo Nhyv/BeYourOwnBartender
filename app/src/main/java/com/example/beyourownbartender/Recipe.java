@@ -14,8 +14,8 @@ public class Recipe {
     @SerializedName("rating")
     int rating;
 
-    @SerializedName("authorid")
-    int authorid;
+    @SerializedName("authorId")
+    int authorId;
 
     @SerializedName("imageId")
     int imageId;
@@ -26,11 +26,11 @@ public class Recipe {
     @SerializedName("modifiedTime")
     OffsetDateTime modifiedTime;
 
-    public Recipe(int id, String name, int rating, int authorid, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime) {
+    public Recipe(int id, String name, int rating, int authorId, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime) {
         this.id = id;
         this.name = name;
         this.rating = rating;
-        this.authorid = authorid;
+        this.authorId = authorId;
         this.imageId = imageId;
         this.creationTime = creationTime;
         this.modifiedTime = modifiedTime;
@@ -49,7 +49,7 @@ public class Recipe {
     }
 
     public int getAuthorid() {
-        return authorid;
+        return authorId;
     }
 
     public int getImageId() {

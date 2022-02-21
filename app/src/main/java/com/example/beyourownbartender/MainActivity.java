@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MainAdapterList adapterList;
+    Context context;
     List<Recipe> recipes;
 
     @Override
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 recipes = response.body();
 
-                adapterList = new MainAdapterList(recipes);
+                adapterList = new MainAdapterList(recipes, getMainActivity());
                 recyclerView.setAdapter(adapterList);
             }
 
@@ -62,5 +65,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
         return true;
+    }
+
+    public MainActivity getMainActivity() {
+        return this;
+    }
+
+    public void startReadRecipeActivity(Recipe recipe) {
+        Intent intent = new Intent(this, ReadRecipeActivity.class);
+        intent.putExtra("recipeId", recipe.getId());
+        startActivity(intent);
     }
 }

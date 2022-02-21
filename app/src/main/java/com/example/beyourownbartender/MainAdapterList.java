@@ -19,9 +19,11 @@ import java.util.List;
 
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
     private List<Recipe> recipes;
+    MainActivity main;
 
-    public MainAdapterList(List<Recipe> recipes) {
+    public MainAdapterList(List<Recipe> recipes, MainActivity main) {
         this.recipes = recipes;
+        this.main = main;
     }
 
     @NonNull
@@ -63,7 +65,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Open the recipe
+                    main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                 }
             });
         }

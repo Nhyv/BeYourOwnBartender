@@ -2,6 +2,8 @@ package com.example.beyourownbartender.data;
 
 import android.os.StrictMode;
 import com.example.beyourownbartender.Login;
+import com.example.beyourownbartender.RetrofitInstance;
+import com.example.beyourownbartender.ServerInterface;
 import com.example.beyourownbartender.data.model.LoggedInUser;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -13,38 +15,36 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginDataSource {
+    LoggedInUser loggedInUser;
+    volatile boolean isSuccessful;
 
     public Result<LoggedInUser> login(String username, String password) throws IOException {
-        JsonObject json = new JsonObject();
-        json.addProperty("username", username);
-        json.addProperty("password", password);
+        ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        Call<LoggedInUser> call = server.getLogin(new Login(username, password));
 
-        URL url = new URL("http://api.impostor.services/api/auth/login");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("content-type", "application/json");
-        conn.setDoOutput(true);
+        call.enqueue(new Callback<LoggedInUser>() {
+            @Override
+            public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
+                loggedInUser = response.body();
+                isSuccessful = true;
+            }
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
+            @Override
+            public void onFailure(Call<LoggedInUser> call, Throwable t) {
+                isSuccessful = false;
+            }
+        });
+
+        if (isSuccessful) {
+            return new Result.Success<>(loggedInUser);
         }
 
-        try (OutputStream os = conn.getOutputStream()) {
-            String rawJson = json.toString();
-            byte[] input = rawJson.getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        }
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-            Login login = new Gson().fromJson(br, Login.class);
-
-            LoggedInUser user = new LoggedInUser(login.getUsername());
-            return new Result.Success<>(user);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }
+        return null;
     }
 
     public void logout() {

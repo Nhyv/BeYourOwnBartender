@@ -23,11 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.beyourownbartender.LoadingActivity;
 import com.example.beyourownbartender.MainActivity;
 import com.example.beyourownbartender.R;
-import com.example.beyourownbartender.ui.login.LoginViewModel;
-import com.example.beyourownbartender.ui.login.LoginViewModelFactory;
 import com.example.beyourownbartender.databinding.ActivityLoginBinding;
 
 import java.io.IOException;

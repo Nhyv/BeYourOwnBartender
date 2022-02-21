@@ -4,6 +4,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
@@ -18,73 +20,53 @@ import java.util.List;
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
     private List<Recipe> recipes;
 
+    public MainAdapterList(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
     @NonNull
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        BufferedReader reader;
-        String line;
-        StringBuilder builder = new StringBuilder();
-
-        try {
-            URL url = new URL("http://api.impostor.services/api/recipes");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
-
-            int status = conn.getResponseCode();
-
-            if (status >= 300) {
-                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-                while ((line = reader.readLine()) != null) {
-                    builder.append(line);
-                }
-                reader.close();
-            }
-            else {
-                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line = reader.readLine()) != null) {
-                    builder.append(line);
-                }
-                reader.close();
-                parse(builder.toString());
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.main_recipe_layout, parent, false);
-        return new MainViewHolder(view);
-    }
 
-    public static String parse(String response) throws JSONException {
-        JSONArray responseArray = new JSONArray(response);
-        for (int i = 0; i < responseArray.length(); i++) {
-            JSONObject responseObject = responseArray.getJSONObject(i);
-            int id = responseObject.getInt("id");
-            String name = responseObject.getString("name");
-            int rating = responseObject.getInt("rating");
-            Log.d("I", "hi " + id + " " + name + " " + " " + rating);
-        }
-        return null;
+        return new MainViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-
+        Recipe recipe = recipes.get(position);
+        holder.tvRecipeName.setText(recipe.getName());
+        if (recipe.authorid != 0) {
+            holder.tvAuthor.setText("TODO");
+        }
+        else {
+            holder.tvAuthor.setText("Choix de BeYourOwnBartender");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return recipes.size();
     }
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
+        TextView tvRecipeName, tvAuthor;
+
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
+            tvAuthor = itemView.findViewById(R.id.tvAuteur);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Open the recipe
+                }
+            });
         }
+
     }
 }

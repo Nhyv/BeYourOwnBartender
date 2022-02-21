@@ -14,13 +14,13 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

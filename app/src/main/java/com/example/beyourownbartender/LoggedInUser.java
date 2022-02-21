@@ -1,12 +1,9 @@
-package com.example.beyourownbartender.data.model;
+package com.example.beyourownbartender;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.time.OffsetDateTime;
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
- */
 public class LoggedInUser {
 
     @SerializedName("token")

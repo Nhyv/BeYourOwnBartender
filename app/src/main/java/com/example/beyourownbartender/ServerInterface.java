@@ -1,7 +1,5 @@
 package com.example.beyourownbartender;
 
-import com.example.beyourownbartender.data.model.LoggedInUser;
-
 import java.util.List;
 
 import retrofit2.Call;

@@ -5,10 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.StrictMode;
-
-import com.example.beyourownbartender.data.Result;
-import com.example.beyourownbartender.data.model.LoggedInUser;
 
 import java.util.List;
 

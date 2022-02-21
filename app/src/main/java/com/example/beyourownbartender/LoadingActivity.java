@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.beyourownbartender.ui.login.LoginActivity;
-
 public class LoadingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

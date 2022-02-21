@@ -3,6 +3,7 @@ package com.example.beyourownbartender;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -86,6 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
                         if (response.code() == 200) {
                             user = response.body();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             Toast.makeText(context,

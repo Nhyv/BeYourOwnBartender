@@ -4,10 +4,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +43,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
         holder.tvRecipeName.setText(recipe.getName());
+        Picasso.get().load("https://www.mordeo.org/files/uploads/2018/10/Anime-Girl-Fireworks-4K-Ultra-HD-Mobile-Wallpaper.jpg").into(holder.imgMain);
         if (recipe.authorId != 7) {
             holder.tvAuthor.setText("TODO");
         }
@@ -55,12 +60,14 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvRecipeName, tvAuthor;
+        ImageView imgMain;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
             tvAuthor = itemView.findViewById(R.id.tvAuteur);
+            imgMain = itemView.findViewById(R.id.imgMain);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

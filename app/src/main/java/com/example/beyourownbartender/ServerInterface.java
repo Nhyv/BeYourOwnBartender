@@ -16,6 +16,6 @@ public interface ServerInterface {
     @POST("/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
 
-    @POST("/recipes/{id}")
+    @GET("/recipes/{id}")
     Call<Recipe> getRecipeById(@Path("id") int id);
 }

@@ -3,6 +3,7 @@ package com.example.beyourownbartender;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class Recipe {
     @SerializedName("id")
@@ -26,7 +27,13 @@ public class Recipe {
     @SerializedName("modifiedTime")
     OffsetDateTime modifiedTime;
 
-    public Recipe(int id, String name, int rating, int authorId, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime) {
+    @SerializedName("steps")
+    List<String> steps;
+
+    @SerializedName("tags")
+    List<String> tags;
+
+    public Recipe(int id, String name, int rating, int authorId, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps) {
         this.id = id;
         this.name = name;
         this.rating = rating;
@@ -34,6 +41,16 @@ public class Recipe {
         this.imageId = imageId;
         this.creationTime = creationTime;
         this.modifiedTime = modifiedTime;
+        this.tags = tags;
+        this.steps = steps;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public List<String> getSteps() {
+        return steps;
     }
 
     public int getId() {

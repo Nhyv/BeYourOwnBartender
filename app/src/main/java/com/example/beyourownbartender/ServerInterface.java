@@ -18,4 +18,10 @@ public interface ServerInterface {
 
     @GET("/recipes/{id}")
     Call<Recipe> getRecipeById(@Path("id") int id);
+
+    @GET("/ingredients")
+    Call<List<Ingredient>> getIngredients();
+
+    @GET("/ingredients/recipe_{id}")
+    Call<List<Ingredient>> getIngredientsByRecipeId(@Path("id") int id);
 }

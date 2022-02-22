@@ -1,6 +1,5 @@
 package com.example.beyourownbartender;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
@@ -42,6 +33,17 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
+        List<String> tags = recipe.getTags();
+        String toShow = "";
+
+        for (int i = 0; i < tags.size(); i++) {
+            if (tags.size() == 1)
+                toShow = tags.get(i);
+            else
+            toShow += tags.get(i) + ", ";
+        }
+
+        holder.tvTags.setText(toShow);
         holder.tvRecipeName.setText(recipe.getName());
         Picasso.get().load("https://www.mordeo.org/files/uploads/2018/10/Anime-Girl-Fireworks-4K-Ultra-HD-Mobile-Wallpaper.jpg").into(holder.imgMain);
         if (recipe.authorId != 7) {
@@ -59,7 +61,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvRecipeName, tvAuthor;
+        TextView tvRecipeName, tvAuthor, tvTags;
         ImageView imgMain;
 
         public MainViewHolder(@NonNull View itemView) {
@@ -67,6 +69,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
             tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
             tvAuthor = itemView.findViewById(R.id.tvAuteur);
+            tvTags = itemView.findViewById(R.id.tvTags);
             imgMain = itemView.findViewById(R.id.imgMain);
 
             itemView.setOnClickListener(new View.OnClickListener() {

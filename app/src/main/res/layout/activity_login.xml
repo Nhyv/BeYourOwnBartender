@@ -64,6 +64,7 @@
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:backgroundTint="#009F3434"
         android:enabled="false"
         android:text="Se connecter ou s'enregistrer"
         android:textColor="@color/white"

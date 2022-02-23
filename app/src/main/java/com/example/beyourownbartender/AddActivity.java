@@ -21,9 +21,12 @@ public class AddActivity extends AppCompatActivity {
     private RecyclerView rvIngredients;
     private RecyclerView rvSteps;
     private IngredientAdapterList ingredientAdapterList;
+    private StepAdapterList stepAdapterList;
     private List<Ingredient> ingredientList;
     private List<Ingredient> allIngredientList;
+    private List<String> stepList;
     private Button buttonAddIngredient;
+    private Button buttonAddStep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,13 @@ public class AddActivity extends AppCompatActivity {
         rvIngredients.setLayoutManager(new LinearLayoutManager(this));
         ingredientAdapterList = new IngredientAdapterList(ingredientList, this);
         rvIngredients.setAdapter(ingredientAdapterList);
+
+        /// Creates the empty String list and sets the recyclerview/adapterlist values for steps
+        stepList = createListSteps();
+        rvSteps = findViewById(R.id.rvSteps);
+        rvSteps.setLayoutManager(new LinearLayoutManager(this));
+        stepAdapterList = new StepAdapterList(stepList, this);
+        rvSteps.setAdapter(stepAdapterList);
 
 
         // This is used to pull the ingredients data from the DB
@@ -67,10 +77,27 @@ public class AddActivity extends AppCompatActivity {
                 ingredientAdapterList.addIngredient(new Ingredient(-1,null,null, allIngredientList));
             }
         });
+
+        // Creates a onClickListener for the addStep button
+        buttonAddStep = findViewById(R.id.btAddSteps);
+        buttonAddStep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Adds an empty step
+                stepAdapterList.addStep("");
+            }
+        });
     }
 
+    // Creates the empty ingredient list
     private List<Ingredient> createListIngredients(){
         List<Ingredient> ingredientList = new ArrayList<>();
         return(ingredientList);
+    }
+
+    private List<String> createListSteps(){
+        List<String> stepList = new ArrayList<>();
+        stepList.add("");
+        return(stepList);
     }
 }

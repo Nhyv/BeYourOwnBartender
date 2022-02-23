@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 public class LoginActivity extends AppCompatActivity {
     EditText username, password;
     boolean filledUsername, filledPassword;
-    Button login;
+    Button login, register;
     LoggedInUser user;
     Context context;
 
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,6 +105,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+
+                startActivity(intent);
+                finish();
             }
         });
     }

@@ -16,6 +16,9 @@ public interface ServerInterface {
     @POST("/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
 
+    @POST("/auth/register")
+    Call<Void> addUser(@Body Registration registration);
+
     @GET("/recipes/{id}")
     Call<Recipe> getRecipeById(@Path("id") int id);
 

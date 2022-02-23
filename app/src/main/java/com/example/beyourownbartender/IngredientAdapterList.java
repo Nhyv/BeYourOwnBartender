@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapterList.AdapterListViewHolder>{
@@ -31,6 +33,9 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     @Override
     public void onBindViewHolder(@NonNull IngredientAdapterList.AdapterListViewHolder holder, int position) {
 
+        // Sets the card title text
+        String titleCardIngredientString = "Ingredient No: "+(position+1);
+        holder.tvTitleCardIngredient.setText(titleCardIngredientString);
     }
 
     @Override
@@ -38,15 +43,20 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         return ingredientList.size();
     }
 
-    public void addNote(Ingredient item){
+    // Adds an empty ingredient to the RV
+    public void addIngredient(Ingredient item){
         ingredientList.add(item);
         notifyItemInserted(ingredientList.size()-1);
     }
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView tvTitleCardIngredient;
+
         public AdapterListViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            tvTitleCardIngredient = itemView.findViewById(R.id.tvTitleCardIngredient);
         }
     }
 }

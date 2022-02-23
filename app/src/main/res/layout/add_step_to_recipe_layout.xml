@@ -14,12 +14,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvTitleStep"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Etape No:" />
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvTitleStep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="Etape No:" />
+
+                <Button
+                    android:id="@+id/btRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supprimer" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

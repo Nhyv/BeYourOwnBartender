@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -53,6 +55,10 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, dropDownText);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinnerAllIngredients.setAdapter(dataAdapter);
+
+        // Sets the selected index on refresh (is -1 if name is undef)
+        int index = dataAdapter.getPosition(ingredientList.get(position).getName());
+        holder.spinnerAllIngredients.setSelection(index);
     }
 
     @Override
@@ -66,16 +72,53 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         notifyItemInserted(ingredientList.size()-1);
     }
 
+    // Removes an ingredient at index
+    public void deleteIngredient(int index){
+        ingredientList.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void refreshAll(){
+        for(int i = 0; i < ingredientList.size(); i++){
+            notifyItemChanged(i);
+        }
+    }
+
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvTitleCardIngredient;
         public Spinner spinnerAllIngredients;
+        public Button btRemoveIngredient;
 
         public AdapterListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitleCardIngredient = itemView.findViewById(R.id.tvTitleCardIngredient);
             spinnerAllIngredients = itemView.findViewById(R.id.spinnerAllIngredients);
+            btRemoveIngredient = itemView.findViewById(R.id.btRemoveIngredient);
+
+            btRemoveIngredient.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deleteIngredient(getLayoutPosition());
+                    refreshAll();
+                }
+            });
+
+            spinnerAllIngredients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    String selectedItem = adapterView.getItemAtPosition(i).toString();
+                    ingredientList.get(getLayoutPosition()).setName(selectedItem);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         }
+
+
     }
 }

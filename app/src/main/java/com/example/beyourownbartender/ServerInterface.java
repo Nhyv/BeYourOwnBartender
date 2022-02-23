@@ -24,4 +24,10 @@ public interface ServerInterface {
 
     @GET("/ingredients/recipe_{id}")
     Call<List<Ingredient>> getIngredientsByRecipeId(@Path("id") int id);
+
+    @POST("/comments/add")
+    Call<Void> addComment(@Body Comment comment);
+
+    @GET("/comments/recipe_{id}")
+    Call<List<Comment>> getCommentsByRecipeId(@Path("id") int id);
 }

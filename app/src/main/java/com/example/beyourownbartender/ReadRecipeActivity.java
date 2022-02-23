@@ -1,9 +1,16 @@
 package com.example.beyourownbartender;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,8 +21,13 @@ import retrofit2.Response;
 import retrofit2.http.Path;
 
 public class ReadRecipeActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private CommentAdapterList adapterList;
+    List<Comment> comments;
     Recipe recipe;
     TextView readTitre, readAuthor, readTags, readIngredients, readSteps;
+    EditText etComment;
+    Button btComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +40,8 @@ public class ReadRecipeActivity extends AppCompatActivity {
         readTags = findViewById(R.id.readTags);
         readIngredients = findViewById(R.id.readIngredients);
         readSteps = findViewById(R.id.readSteps);
+        etComment = findViewById(R.id.etComment);
+        btComment = findViewById(R.id.btComment);
 
         int id = 0;
         if (intent.hasExtra("recipeId")) {
@@ -91,6 +105,65 @@ public class ReadRecipeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Ingredient>> call, Throwable t) { }
+        });
+
+        etComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 1) {
+                    btComment.setEnabled(true);
+                }
+                else {
+                    btComment.setEnabled(false);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+
+        btComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Comment commentToAdd = new Comment(7, "BYOB",
+                        etComment.getText().toString(), 7);
+                Call<Void> callAdd = server.addComment(commentToAdd);
+
+                callAdd.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == 200)
+                            adapterList.addComment(commentToAdd);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        String apple;
+                    }
+                });
+            }
+        });
+
+        recyclerView = findViewById(R.id.rvComments);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Call<List<Comment>> callComment = server.getCommentsByRecipeId(id);
+
+        callComment.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                comments = response.body();
+                adapterList = new CommentAdapterList(comments);
+                recyclerView.setAdapter(adapterList);
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+            }
         });
     }
 }

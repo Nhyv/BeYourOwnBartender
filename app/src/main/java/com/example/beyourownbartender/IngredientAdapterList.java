@@ -1,15 +1,19 @@
 package com.example.beyourownbartender;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.BreakIterator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapterList.AdapterListViewHolder>{
@@ -20,6 +24,10 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     public IngredientAdapterList(List<Ingredient> ingredientList, Context context) {
         this.ingredientList = ingredientList;
         this.context = context;
+    }
+
+    public IngredientAdapterList(List<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
     }
 
     @NonNull
@@ -36,6 +44,15 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         // Sets the card title text
         String titleCardIngredientString = "Ingredient No: "+(position+1);
         holder.tvTitleCardIngredient.setText(titleCardIngredientString);
+
+        List<Ingredient> allIngredients = ingredientList.get(position).getAllIngredients();
+        List<String> dropDownText = new ArrayList<>();
+        for(int i = 0; i < allIngredients.size(); i++){
+            dropDownText.add(allIngredients.get(i).getName());
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, dropDownText);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.spinnerAllIngredients.setAdapter(dataAdapter);
     }
 
     @Override
@@ -52,11 +69,13 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvTitleCardIngredient;
+        public Spinner spinnerAllIngredients;
 
         public AdapterListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitleCardIngredient = itemView.findViewById(R.id.tvTitleCardIngredient);
+            spinnerAllIngredients = itemView.findViewById(R.id.spinnerAllIngredients);
         }
     }
 }

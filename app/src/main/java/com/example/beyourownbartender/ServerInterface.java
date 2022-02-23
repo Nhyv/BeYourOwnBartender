@@ -11,6 +11,9 @@ public interface ServerInterface {
     @GET("/recipes")
     Call<List<Recipe>> getRecipes();
 
+    @GET("/ingredients")
+    Call<List<Ingredient>> getIngredients();
+
     @POST("/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
 }

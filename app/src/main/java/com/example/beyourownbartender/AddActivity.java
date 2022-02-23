@@ -5,11 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -17,6 +22,7 @@ public class AddActivity extends AppCompatActivity {
     private RecyclerView rvSteps;
     private IngredientAdapterList ingredientAdapterList;
     private List<Ingredient> ingredientList;
+    private List<Ingredient> allIngredientList;
     private Button buttonAddIngredient;
 
     @Override
@@ -32,6 +38,23 @@ public class AddActivity extends AppCompatActivity {
         rvIngredients.setAdapter(ingredientAdapterList);
 
 
+        // This is used to pull the ingredients data from the DB
+        ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        Call<List<Ingredient>> call = server.getIngredients();
+
+        call.enqueue(new Callback<List<Ingredient>>() {
+            @Override
+            public void onResponse(Call<List<Ingredient>> call, Response<List<Ingredient>> response) {
+                allIngredientList = response.body();
+                ingredientAdapterList.addIngredient(new Ingredient(-1,null,null, allIngredientList));
+            }
+
+            @Override
+            public void onFailure(Call<List<Ingredient>> call, Throwable t) {
+
+            }
+        });
+
         rvSteps = findViewById(R.id.rvSteps);
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
 
@@ -40,16 +63,14 @@ public class AddActivity extends AppCompatActivity {
         buttonAddIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ingredientAdapterList.addIngredient(new Ingredient());
+                //Adds an empty ingredient containing a list of all ingredients
+                ingredientAdapterList.addIngredient(new Ingredient(-1,null,null, allIngredientList));
             }
         });
     }
 
     private List<Ingredient> createListIngredients(){
         List<Ingredient> ingredientList = new ArrayList<>();
-
-        ingredientList.add(new Ingredient());
-
         return(ingredientList);
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,12 +29,14 @@ public class ReadRecipeActivity extends AppCompatActivity {
     TextView readTitre, readAuthor, readTags, readIngredients, readSteps;
     EditText etComment;
     Button btComment;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_recipe);
 
+        context = this;
         Intent intent = getIntent();
         readTitre = findViewById(R.id.readTitre);
         readAuthor = findViewById(R.id.readAuthor);
@@ -107,6 +110,25 @@ public class ReadRecipeActivity extends AppCompatActivity {
             public void onFailure(Call<List<Ingredient>> call, Throwable t) { }
         });
 
+        recyclerView = findViewById(R.id.rvComments);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Call<List<Comment>> callComment = server.getCommentsByRecipeId(id);
+
+        callComment.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                comments = response.body();
+                adapterList = new CommentAdapterList(comments);
+                recyclerView.setAdapter(adapterList);
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+            }
+        });
+
         etComment.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -147,23 +169,6 @@ public class ReadRecipeActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rvComments);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Call<List<Comment>> callComment = server.getCommentsByRecipeId(id);
-
-        callComment.enqueue(new Callback<List<Comment>>() {
-            @Override
-            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                comments = response.body();
-                adapterList = new CommentAdapterList(comments);
-                recyclerView.setAdapter(adapterList);
-            }
-
-            @Override
-            public void onFailure(Call<List<Comment>> call, Throwable t) {
-
-            }
-        });
     }
 }

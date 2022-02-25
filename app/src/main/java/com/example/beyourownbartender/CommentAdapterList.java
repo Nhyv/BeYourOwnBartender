@@ -17,6 +17,8 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
         this.comments = comments;
     }
 
+    public CommentAdapterList() { }
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,7 +37,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
 
     @Override
     public int getItemCount() {
-        return 0;
+        return comments.size();
     }
 
     public void addComment(Comment comment) {

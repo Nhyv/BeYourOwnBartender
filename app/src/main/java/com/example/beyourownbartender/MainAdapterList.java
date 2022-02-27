@@ -5,18 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
-    private List<Recipe> recipes;
+    private List<RecipeDisplay> recipes;
     MainActivity main;
 
-    public MainAdapterList(List<Recipe> recipes, MainActivity main) {
+    public MainAdapterList(List<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
     }
@@ -32,7 +30,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-        Recipe recipe = recipes.get(position);
+        RecipeDisplay recipe = recipes.get(position);
         List<String> tags = recipe.getTags();
         String toShow = "";
 
@@ -45,8 +43,10 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
         holder.tvTags.setText(toShow);
         holder.tvRecipeName.setText(recipe.getName());
-        Picasso.get().load("https://www.mordeo.org/files/uploads/2018/10/Anime-Girl-Fireworks-4K-Ultra-HD-Mobile-Wallpaper.jpg").into(holder.imgMain);
-        if (recipe.authorId != 7) {
+        if (recipe.getImageUrl() != null) {
+            Picasso.get().load(recipe.getImageUrl()).into(holder.imgMain);
+        }
+        if (recipe.authorId != 1) {
             holder.tvAuthor.setText("TODO");
         }
         else {

@@ -2,13 +2,13 @@ package com.example.beyourownbartender;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Ingredient {
+public class IngredientCreate {
     @SerializedName("name")
     String name;
 
-    @SerializedName("id")
-    int id;
-
     @SerializedName("brand")
     String brand;
+
+    @SerializedName("imageData")
+    String imageData; // That's where you put the base64 of the inputStream.
 }

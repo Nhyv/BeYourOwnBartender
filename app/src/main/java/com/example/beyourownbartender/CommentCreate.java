@@ -2,7 +2,7 @@ package com.example.beyourownbartender;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Comment {
+public class CommentCreate {
     @SerializedName("authorId")
     int authorId;
 
@@ -15,7 +15,7 @@ public class Comment {
     @SerializedName("recipeId")
     int recipeId;
 
-    public Comment(int authorId, String authorName, String content, int recipeId) {
+    public CommentCreate(int authorId, String authorName, String content, int recipeId) {
         this.authorId = authorId;
         this.authorName = authorName;
         this.content = content;

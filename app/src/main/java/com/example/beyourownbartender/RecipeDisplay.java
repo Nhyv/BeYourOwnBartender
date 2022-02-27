@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class Recipe {
+public class RecipeDisplay {
     @SerializedName("id")
     int id;
 
@@ -18,8 +18,8 @@ public class Recipe {
     @SerializedName("authorId")
     int authorId;
 
-    @SerializedName("imageId")
-    int imageId;
+    @SerializedName("imageUrl")
+    String imageUrl;
 
     @SerializedName("creationTime")
     OffsetDateTime creationTime;
@@ -33,12 +33,12 @@ public class Recipe {
     @SerializedName("tags")
     List<String> tags;
 
-    public Recipe(int id, String name, int rating, int authorId, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps) {
+    public RecipeDisplay(int id, String name, int rating, int authorId, String imageUrl, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps) {
         this.id = id;
         this.name = name;
         this.rating = rating;
         this.authorId = authorId;
-        this.imageId = imageId;
+        this.imageUrl = imageUrl;
         this.creationTime = creationTime;
         this.modifiedTime = modifiedTime;
         this.tags = tags;
@@ -69,8 +69,8 @@ public class Recipe {
         return authorId;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public OffsetDateTime getCreationTime() {

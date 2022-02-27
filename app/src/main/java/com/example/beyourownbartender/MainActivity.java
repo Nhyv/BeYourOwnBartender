@@ -1,7 +1,6 @@
 package com.example.beyourownbartender;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MainAdapterList adapterList;
     Context context;
-    List<Recipe> recipes;
+    List<RecipeDisplay> recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-        Call<List<Recipe>> call = server.getRecipes();
+        Call<List<RecipeDisplay>> call = server.getRecipes();
 
-        call.enqueue(new Callback<List<Recipe>>() {
+        call.enqueue(new Callback<List<RecipeDisplay>>() {
             @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+            public void onResponse(Call<List<RecipeDisplay>> call, Response<List<RecipeDisplay>> response) {
                 recipes = response.body();
 
                 adapterList = new MainAdapterList(recipes, getMainActivity());
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+            public void onFailure(Call<List<RecipeDisplay>> call, Throwable t) {
 
             }
         });
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         return this;
     }
 
-    public void startReadRecipeActivity(Recipe recipe) {
+    public void startReadRecipeActivity(RecipeDisplay recipe) {
         Intent intent = new Intent(this, ReadRecipeActivity.class);
         intent.putExtra("recipeId", recipe.getId());
         startActivity(intent);

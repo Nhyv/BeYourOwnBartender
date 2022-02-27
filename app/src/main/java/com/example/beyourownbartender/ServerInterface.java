@@ -7,30 +7,29 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ServerInterface {
-    @GET("/recipes")
-    Call<List<Recipe>> getRecipes();
+    @GET("/api/recipes")
+    Call<List<RecipeDisplay>> getRecipes();
 
-    @POST("/auth/login")
+    @POST("/api/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
 
-    @POST("/auth/register")
+    @POST("/api/auth/register")
     Call<Void> addUser(@Body Registration registration);
 
-    @GET("/recipes/{id}")
-    Call<Recipe> getRecipeById(@Path("id") int id);
+    @GET("/api/recipes/{id}")
+    Call<RecipeDisplay> getRecipeById(@Path("id") int id);
 
-    @GET("/ingredients")
-    Call<List<Ingredient>> getIngredients();
+    @GET("/api/ingredients")
+    Call<List<IngredientDisplay>> getIngredients();
 
-    @GET("/ingredients/recipe_{id}")
-    Call<List<Ingredient>> getIngredientsByRecipeId(@Path("id") int id);
+    @GET("/api/ingredients/recipe_{id}")
+    Call<List<IngredientDisplay>> getIngredientsByRecipeId(@Path("id") int id);
 
-    @POST("/comments/add")
-    Call<Void> addComment(@Body Comment comment);
+    @POST("/api/comments/add")
+    Call<CommentDisplay> addComment(@Body CommentCreate comment);
 
-    @GET("/comments/recipe_{id}")
-    Call<List<Comment>> getCommentsByRecipeId(@Path("id") int id);
+    @GET("/api/comments/recipe_{id}")
+    Call<List<CommentDisplay>> getCommentsByRecipeId(@Path("id") int id);
 }

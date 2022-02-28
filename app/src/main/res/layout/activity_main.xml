@@ -16,5 +16,4 @@
         android:backgroundTint="#000000">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 </FrameLayout>

@@ -26,12 +26,23 @@ public class LoginActivity extends AppCompatActivity {
     Button login, register;
     LoggedInUser user;
     Context context;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+        if (pref.contains("username")) {
+            String username = pref.getString("username", "N/A");
+            if (!username.equals("N/A")) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                startActivity(intent);
+                finish();
+            }
+        }
         context = this;
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -90,9 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
                         if (response.code() == 200) {
-                            SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+
                             SharedPreferences.Editor editor = pref.edit();
                             user = response.body();
+
                             editor.putInt("userId", user.getUserId());
                             editor.putString("username", user.getUsername());
                             editor.commit();

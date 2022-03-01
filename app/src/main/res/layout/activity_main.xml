@@ -4,16 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8D000000"
+    android:background="@drawable/select_background_test"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#83000000"
-        android:backgroundTint="#000000">
+        android:background="#83000000">
 
     </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>

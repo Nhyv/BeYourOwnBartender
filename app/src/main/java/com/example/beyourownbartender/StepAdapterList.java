@@ -1,5 +1,6 @@
 package com.example.beyourownbartender;
 
+import android.app.assist.AssistStructure;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,13 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
 
     List<String> stepList;
     Context context;
+    private RecyclerView rvSteps;
 
-    public StepAdapterList(List<String> stepList, Context context) {
+
+    public StepAdapterList(List<String> stepList, Context context, RecyclerView rvSteps) {
         this.stepList = stepList;
         this.context = context;
+        this.rvSteps = rvSteps;
     }
 
     public StepAdapterList(List<String> stepList) {
@@ -41,6 +46,12 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
     @Override
     public void onBindViewHolder(@NonNull AdapterListViewHolder holder, int position) {
 
+        // Sets the card title text
+        String titleCardStepString = "Etape No: "+(position+1);
+        holder.tvTitleStep.setText(titleCardStepString);
+
+        // Sets innerText
+        holder.mtbStepInfo.setText(stepList.get(position));
     }
 
     @Override
@@ -54,11 +65,45 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
         notifyItemInserted(stepList.size()-1);
     }
 
+    public void deleteStep(int index){
+        stepList.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void refreshAll(){
+        notifyDataSetChanged();
+    }
+
+    public void updateListWithoutNotify(){
+        for (int i = 0; i < rvSteps.getChildCount(); i++) {
+            AdapterListViewHolder holder = (AdapterListViewHolder) rvSteps.findViewHolderForAdapterPosition(i);
+            String textStep = holder.mtbStepInfo.getText().toString();
+            stepList.set(i, textStep);
+        }
+    }
+
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
+        public Button btRemoveStep;
+        public TextView tvTitleStep;
+        public TextView mtbStepInfo;
 
         public AdapterListViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            btRemoveStep = itemView.findViewById(R.id.btRemoveStep);
+            tvTitleStep = itemView.findViewById(R.id.tvTitleStep);
+            mtbStepInfo = itemView.findViewById(R.id.mtbStepInfo);
+
+
+            btRemoveStep.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    updateListWithoutNotify();
+                    deleteStep(getLayoutPosition());
+                    refreshAll();
+                }
+            });
         }
     }
 }

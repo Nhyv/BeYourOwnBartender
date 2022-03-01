@@ -78,10 +78,9 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         notifyItemRemoved(index);
     }
 
+    // Notifies a change to each position
     public void refreshAll(){
-        for(int i = 0; i < ingredientList.size(); i++){
-            notifyItemChanged(i);
-        }
+        notifyDataSetChanged();
     }
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {

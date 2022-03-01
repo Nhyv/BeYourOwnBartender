@@ -44,7 +44,7 @@ public class AddActivity extends AppCompatActivity {
         stepList = createListSteps();
         rvSteps = findViewById(R.id.rvSteps);
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
-        stepAdapterList = new StepAdapterList(stepList, this);
+        stepAdapterList = new StepAdapterList(stepList, this, rvSteps);
         rvSteps.setAdapter(stepAdapterList);
 
 

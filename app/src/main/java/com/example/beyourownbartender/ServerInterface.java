@@ -8,12 +8,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ServerInterface {
-    @GET("/recipes")
+    @GET("api/recipes")
     Call<List<Recipe>> getRecipes();
 
-    @GET("/ingredients")
+    @GET("api/ingredients")
     Call<List<Ingredient>> getIngredients();
 
-    @POST("/auth/login")
+    @POST("api/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
 }

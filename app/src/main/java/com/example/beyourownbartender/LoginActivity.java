@@ -13,12 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username, password;
@@ -44,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         context = this;
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.settingsUsername);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -159,7 +161,10 @@ public class ReadRecipeActivity extends AppCompatActivity {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommentCreate commentToAdd = new CommentCreate(1, "BYOB",
+                @SuppressLint("WrongConstant") SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_APPEND);
+                String username = pref.getString("username", "N/A");
+                int userId = pref.getInt("userId", 1);
+                CommentCreate commentToAdd = new CommentCreate(userId, username,
                         etComment.getText().toString(), 1);
                 Call<CommentDisplay> callAdd = server.addComment(commentToAdd);
                 callAdd.enqueue(new Callback<CommentDisplay>() {

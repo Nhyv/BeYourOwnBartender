@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.File;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,7 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
                         if (response.code() == 200) {
+                            SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
                             user = response.body();
+                            editor.putInt("userId", user.getUserId());
+                            editor.putString("username", user.getUsername());
+                            editor.commit();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                             startActivity(intent);

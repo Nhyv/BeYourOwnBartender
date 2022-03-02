@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,14 +31,21 @@ import retrofit2.Response;
 public class ReadRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CommentAdapterList adapterList;
+    int authorId;
     List<CommentDisplay> comments;
+    List<Integer> likes;
+    int recipeId;
     ImageView imgRead;
     RecipeDisplay recipe;
-    TextView readTitre, readAuthor, readTags, readIngredients, readSteps;
+    TextView readTitre, readAuthor, readTags, readIngredients, readSteps, readRating;
     EditText etComment;
     Button btComment;
     Context context;
     CommentDisplay commentToDisplay;
+    UserDisplay author;
+    FloatingActionButton fabLike;
+    SharedPreferences pref;
+    boolean isLiked;
 
 
     @Override
@@ -43,6 +53,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_recipe);
 
+        pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         context = this;
         Intent intent = getIntent();
         imgRead = findViewById(R.id.imgRead);
@@ -50,23 +61,25 @@ public class ReadRecipeActivity extends AppCompatActivity {
         readAuthor = findViewById(R.id.readAuthor);
         readTags = findViewById(R.id.readTags);
         readIngredients = findViewById(R.id.readIngredients);
+        readRating = findViewById(R.id.readRating);
         readSteps = findViewById(R.id.readSteps);
         etComment = findViewById(R.id.etComment);
         btComment = findViewById(R.id.btComment);
+        fabLike = findViewById(R.id.fabLike);
 
-        int id = 0;
+         recipeId = 0;
         if (intent.hasExtra("recipeId")) {
             Bundle bundle = intent.getExtras();
-            id = bundle.getInt("recipeId", 0);
+            recipeId = bundle.getInt("recipeId", 0);
+            authorId = bundle.getInt("authorId", 1);
         }
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-        Call<RecipeDisplay> call = server.getRecipeById(id);
+        Call<RecipeDisplay> call = server.getRecipeById(recipeId);
         call.enqueue(new Callback<RecipeDisplay>() {
             @Override
             public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
                 recipe = response.body();
                 String name = recipe.getName();
-                int authorId = recipe.getAuthorid();
                 List<String> tags = recipe.getTags();
                 List<String> steps = recipe.getSteps();
                 String toShowTags = "";
@@ -93,18 +106,14 @@ public class ReadRecipeActivity extends AppCompatActivity {
                 readTags.setText(toShowTags);
                 readSteps.setText(toShowSteps);
                 readTitre.setText(name);
-                if (authorId == 7) {
-                    readAuthor.setText("BeYourOwnBartender");
-                }
-                else {
-                }
+                readRating.setText(recipe.getRating() + " ❤");
             }
 
             @Override
             public void onFailure(Call<RecipeDisplay> call, Throwable t) { }
         });
 
-        Call<List<IngredientDisplay>> callIngredients = server.getIngredientsByRecipeId(id);
+        Call<List<IngredientDisplay>> callIngredients = server.getIngredientsByRecipeId(recipeId);
         callIngredients.enqueue(new Callback<List<IngredientDisplay>>() {
             @Override
             public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
@@ -125,7 +134,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvComments);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Call<List<CommentDisplay>> callComment = server.getCommentsByRecipeId(id);
+        Call<List<CommentDisplay>> callComment = server.getCommentsByRecipeId(recipeId);
 
         callComment.enqueue(new Callback<List<CommentDisplay>>() {
             @Override
@@ -137,6 +146,43 @@ public class ReadRecipeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<CommentDisplay>> call, Throwable t) {
+
+            }
+        });
+
+        Call<UserDisplay> callUser = server.getUserById(authorId);
+        callUser.enqueue(new Callback<UserDisplay>() {
+            @Override
+            public void onResponse(Call<UserDisplay> call, Response<UserDisplay> response) {
+                author = response.body();
+                readAuthor.setText(author.username);
+            }
+
+            @Override
+            public void onFailure(Call<UserDisplay> call, Throwable t) {
+
+            }
+        });
+
+        int userId = pref.getInt("userId", 1);
+        Call<List<Integer>> callLikes = server.getUserLiked(userId);
+        // mFab.setBackgroundTintList(ColorStateList.valueOf(your color in int)); for normal state
+        // mFab.setRippleColor(your color in int); pressed state
+        callLikes.enqueue(new Callback<List<Integer>>() {
+            @Override
+            public void onResponse(Call<List<Integer>> call, Response<List<Integer>> response) {
+                likes = response.body();
+
+                if (likes.contains(recipeId)) {
+                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                }
+                else {
+                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Integer>> call, Throwable t) {
 
             }
         });
@@ -161,9 +207,9 @@ public class ReadRecipeActivity extends AppCompatActivity {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                @SuppressLint("WrongConstant") SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_APPEND);
+
                 String username = pref.getString("username", "N/A");
-                int userId = pref.getInt("userId", 1);
+
                 CommentCreate commentToAdd = new CommentCreate(userId, username,
                         etComment.getText().toString(), 1);
                 Call<CommentDisplay> callAdd = server.addComment(commentToAdd);
@@ -185,6 +231,32 @@ public class ReadRecipeActivity extends AppCompatActivity {
             }
         });
 
+        fabLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int userId = pref.getInt("userId", 1);
+                Call<Boolean> callToggleLike = server.toggleLikeRecipe(recipeId, userId);
+
+                callToggleLike.enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        isLiked = response.body();
+
+                        if (isLiked) {
+                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                        }
+                        else {
+                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
     }
 }

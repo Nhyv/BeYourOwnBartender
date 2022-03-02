@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public void startReadRecipeActivity(RecipeDisplay recipe) {
         Intent intent = new Intent(this, ReadRecipeActivity.class);
         intent.putExtra("recipeId", recipe.getId());
+        intent.putExtra("authorId", recipe.getAuthorid());
         startActivity(intent);
     }
 

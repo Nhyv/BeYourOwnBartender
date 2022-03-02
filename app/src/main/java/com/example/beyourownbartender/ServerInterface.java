@@ -32,4 +32,13 @@ public interface ServerInterface {
 
     @GET("/api/comments/recipe_{id}")
     Call<List<CommentDisplay>> getCommentsByRecipeId(@Path("id") int id);
+
+    @GET("/api/users/{id}")
+    Call<UserDisplay> getUserById(@Path("id") int id);
+
+    @GET("/api/users/{id}/liked")
+    Call<List<Integer>> getUserLiked(@Path("id") int id);
+
+    @POST("/api/recipes/{id}/like/{userId}")
+    Call<Boolean> toggleLikeRecipe(@Path("id") int id, @Path("userId") int userId);
 }

@@ -13,10 +13,22 @@ import java.util.List;
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
     private List<RecipeDisplay> recipes;
     MainActivity main;
+    MyRecipesActivity mr;
+    MyLikesActivity ml;
 
     public MainAdapterList(List<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
+    }
+
+    public MainAdapterList(List<RecipeDisplay> recipes, MyRecipesActivity mr) {
+        this.recipes = recipes;
+        this.mr = mr;
+    }
+
+    public MainAdapterList(List<RecipeDisplay> recipes, MyLikesActivity mr) {
+        this.recipes = recipes;
+        this.ml = ml;
     }
 
     @NonNull
@@ -75,7 +87,14 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                    try {
+                        main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                        mr.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                        ml.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                    }
+                    catch (Exception ex) {
+
+                    }
                 }
             });
         }

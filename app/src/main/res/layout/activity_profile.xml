@@ -32,10 +32,10 @@
         android:text="Mes ❤" />
 
     <Button
-        android:id="@+id/btProfileDemande"
+        android:id="@+id/btProfileRobot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Demande d'ajout d'ingrédients" />
+        android:text="Espace Janus" />
 
     <Button
         android:id="@+id/btDisconnect"

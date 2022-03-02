@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         context = this;
         etUsername = findViewById(R.id.etUsername);
         etEmail = findViewById(R.id.etEmail);
@@ -83,9 +84,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0) {
                     if (emailFilled && userFilled && pwConfirmFilled) {
-                        if (etPassword.getText().equals(etPasswordConfirm.getText())) {
+                        if (etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
                             tvErrorReg.setVisibility(View.INVISIBLE);
-                            btInscrire.setEnabled(true);
+                            if (charSequence.length() > 10)
+                                btInscrire.setEnabled(true);
                         }
                         else {
                             tvErrorReg.setVisibility(View.VISIBLE);
@@ -93,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
                     if (pwConfirmFilled){
-                        if (etPassword.getText().equals(etPasswordConfirm.getText())) {
+                        if (etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
                             tvErrorReg.setVisibility(View.INVISIBLE);
                         }
                         else {
@@ -118,13 +120,13 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0) {
                     if (emailFilled && userFilled && pwFilled) {
-                        if (etPassword.getText().equals(etPasswordConfirm.getText())) {
+                        if (etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
                             btInscrire.setEnabled(true);
                             tvErrorReg.setVisibility(View.INVISIBLE);
                         }
                     }
                     else if (pwFilled) {
-                        if (etPassword.getText().equals(etPasswordConfirm.getText())) {
+                        if (etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
                             tvErrorReg.setVisibility(View.INVISIBLE);
                         }
                         else {

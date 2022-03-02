@@ -14,6 +14,15 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MyLikesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
@@ -32,11 +41,8 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".UpdateStep"
-            android:exported="true" />
-        <activity
             android:name=".LoadingActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

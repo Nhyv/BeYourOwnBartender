@@ -67,9 +67,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, AddActivity.class);
 
-        startActivity(intent);
+        if (item.getTitle().equals("idAdd")) {
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+
+            startActivity(intent);
+        }
+        if (item.getTitle().equals("idProfile")) {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+
+            startActivity(intent);
+        }
         return true;
     }
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +31,7 @@ public class AddActivity extends AppCompatActivity {
     private List<String> stepList;
     private Button buttonAddIngredient;
     private Button buttonAddStep;
+    private TextView etbName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class AddActivity extends AppCompatActivity {
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
         stepAdapterList = new StepAdapterList(stepList, this, rvSteps);
         rvSteps.setAdapter(stepAdapterList);
+
+        // Button to push to the DB
+        Button btAddRecipe;
 
 
         // This is used to pull the ingredients data from the DB
@@ -90,6 +95,22 @@ public class AddActivity extends AppCompatActivity {
                 stepAdapterList.addStep("");
             }
         });
+
+        etbName = findViewById(R.id.etbName);
+        btAddRecipe = findViewById(R.id.btAddRecipe);
+        btAddRecipe.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                pushToDB(ingredientList, stepList, etbName.getText().toString());
+            }
+
+        });
+    }
+
+    // Used to push to the DB
+    private void pushToDB(List<IngredientDisplay> listIngredients, List<String> listSteps, String title) {
+
     }
 
     // Creates the empty ingredient list

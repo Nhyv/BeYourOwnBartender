@@ -3,7 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:icon="@drawable/ic_create"
-        android:title="Item"
+        android:icon="@drawable/ic_create2"
+        android:iconTint="#FFFFFF"
+        android:iconTintMode="multiply"
+        android:title="idAdd"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/ic_profile"
+        android:title="idProfile"
         app:showAsAction="always" />
 </menu>

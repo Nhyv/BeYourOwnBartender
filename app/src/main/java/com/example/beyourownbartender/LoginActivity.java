@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,24 +16,35 @@ import android.widget.Toast;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username, password;
     boolean filledUsername, filledPassword;
-    Button login;
+    Button login, register;
     LoggedInUser user;
     Context context;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+        if (pref.contains("username")) {
+            String username = pref.getString("username", "N/A");
+            if (!username.equals("N/A")) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
+                startActivity(intent);
+                finish();
+            }
+        }
         context = this;
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.settingsUsername);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,7 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
                         if (response.code() == 200) {
+
+                            SharedPreferences.Editor editor = pref.edit();
                             user = response.body();
+
+                            editor.putInt("userId", user.getUserId());
+                            editor.putString("username", user.getUsername());
+                            editor.commit();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                             startActivity(intent);
@@ -104,6 +122,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+
+                startActivity(intent);
+                finish();
             }
         });
     }

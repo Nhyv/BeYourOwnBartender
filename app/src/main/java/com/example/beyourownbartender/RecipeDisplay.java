@@ -3,8 +3,9 @@ package com.example.beyourownbartender;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
-public class Recipe {
+public class RecipeDisplay {
     @SerializedName("id")
     int id;
 
@@ -14,11 +15,11 @@ public class Recipe {
     @SerializedName("rating")
     int rating;
 
-    @SerializedName("authorid")
-    int authorid;
+    @SerializedName("authorId")
+    int authorId;
 
-    @SerializedName("imageId")
-    int imageId;
+    @SerializedName("imageUrl")
+    String imageUrl;
 
     @SerializedName("creationTime")
     OffsetDateTime creationTime;
@@ -26,14 +27,30 @@ public class Recipe {
     @SerializedName("modifiedTime")
     OffsetDateTime modifiedTime;
 
-    public Recipe(int id, String name, int rating, int authorid, int imageId, OffsetDateTime creationTime, OffsetDateTime modifiedTime) {
+    @SerializedName("steps")
+    List<String> steps;
+
+    @SerializedName("tags")
+    List<String> tags;
+
+    public RecipeDisplay(int id, String name, int rating, int authorId, String imageUrl, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps) {
         this.id = id;
         this.name = name;
         this.rating = rating;
-        this.authorid = authorid;
-        this.imageId = imageId;
+        this.authorId = authorId;
+        this.imageUrl = imageUrl;
         this.creationTime = creationTime;
         this.modifiedTime = modifiedTime;
+        this.tags = tags;
+        this.steps = steps;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public List<String> getSteps() {
+        return steps;
     }
 
     public int getId() {
@@ -49,11 +66,11 @@ public class Recipe {
     }
 
     public int getAuthorid() {
-        return authorid;
+        return authorId;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public OffsetDateTime getCreationTime() {

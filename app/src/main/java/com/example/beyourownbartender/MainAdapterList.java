@@ -1,27 +1,22 @@
 package com.example.beyourownbartender;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
-    private List<Recipe> recipes;
+    private List<RecipeDisplay> recipes;
+    MainActivity main;
 
-    public MainAdapterList(List<Recipe> recipes) {
+    public MainAdapterList(List<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
+        this.main = main;
     }
 
     @NonNull
@@ -35,9 +30,23 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-        Recipe recipe = recipes.get(position);
+        RecipeDisplay recipe = recipes.get(position);
+        List<String> tags = recipe.getTags();
+        String toShow = "";
+
+        for (int i = 0; i < tags.size(); i++) {
+            if (tags.size() == 1)
+                toShow = tags.get(i);
+            else
+            toShow += tags.get(i) + ", ";
+        }
+
+        holder.tvTags.setText(toShow);
         holder.tvRecipeName.setText(recipe.getName());
-        if (recipe.authorid != 0) {
+        if (recipe.getImageUrl() != null) {
+            Picasso.get().load(recipe.getImageUrl()).into(holder.imgMain);
+        }
+        if (recipe.authorId != 1) {
             holder.tvAuthor.setText("TODO");
         }
         else {
@@ -52,18 +61,21 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvRecipeName, tvAuthor;
+        TextView tvRecipeName, tvAuthor, tvTags;
+        ImageView imgMain;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
             tvAuthor = itemView.findViewById(R.id.tvAuteur);
+            tvTags = itemView.findViewById(R.id.tvTags);
+            imgMain = itemView.findViewById(R.id.imgMain);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Open the recipe
+                    main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                 }
             });
         }

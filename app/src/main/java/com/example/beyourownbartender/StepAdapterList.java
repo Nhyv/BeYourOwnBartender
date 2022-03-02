@@ -1,7 +1,9 @@
 package com.example.beyourownbartender;
 
+import android.app.Activity;
 import android.app.assist.AssistStructure;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -70,21 +73,26 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
         notifyItemRemoved(index);
     }
 
-    public void refreshAll(){
-        notifyDataSetChanged();
+    public void startUpdate(int pos, String oldStep){
+        Intent intent =  new Intent(context, UpdateStep.class);
+        intent.putExtra("pos", pos);
+        intent.putExtra("oldStep", oldStep);
+        ((Activity)context).startActivityForResult(intent, 1);
     }
 
-    public void updateListWithoutNotify(){
-        for (int i = 0; i < rvSteps.getChildCount(); i++) {
-            AdapterListViewHolder holder = (AdapterListViewHolder) rvSteps.findViewHolderForAdapterPosition(i);
-            String textStep = holder.mtbStepInfo.getText().toString();
-            stepList.set(i, textStep);
-        }
+    public void concludeUpdate(int pos, String newStep){
+        stepList.set(pos, newStep);
+        notifyItemChanged(pos);
+    }
+
+    public void refreshAll(){
+        notifyDataSetChanged();
     }
 
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
         public Button btRemoveStep;
+        public Button btUpdateStep;
         public TextView tvTitleStep;
         public TextView mtbStepInfo;
 
@@ -92,6 +100,7 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
             super(itemView);
 
             btRemoveStep = itemView.findViewById(R.id.btRemoveStep);
+            btUpdateStep = itemView.findViewById(R.id.btUpdateStep);
             tvTitleStep = itemView.findViewById(R.id.tvTitleStep);
             mtbStepInfo = itemView.findViewById(R.id.mtbStepInfo);
 
@@ -99,9 +108,15 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
             btRemoveStep.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    updateListWithoutNotify();
                     deleteStep(getLayoutPosition());
                     refreshAll();
+                }
+            });
+
+            btUpdateStep.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   startUpdate(getLayoutPosition(), stepList.get(getLayoutPosition()));
                 }
             });
         }

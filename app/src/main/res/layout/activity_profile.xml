@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/profileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username Goes Here" />
+
+    <Button
+        android:id="@+id/btAdminMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Panneau Admin" />
+
+    <Button
+        android:id="@+id/btProfileRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mes Recettes" />
+
+    <Button
+        android:id="@+id/btProfileLikes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mes ❤" />
+
+    <Button
+        android:id="@+id/btProfileDemande"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demande d'ajout d'ingrédients" />
+
+    <Button
+        android:id="@+id/btDisconnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF0000"
+        android:text="Se déconnecter" />
+
+</LinearLayout>

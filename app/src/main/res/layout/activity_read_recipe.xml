@@ -22,6 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                app:backgroundTint="#888888"
+                app:tint="#4A4A4A"
+                app:fabSize="auto"
                 app:srcCompat="@drawable/heart"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -94,14 +97,16 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:hint="Commentaire"
+                android:inputType="textMultiLine"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/btComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:text="Submit Comment"
+                android:text="Envoyer commentaire"
                 android:textColor="@color/black" />
 
         </LinearLayout>

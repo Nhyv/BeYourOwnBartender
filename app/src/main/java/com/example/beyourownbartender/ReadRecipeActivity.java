@@ -174,10 +174,12 @@ public class ReadRecipeActivity extends AppCompatActivity {
                 likes = response.body();
 
                 if (likes.contains(recipeId)) {
-                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(221,74,74)));
+                    fabLike.setImageTintList(ColorStateList.valueOf(Color.rgb(161,34,34)));
                 }
                 else {
-                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                    fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                    fabLike.setImageTintList(ColorStateList.valueOf(Color.DKGRAY));
                 }
             }
 
@@ -243,10 +245,12 @@ public class ReadRecipeActivity extends AppCompatActivity {
                         isLiked = response.body();
 
                         if (isLiked) {
-                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(221,74,74)));
+                            fabLike.setImageTintList(ColorStateList.valueOf(Color.rgb(161,34,34)));
                         }
                         else {
-                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                            fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                            fabLike.setImageTintList(ColorStateList.valueOf(Color.DKGRAY));
                         }
                     }
 

@@ -12,23 +12,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvTitleStepUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/tbNewStep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:maxLines="20"
+            android:minLines="2"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btSubmitUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Confirmer la modification" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

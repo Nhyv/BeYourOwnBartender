@@ -32,7 +32,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".AddActivity"
+            android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

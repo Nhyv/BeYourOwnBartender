@@ -1,7 +1,6 @@
 package com.example.beyourownbartender;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +12,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapterList.AdapterListViewHolder>{
 
-    List<Ingredient> ingredientList;
+    List<IngredientDisplay> ingredientList;
     Context context;
 
-    public IngredientAdapterList(List<Ingredient> ingredientList, Context context) {
+    public IngredientAdapterList(List<IngredientDisplay> ingredientList, Context context) {
         this.ingredientList = ingredientList;
         this.context = context;
     }
 
-    public IngredientAdapterList(List<Ingredient> ingredientList) {
+    public IngredientAdapterList(List<IngredientDisplay> ingredientList) {
         this.ingredientList = ingredientList;
     }
 
@@ -47,7 +44,7 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         String titleCardIngredientString = "Ingredient No: "+(position+1);
         holder.tvTitleCardIngredient.setText(titleCardIngredientString);
 
-        List<Ingredient> allIngredients = ingredientList.get(position).getAllIngredients();
+        List<IngredientDisplay> allIngredients = ingredientList.get(position).getAllIngredients();
         List<String> dropDownText = new ArrayList<>();
         for(int i = 0; i < allIngredients.size(); i++){
             dropDownText.add(allIngredients.get(i).getName());
@@ -67,7 +64,7 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     }
 
     // Adds an empty ingredient to the RV
-    public void addIngredient(Ingredient item){
+    public void addIngredient(IngredientDisplay item){
         ingredientList.add(item);
         notifyItemInserted(ingredientList.size()-1);
     }

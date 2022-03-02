@@ -2,6 +2,8 @@ package com.example.beyourownbartender;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class IngredientDisplay {
     @SerializedName("name")
     String name;
@@ -9,32 +11,46 @@ public class IngredientDisplay {
     @SerializedName("id")
     int id;
 
-    @SerializedName("brand")
-    String brand;
-
     @SerializedName("imageUrl")
     String imageUrl;
 
-    public IngredientDisplay(String name, int id, String brand, String imageUrl) {
+    List<IngredientDisplay> allIngredients;
+
+
+    public IngredientDisplay(int id, String name) {
         this.name = name;
         this.id = id;
-        this.brand = brand;
         this.imageUrl = imageUrl;
     }
 
+    public IngredientDisplay(int id, String name, List<IngredientDisplay> allIngredients) {
+        this.id = id;
+        this.name = name;
+        this.allIngredients = allIngredients;
+    }
+
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public List<IngredientDisplay> getAllIngredients() {
+        return allIngredients;
+    }
+
+    public void setAllIngredients(List<IngredientDisplay> allIngredients) {
+        this.allIngredients = allIngredients;
     }
 }

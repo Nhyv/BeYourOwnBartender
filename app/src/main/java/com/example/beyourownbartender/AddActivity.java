@@ -22,8 +22,8 @@ public class AddActivity extends AppCompatActivity {
     private RecyclerView rvSteps;
     private IngredientAdapterList ingredientAdapterList;
     private StepAdapterList stepAdapterList;
-    private List<Ingredient> ingredientList;
-    private List<Ingredient> allIngredientList;
+    private List<IngredientDisplay> ingredientList;
+    private List<IngredientDisplay> allIngredientList;
     private List<String> stepList;
     private Button buttonAddIngredient;
     private Button buttonAddStep;
@@ -50,17 +50,17 @@ public class AddActivity extends AppCompatActivity {
 
         // This is used to pull the ingredients data from the DB
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-        Call<List<Ingredient>> call = server.getIngredients();
+        Call<List<IngredientDisplay>> call = server.getIngredients();
 
-        call.enqueue(new Callback<List<Ingredient>>() {
+        call.enqueue(new Callback<List<IngredientDisplay>>() {
             @Override
-            public void onResponse(Call<List<Ingredient>> call, Response<List<Ingredient>> response) {
+            public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
                 allIngredientList = response.body();
-                ingredientAdapterList.addIngredient(new Ingredient(-1,null,null, allIngredientList));
+                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", null));
             }
 
             @Override
-            public void onFailure(Call<List<Ingredient>> call, Throwable t) {
+            public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
 
             }
         });
@@ -74,7 +74,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Adds an empty ingredient containing a list of all ingredients
-                ingredientAdapterList.addIngredient(new Ingredient(-1,null,null, allIngredientList));
+                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", null));
             }
         });
 
@@ -90,8 +90,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     // Creates the empty ingredient list
-    private List<Ingredient> createListIngredients(){
-        List<Ingredient> ingredientList = new ArrayList<>();
+    private List<IngredientDisplay> createListIngredients(){
+        List<IngredientDisplay> ingredientList = new ArrayList<>();
         return(ingredientList);
     }
 

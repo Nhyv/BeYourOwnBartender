@@ -73,7 +73,7 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
         notifyItemRemoved(index);
     }
 
-    public void startUpdate(int pos, String oldStep){
+    public void startUpdate(String pos, String oldStep){
         Intent intent =  new Intent(context, UpdateStep.class);
         intent.putExtra("pos", pos);
         intent.putExtra("oldStep", oldStep);
@@ -116,7 +116,9 @@ public class StepAdapterList extends RecyclerView.Adapter<StepAdapterList.Adapte
             btUpdateStep.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   startUpdate(getLayoutPosition(), stepList.get(getLayoutPosition()));
+                    int pos = getLayoutPosition();
+                    String posStr = Integer.toString(pos);
+                    startUpdate(posStr, stepList.get(getLayoutPosition()));
                 }
             });
         }

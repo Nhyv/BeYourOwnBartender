@@ -59,7 +59,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
                 allIngredientList = response.body();
-                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", null));
+                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", allIngredientList));
             }
 
             @Override
@@ -77,7 +77,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Adds an empty ingredient containing a list of all ingredients
-                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", null));
+                ingredientAdapterList.addIngredient(new IngredientDisplay(0, "", allIngredientList));
             }
         });
 

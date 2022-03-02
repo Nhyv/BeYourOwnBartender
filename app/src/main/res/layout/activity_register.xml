@@ -81,6 +81,13 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#B5FFFFFF" />
 
+    <TextView
+        android:id="@+id/tvErreurRegi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mot de passes non identiques"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/btInscrire"
         android:layout_width="match_parent"

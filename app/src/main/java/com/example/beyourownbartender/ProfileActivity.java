@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         editor.putString("username", "N/A");
+                        editor.commit();
                         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
 
                         startActivity(intent);

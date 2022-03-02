@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("Feed");
         context = this;
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, AddActivity.class);
 
         startActivity(intent);
-        finish();
         return true;
     }
 

@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         if (pref.contains("username")) {
             String username = pref.getString("username", "N/A");

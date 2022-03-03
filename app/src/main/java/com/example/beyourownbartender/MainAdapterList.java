@@ -15,20 +15,27 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     MainActivity main;
     MyRecipesActivity mr;
     MyLikesActivity ml;
+    boolean isMain = true;
+    boolean isMr, isMl;
 
     public MainAdapterList(List<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
+        isMain = true;
     }
 
     public MainAdapterList(List<RecipeDisplay> recipes, MyRecipesActivity mr) {
         this.recipes = recipes;
         this.mr = mr;
+        isMain = false;
+        isMr = true;
     }
 
-    public MainAdapterList(List<RecipeDisplay> recipes, MyLikesActivity mr) {
+    public MainAdapterList(List<RecipeDisplay> recipes, MyLikesActivity ml) {
         this.recipes = recipes;
         this.ml = ml;
+        isMain = false;
+        isMl = true;
     }
 
     @NonNull
@@ -87,14 +94,12 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    try {
-                        main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                    if (isMr)
                         mr.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                    if (isMl)
                         ml.startReadRecipeActivity(recipes.get(getLayoutPosition()));
-                    }
-                    catch (Exception ex) {
-
-                    }
+                    if (isMain)
+                        main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                 }
             });
         }

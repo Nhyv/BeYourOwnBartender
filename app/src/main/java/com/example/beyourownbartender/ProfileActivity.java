@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btAdminMode;
     Button btProfileRecipes;
     Button btProfileLikes;
+    Button btProfileRobot;
     TextView profileUsername;
 
     UserDisplay user;
@@ -43,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         btAdminMode.setVisibility(View.INVISIBLE);
         btProfileLikes = findViewById(R.id.btProfileLikes);
         btProfileRecipes = findViewById(R.id.btProfileRecipes);
+        btProfileRobot = findViewById(R.id.btProfileRobot);
 
         pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         editor = pref.edit();
@@ -111,6 +113,22 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, MyLikesActivity.class);
+
+                startActivity(intent);
+            }
+        });
+        btProfileRobot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, RobotActivity.class);
+
+                startActivity(intent);
+            }
+        });
+        btAdminMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, AdminActivity.class);
 
                 startActivity(intent);
             }

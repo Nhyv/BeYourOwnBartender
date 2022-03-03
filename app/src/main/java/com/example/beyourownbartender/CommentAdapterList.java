@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.CommentViewHolder> {
@@ -33,6 +35,23 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
         CommentDisplay comment = comments.get(position);
         holder.cUsername.setText(comment.getAuthorName());
         holder.cContent.setText(comment.getContent());
+        long days = ChronoUnit.DAYS.between(comment.creationTime, OffsetDateTime.now());
+        long months = 0;
+        long years = 0;
+
+        if (days >= 28) {
+            months = days / 28;
+            if (months >= 12) {
+                years = months / 12;
+                holder.cTime.setText("il y a " + years + " ans");
+            }
+            else {
+                holder.cTime.setText("il y a " + months + " mois");
+            }
+        }
+        else {
+            holder.cTime.setText("il y a " + days + " jour(s)");
+        }
     }
 
     @Override

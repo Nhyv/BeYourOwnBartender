@@ -167,6 +167,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     }
+                    return false;
                 }
             });
         }

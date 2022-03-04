@@ -1,9 +1,8 @@
 package com.example.beyourownbartender;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import android.widget.SearchView;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
@@ -13,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MainAdapterList adapterList;
     Context context;
-    List<RecipeDisplay> recipes;
+    ArrayList<RecipeDisplay> recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-        Call<List<RecipeDisplay>> call = server.getRecipes();
+        Call<ArrayList<RecipeDisplay>> call = server.getRecipes();
 
-        call.enqueue(new Callback<List<RecipeDisplay>>() {
+        call.enqueue(new Callback<ArrayList<RecipeDisplay>>() {
             @Override
-            public void onResponse(Call<List<RecipeDisplay>> call, Response<List<RecipeDisplay>> response) {
+            public void onResponse(Call<ArrayList<RecipeDisplay>> call, Response<ArrayList<RecipeDisplay>> response) {
                 recipes = response.body();
 
                 adapterList = new MainAdapterList(recipes, getMainActivity());
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<RecipeDisplay>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<RecipeDisplay>> call, Throwable t) {
 
             }
         });
@@ -62,6 +60,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu_layout, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("newText1",query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("newText",newText);
+                adapterList.getFilter().filter(newText);
+                return false;
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                adapterList = new MainAdapterList(recipes, getMainActivity());
+                recyclerView.setAdapter(adapterList);
+                return false;
+            }
+        });
         return true;
     }
 

@@ -3,39 +3,50 @@ package com.example.beyourownbartender;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
-    private List<RecipeDisplay> recipes;
+    private ArrayList<RecipeDisplay> recipes;
+    private ArrayList<RecipeDisplay> fullList;
     MainActivity main;
     MyRecipesActivity mr;
     MyLikesActivity ml;
     boolean isMain = true;
     boolean isMr, isMl;
 
-    public MainAdapterList(List<RecipeDisplay> recipes, MainActivity main) {
+    public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
         isMain = true;
+        fullList = new ArrayList<RecipeDisplay>(recipes);
     }
 
-    public MainAdapterList(List<RecipeDisplay> recipes, MyRecipesActivity mr) {
+    public MainAdapterList(ArrayList<RecipeDisplay> recipes, MyRecipesActivity mr) {
         this.recipes = recipes;
         this.mr = mr;
         isMain = false;
         isMr = true;
+        fullList = new ArrayList<RecipeDisplay>(recipes);
     }
 
-    public MainAdapterList(List<RecipeDisplay> recipes, MyLikesActivity ml) {
+    public MainAdapterList(ArrayList<RecipeDisplay> recipes, MyLikesActivity ml) {
         this.recipes = recipes;
         this.ml = ml;
         isMain = false;
         isMl = true;
+        fullList = new ArrayList<RecipeDisplay>(recipes);
+    }
+
+    public Filter getFilter() {
+        return Searched_Filter;
     }
 
     @NonNull
@@ -72,6 +83,32 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             holder.tvAuthor.setText("Choix de BeYourOwnBartender");
         }
     }
+
+    private Filter Searched_Filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<RecipeDisplay> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(fullList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (RecipeDisplay recipe : fullList) {
+                    if (recipe.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(recipe);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            recipes.clear();
+            recipes.addAll((ArrayList) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     @Override
     public int getItemCount() {

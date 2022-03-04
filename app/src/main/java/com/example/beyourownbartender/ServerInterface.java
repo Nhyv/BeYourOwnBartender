@@ -1,5 +1,6 @@
 package com.example.beyourownbartender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -10,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface ServerInterface {
     @GET("/api/recipes")
-    Call<List<RecipeDisplay>> getRecipes();
+    Call<ArrayList<RecipeDisplay>> getRecipes();
 
     @POST("/api/auth/login")
     Call<LoggedInUser> getLogin(@Body Login login);
@@ -43,10 +44,10 @@ public interface ServerInterface {
     Call<Boolean> toggleLikeRecipe(@Path("id") int id, @Path("userId") int userId);
 
     @GET("/api/recipes/user/{id}")
-    Call<List<RecipeDisplay>> getUserRecipes(@Path("id") int id);
+    Call<ArrayList<RecipeDisplay>> getUserRecipes(@Path("id") int id);
 
     @GET("/api/recipes/user/{id}/liked")
-    Call<List<RecipeDisplay>> getUserLikedRecipes(@Path("id") int id);
+    Call<ArrayList<RecipeDisplay>> getUserLikedRecipes(@Path("id") int id);
 
     @GET("/api/logs")
     Call<List<LogDisplay>> getLogs();

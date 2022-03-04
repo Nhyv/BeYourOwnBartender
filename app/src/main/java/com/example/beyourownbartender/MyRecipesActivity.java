@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,7 +18,7 @@ import retrofit2.Response;
 public class MyRecipesActivity extends AppCompatActivity {
     private RecyclerView mrRecipe;
     private MainAdapterList adapterList;
-    List<RecipeDisplay> recipes;
+    ArrayList<RecipeDisplay> recipes;
     SharedPreferences pref;
 
     @Override
@@ -33,18 +34,18 @@ public class MyRecipesActivity extends AppCompatActivity {
         mrRecipe.setLayoutManager(new LinearLayoutManager(this));
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-        Call<List<RecipeDisplay>> call = server.getUserRecipes(userId);
+        Call<ArrayList<RecipeDisplay>> call = server.getUserRecipes(userId);
 
-        call.enqueue(new Callback<List<RecipeDisplay>>() {
+        call.enqueue(new Callback<ArrayList<RecipeDisplay>>() {
             @Override
-            public void onResponse(Call<List<RecipeDisplay>> call, Response<List<RecipeDisplay>> response) {
+            public void onResponse(Call<ArrayList<RecipeDisplay>> call, Response<ArrayList<RecipeDisplay>> response) {
                 recipes = response.body();
                 adapterList = new MainAdapterList(recipes, getMyRecipesActivity());
                 mrRecipe.setAdapter(adapterList);
             }
 
             @Override
-            public void onFailure(Call<List<RecipeDisplay>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<RecipeDisplay>> call, Throwable t) {
 
             }
         });

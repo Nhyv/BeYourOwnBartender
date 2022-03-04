@@ -21,6 +21,15 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvErreurRegi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:text="Mot de passes non identiques"
+        android:textColor="@color/white" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -80,13 +89,6 @@
         android:minHeight="48dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B5FFFFFF" />
-
-    <TextView
-        android:id="@+id/tvErreurRegi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mot de passes non identiques"
-        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btInscrire"

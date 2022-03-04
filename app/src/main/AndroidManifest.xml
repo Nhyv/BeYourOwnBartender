@@ -33,7 +33,8 @@
             android:exported="false" />
         <activity
             android:name=".ReadRecipeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MyRecipesActivity"/>
         <activity
             android:name=".AddActivity"
             android:exported="false" />
@@ -42,6 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UpdateStep"
             android:exported="true" />
         <activity
             android:name=".LoadingActivity"

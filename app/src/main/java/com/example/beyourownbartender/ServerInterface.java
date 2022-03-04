@@ -47,4 +47,7 @@ public interface ServerInterface {
 
     @GET("/api/recipes/user/{id}/liked")
     Call<List<RecipeDisplay>> getUserLikedRecipes(@Path("id") int id);
+
+    @GET("/api/logs")
+    Call<List<LogDisplay>> getLogs();
 }

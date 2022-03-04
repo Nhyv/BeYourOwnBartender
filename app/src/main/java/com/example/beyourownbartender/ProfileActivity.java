@@ -9,8 +9,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -28,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profileUsername;
 
     UserDisplay user;
+    LoggedInUser loggedInUser;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context context;
@@ -128,9 +131,44 @@ public class ProfileActivity extends AppCompatActivity {
         btAdminMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, AdminActivity.class);
+                String username = pref.getString("username", "N/A");
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle("Menu Admin - Connexion");
+                alert.setMessage("Entrez votre mot de passe: ");
+                EditText input = new EditText(context);
+                input.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                alert.setView(input);
 
-                startActivity(intent);
+                alert.setPositiveButton("Accéder", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Call<LoggedInUser> call =
+                                server.getLogin(new Login(username,
+                                        input.getText().toString()));
+
+                        call.enqueue(new Callback<LoggedInUser>() {
+                            @Override
+                            public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
+                                if (response.code() == 200) {
+                                    Intent intent = new Intent(ProfileActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoggedInUser> call, Throwable t) {
+                            }
+                        });
+                    }
+                });
+                alert.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+
+                alert.show();
             }
         });
     }

@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,6 +34,7 @@ public class AddActivity extends AppCompatActivity {
     private Button buttonAddIngredient;
     private Button buttonAddStep;
     private TextView etbName;
+    RecipeDisplay recipeToDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +113,38 @@ public class AddActivity extends AppCompatActivity {
 
     // Used to push to the DB
     private void pushToDB(List<IngredientDisplay> listIngredients, List<String> listSteps, String title) {
+        // Creating the recipe to create
+        SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+        int authorID = pref.getInt("userId", 0);
+        List<String> listTags = new ArrayList<>();
+        // TestLine: RecipeCreate recipeToCreateTest = new RecipeCreate("testRecipe", 1,listTags, listTags);
+        RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, listSteps, listTags);
 
+        // Trying to post it to the DB
+        ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        Call<RecipeDisplay> callAdd = server.addRecipe(recipeToCreate);
+        callAdd.enqueue(new Callback<RecipeDisplay>() {
+            @Override
+            public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
+                int resp = response.code();
+                recipeToDisplay = response.body();
+                if (response.code() == 200) {
+                    // Sets the recipeToDisplay to the response body
+                    recipeToDisplay = response.body();
+                    int recipeID = recipeToDisplay.getId();
+
+                }
+                else{
+                    // Where response code is not 200 AKA Api is having a seizure
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeDisplay> call, Throwable t) {
+                // Fails
+                String err;
+            }
+        });
     }
 
     // Creates the empty ingredient list

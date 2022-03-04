@@ -41,4 +41,7 @@ public interface ServerInterface {
 
     @POST("/api/recipes/{id}/like/{userId}")
     Call<Boolean> toggleLikeRecipe(@Path("id") int id, @Path("userId") int userId);
+
+    @POST("/api/recipes/add")
+    Call<RecipeDisplay> addRecipe(@Body RecipeCreate recipe);
 }

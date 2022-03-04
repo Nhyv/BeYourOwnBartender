@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("Feed");
+        getSupportActionBar().setTitle("Liste de recettes");
         context = this;
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -4,44 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     tools:context=".ProfileActivity">
 
     <TextView
         android:id="@+id/profileUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Username Goes Here" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="Username Goes Here"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btAdminMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Panneau Admin" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Panneau Admin"
+        android:textColor="#D8D8D8" />
 
     <Button
         android:id="@+id/btProfileRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mes Recettes" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Mes Recettes"
+        android:textColor="#D8D8D8" />
 
     <Button
         android:id="@+id/btProfileLikes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mes ❤" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Mes ❤"
+        android:textColor="#D8D8D8" />
 
     <Button
         android:id="@+id/btProfileRobot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Espace Janus" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Espace Janus"
+        android:textColor="#D8D8D8" />
 
     <Button
         android:id="@+id/btDisconnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#FF0000"
-        android:text="Se déconnecter" />
+        android:text="Se déconnecter"
+        android:textColor="#290000" />
 
 </LinearLayout>

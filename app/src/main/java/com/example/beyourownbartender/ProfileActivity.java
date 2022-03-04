@@ -39,7 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         profileUsername = findViewById(R.id.profileUsername);
         btDisconnect = findViewById(R.id.btDisconnect);
@@ -56,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         String username = pref.getString("username", "N/A");
         int userId = pref.getInt("userId", 0);
         profileUsername.setText(username);
+        getSupportActionBar().setTitle("Paramètres");
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
         Call<UserDisplay> call = server.getUserById(userId);

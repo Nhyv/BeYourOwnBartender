@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/select_background_test"
     android:orientation="vertical"
     tools:context=".MyLikesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mlRecipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#83000000" />
 </LinearLayout>

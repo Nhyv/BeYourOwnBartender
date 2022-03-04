@@ -16,6 +16,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainViewHolder> {
     private ArrayList<RecipeDisplay> recipes;
     private ArrayList<RecipeDisplay> fullList;
@@ -113,6 +117,11 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         }
     };
 
+    private void supprimer(int index) {
+        recipes.remove(index);
+        notifyItemRemoved(index);
+    }
+
     @Override
     public int getItemCount() {
         return recipes.size();
@@ -147,14 +156,26 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
                 @Override
                 public boolean onLongClick(View view) {
                     if (isMr) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(main);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mr);
                         builder.setCancelable(true);
                         builder.setTitle("Confirmation");
                         builder.setMessage("Voulez-vous vraiment supprimer cette recette?");
                         builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                
+                                ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+                                Call<Void> call = server.deleteRecipeById(recipes.get(getLayoutPosition()).getId());
+                                call.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        supprimer(getLayoutPosition());
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+
+                                    }
+                                });
                             }
                         });
 

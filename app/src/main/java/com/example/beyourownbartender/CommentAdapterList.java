@@ -68,7 +68,6 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
-
             cUsername = itemView.findViewById(R.id.cUsername);
             cContent = itemView.findViewById(R.id.cContent);
             cTime = itemView.findViewById(R.id.cTime);

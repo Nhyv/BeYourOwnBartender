@@ -1,5 +1,7 @@
 package com.example.beyourownbartender;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
@@ -137,6 +140,33 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
                         ml.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                     if (isMain)
                         main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (isMr) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(main);
+                        builder.setCancelable(true);
+                        builder.setTitle("Confirmation");
+                        builder.setMessage("Voulez-vous vraiment supprimer cette recette?");
+                        builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                
+                            }
+                        });
+
+                        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             });
         }

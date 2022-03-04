@@ -17,6 +17,9 @@ public class CommentDisplay {
     @SerializedName("content")
     String content;
 
+    @SerializedName("rating")
+    int rating;
+
     @SerializedName("recipeId")
     int recipeId;
 
@@ -26,7 +29,7 @@ public class CommentDisplay {
     @SerializedName("modifiedTime")
     OffsetDateTime modifiedTime;
 
-    public CommentDisplay(int id, int authorId, String authorName, String content,
+    public CommentDisplay(int id, int authorId, int rating, String authorName, String content,
                           int recipeId, OffsetDateTime creationTime, OffsetDateTime modifiedTime) {
         this.authorId = authorId;
         this.authorName = authorName;

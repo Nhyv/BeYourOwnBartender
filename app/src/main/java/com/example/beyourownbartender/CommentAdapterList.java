@@ -3,6 +3,7 @@ package com.example.beyourownbartender;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView cUsername, cContent, cTime, cCounter;
+        Button btHelpful;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +74,15 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
             cContent = itemView.findViewById(R.id.cContent);
             cTime = itemView.findViewById(R.id.cTime);
             cCounter = itemView.findViewById(R.id.cCounter);
+            btHelpful = itemView.findViewById(R.id.btHelpful);
+
+            btHelpful.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    
+                }
+            });
+
         }
     }
 }

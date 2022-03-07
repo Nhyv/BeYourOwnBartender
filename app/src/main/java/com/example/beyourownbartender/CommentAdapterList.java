@@ -61,6 +61,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
     }
 
     public void addComment(CommentDisplay commentToDisplay) {
+        comments.add(commentToDisplay);
         notifyItemInserted(comments.size() - 1);
     }
 

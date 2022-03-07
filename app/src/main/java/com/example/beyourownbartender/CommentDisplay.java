@@ -37,6 +37,54 @@ public class CommentDisplay {
         this.recipeId = recipeId;
     }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
+
+    public OffsetDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(OffsetDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public OffsetDateTime getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(OffsetDateTime modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
     public int getAuthorId() {
         return authorId;
     }

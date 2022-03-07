@@ -1,5 +1,9 @@
 package com.example.beyourownbartender;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,17 +11,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.CommentViewHolder> {
     private List<CommentDisplay> comments;
+    ReadRecipeActivity rr;
+    SharedPreferences pref;
 
-    public CommentAdapterList(List<CommentDisplay> comments) {
+    public CommentAdapterList(List<CommentDisplay> comments, ReadRecipeActivity rr) {
         this.comments = comments;
+        this.rr = rr;
     }
 
     public CommentAdapterList() { }
@@ -84,6 +96,51 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
                 }
             });
 
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (comments.get(getLayoutPosition()).getAuthorId() != rr.getCurrentUserId())
+                        return false;
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(rr);
+                    builder.setCancelable(true);
+                    builder.setTitle("Confirmation");
+                    builder.setMessage("Voulez-vous vraiment supprimer votre commentaire?");
+                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+                            Call<Void> call = server.deleteCommentById(comments.get(getLayoutPosition()).getId());
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    supprimer(getLayoutPosition());
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    });
+
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return true;
+                }
+            });
+        }
+        private void supprimer(int index) {
+            comments.remove(index);
+            notifyItemRemoved(index);
         }
     }
 }

@@ -142,7 +142,7 @@ ReadRecipeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CommentDisplay>> call, Response<List<CommentDisplay>> response) {
                 comments = response.body();
-                adapterList = new CommentAdapterList(comments);
+                adapterList = new CommentAdapterList(comments, getReadRecipeActivity());
                 recyclerView.setAdapter(adapterList);
             }
 
@@ -249,12 +249,12 @@ ReadRecipeActivity extends AppCompatActivity {
                         if (like.isLiked()) {
                             fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(221,74,74)));
                             fabLike.setImageTintList(ColorStateList.valueOf(Color.rgb(161,34,34)));
-                            readRating.setText(like.getRatingScore() + " ❤");
+                            readRating.setText(like.getRating() + " ❤");
                         }
                         else {
                             fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                             fabLike.setImageTintList(ColorStateList.valueOf(Color.DKGRAY));
-                            readRating.setText(like.getRatingScore() + " ❤");
+                            readRating.setText(like.getRating() + " ❤");
                         }
                     }
 
@@ -266,5 +266,12 @@ ReadRecipeActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public ReadRecipeActivity getReadRecipeActivity() {
+        return this;
+    }
+
+    public int getCurrentUserId() {
+        return pref.getInt("userId", 0);
     }
 }

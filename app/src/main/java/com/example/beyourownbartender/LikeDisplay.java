@@ -6,12 +6,12 @@ public class LikeDisplay {
     @SerializedName("liked")
     boolean liked;
 
-    @SerializedName("ratingScore")
-    int ratingScore;
+    @SerializedName("rating")
+    int rating;
 
-    public LikeDisplay(boolean liked, int ratingScore) {
+    public LikeDisplay(boolean liked, int rating) {
         this.liked = liked;
-        this.ratingScore = ratingScore;
+        this.rating = rating;
     }
 
     public boolean isLiked() {
@@ -22,11 +22,11 @@ public class LikeDisplay {
         this.liked = liked;
     }
 
-    public int getRatingScore() {
-        return ratingScore;
+    public int getRating() {
+        return rating;
     }
 
-    public void setRatingScore(int ratingScore) {
-        this.ratingScore = ratingScore;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }

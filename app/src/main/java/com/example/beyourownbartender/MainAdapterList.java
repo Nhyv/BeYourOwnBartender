@@ -1,7 +1,10 @@
 package com.example.beyourownbartender;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +31,14 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     MyLikesActivity ml;
     boolean isMain = true;
     boolean isMr, isMl;
+    SharedPreferences pref;
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
         isMain = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
+        pref = main.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
     }
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MyRecipesActivity mr) {
@@ -42,6 +47,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         isMain = false;
         isMr = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
+        pref = mr.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
     }
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MyLikesActivity ml) {
@@ -50,6 +56,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         isMain = false;
         isMl = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
+        pref = ml.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
     }
 
     public Filter getFilter() {
@@ -155,8 +162,13 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    if (isMr) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(mr);
+                    boolean adminCheck = pref.getBoolean("isAdmin", false);
+                    if (isMr || (adminCheck && isMain)) {
+                        AlertDialog.Builder builder;
+                        if (isMain)
+                             builder = new AlertDialog.Builder(main);
+                        else
+                            builder = new AlertDialog.Builder(mr);
                         builder.setCancelable(true);
                         builder.setTitle("Confirmation");
                         builder.setMessage("Voulez-vous vraiment supprimer cette recette?");

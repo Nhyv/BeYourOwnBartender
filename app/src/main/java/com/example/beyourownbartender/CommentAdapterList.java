@@ -26,6 +26,8 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
     private List<CommentDisplay> comments;
     ReadRecipeActivity rr;
     SharedPreferences pref;
+    ServerInterface server;
+    UserDisplay currentUser;
 
     public CommentAdapterList(List<CommentDisplay> comments, ReadRecipeActivity rr) {
         this.comments = comments;
@@ -39,6 +41,8 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.read_comment_layout, parent, false);
+        server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        pref = rr.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
 
         return new CommentViewHolder(view);
     }
@@ -100,17 +104,20 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    if (comments.get(getLayoutPosition()).getAuthorId() != rr.getCurrentUserId())
-                        return false;
+                    if (comments.get(getLayoutPosition()).getAuthorId() != rr.getCurrentUserId()) {
+                        if (pref.getBoolean("isAdmin", false) == false) {
+                            return false;
+                        }
+                    }
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(rr);
                     builder.setCancelable(true);
                     builder.setTitle("Confirmation");
-                    builder.setMessage("Voulez-vous vraiment supprimer votre commentaire?");
+                    builder.setMessage("Voulez-vous vraiment supprimer ce commentaire?");
                     builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+
                             Call<Void> call = server.deleteCommentById(comments.get(getLayoutPosition()).getId());
                             call.enqueue(new Callback<Void>() {
                                 @Override
@@ -123,6 +130,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
 
                                 }
                             });
+
                         }
                     });
 

@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<RecipeDisplay> recipes;
 
     @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

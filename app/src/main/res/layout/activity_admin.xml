@@ -18,13 +18,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/adminSupp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Supprimer une recette" />
-
-    <Button
-        android:id="@+id/button2"
+        android:id="@+id/btAdminDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Supprimer un ingrédient" />

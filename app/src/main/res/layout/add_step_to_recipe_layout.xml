@@ -8,6 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:background="#888484"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,6 +28,7 @@
                     android:id="@+id/tvTitleStep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
                     android:text="Etape No:" />
 
@@ -56,6 +59,7 @@
                         android:id="@+id/labelStepInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Description de l'etape:" />
 
                     <Button
@@ -75,12 +79,15 @@
                     android:id="@+id/mtbStepInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#9E9E9E"
                     android:gravity="top|left"
                     android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
                     android:lines="2"
                     android:maxLines="10"
                     android:minHeight="48dp"
-                    android:minLines="2" />
+                    android:minLines="2"
+                    android:padding="5dp" />
             </LinearLayout>
 
         </LinearLayout>

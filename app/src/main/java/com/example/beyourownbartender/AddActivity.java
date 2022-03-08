@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -35,6 +39,8 @@ public class AddActivity extends AppCompatActivity {
     private Button buttonAddStep;
     private TextView etbName;
     RecipeDisplay recipeToDisplay;
+
+    MonPhoneReceiver br;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +125,8 @@ public class AddActivity extends AppCompatActivity {
         List<String> listTags = new ArrayList<>();
         // TestLine: RecipeCreate recipeToCreateTest = new RecipeCreate("testRecipe", 1,listTags, listTags);
         RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, listSteps, listTags);
+        int recipeID;
+        //int[] idIngredientDisplayToLink = new ();
 
         // Trying to post it to the DB
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
@@ -133,12 +141,25 @@ public class AddActivity extends AppCompatActivity {
                     recipeToDisplay = response.body();
                     int recipeID = recipeToDisplay.getId();
 
+                    for(int j = 0; j<listIngredients.size(); j++){
+                        for(int k = 0; k<allIngredientList.size(); k++){
+                            if(listIngredients.get(j).name == allIngredientList.get(k).name){
+                                //idIngredientDisplayToLink.add(listIngredients.get(j).id);
+                            }
+                        }
+                    }
+
+                    Intent intent = new Intent();
+                    intent.setAction("com.info.lesreceivers.MON_ACTION");
+                    intent.putExtra("id",recipeID);
+                    intent.putIntegerArrayListExtra("listIngredient", ingredientDisplayToLink);
+
+                    sendBroadcast(intent);
                 }
                 else{
                     // Where response code is not 200 AKA Api is having a seizure
                 }
             }
-
             @Override
             public void onFailure(Call<RecipeDisplay> call, Throwable t) {
                 // Fails
@@ -168,4 +189,37 @@ public class AddActivity extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.info.lesreceivers.MON_ACTION");
+        this.registerReceiver(br, filter);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(br);
+    }
+
+    public class MonPhoneReceiver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String action = intent.getAction();
+            Toast.makeText(context, action, Toast.LENGTH_LONG).show();
+
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+
+
+            }
+        }
+    }
+
 }

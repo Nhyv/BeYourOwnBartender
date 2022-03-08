@@ -46,5 +46,5 @@ public interface ServerInterface {
     Call<RecipeDisplay> addRecipe(@Body RecipeCreate recipe);
 
     @POST("/api/recipes/{id}/ingredients/add")
-    Call<RecipeDisplay> addIngredientToRecipe(@Path("id") int id, @Body List<IngredientDisplay> listIngredients);
+    Call<List<IngredientDisplay>> addIngredientToRecipe(@Body List<IngredientDisplay> ingredientDisplayToLink, @Path("id") int id);
 }

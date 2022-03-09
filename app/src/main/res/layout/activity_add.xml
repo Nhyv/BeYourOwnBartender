@@ -84,6 +84,7 @@
                         android:backgroundTint="#323232"
                         app:icon="@drawable/ic_add"
                         app:iconTint="#AFAEAE"
+                        app:rippleColor="#717171"
                         app:tint="#66B1B8"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -130,6 +131,7 @@
                         android:backgroundTint="#323232"
                         app:icon="@drawable/ic_add"
                         app:iconTint="#AFAEAE"
+                        app:rippleColor="#717171"
                         app:tint="#66B1B8"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>

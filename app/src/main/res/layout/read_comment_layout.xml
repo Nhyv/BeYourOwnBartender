@@ -15,15 +15,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F4F4F4"
+            android:background="#222222"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/cUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:text="George the Pirate"
+                android:textColor="#AFAEAE"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -37,7 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="This here recipe be very jolly yarrharr" />
+                    android:text="This here recipe be very jolly yarrharr"
+                    android:textColor="#AFAEAE" />
 
             </LinearLayout>
 
@@ -52,9 +55,10 @@
                     android:id="@+id/cTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="5 months ago"
+                    android:textColor="#AFAEAE"
                     android:textSize="10sp" />
 
                 <TextView
@@ -66,6 +70,7 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="2 sheep found this helpful."
+                    android:textColor="#AFAEAE"
                     android:textSize="10sp" />
 
                 <Button
@@ -75,7 +80,7 @@
                     android:layout_weight="1"
                     android:background="#00FFFFFF"
                     app:icon="@drawable/ic_helpful"
-                    app:iconTint="#686868"
+                    app:iconTint="#AFAEAE"
                     app:tint="#66B1B8"
                     tools:ignore="SpeakableTextPresentCheck" />
 

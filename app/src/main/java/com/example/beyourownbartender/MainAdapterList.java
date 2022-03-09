@@ -134,7 +134,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         return recipes.size();
     }
 
-    public void updateDisplayedData(List<RecipeDisplay> listRecipes){
+    public void updateDisplayedData(ArrayList<RecipeDisplay> listRecipes){
         recipes = listRecipes;
         notifyDataSetChanged();
     }

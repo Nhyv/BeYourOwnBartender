@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         if(adapterList != null){
             // It updates from the DB each time
             ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-            Call<List<RecipeDisplay>> call = server.getRecipes();
+            Call<ArrayList<RecipeDisplay>> call = server.getRecipes();
 
-            call.enqueue(new Callback<List<RecipeDisplay>>() {
+            call.enqueue(new Callback<ArrayList<RecipeDisplay>>() {
                 @Override
-                public void onResponse(Call<List<RecipeDisplay>> call, Response<List<RecipeDisplay>> response) {
-                    recipes = response.body();
+                public void onResponse(Call<ArrayList<RecipeDisplay>> call, Response<ArrayList<RecipeDisplay>> response) {
+                    recipes =  response.body();
                     // On success updates the adapterList data
                     if(recipes != null){
                         adapterList.updateDisplayedData(recipes);
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<List<RecipeDisplay>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<RecipeDisplay>> call, Throwable t) {
                     // Failed need to display the issue
                 }
             });

@@ -49,7 +49,7 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         for(int i = 0; i < allIngredients.size(); i++){
             dropDownText.add(allIngredients.get(i).getName());
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, dropDownText);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, dropDownText);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinnerAllIngredients.setAdapter(dataAdapter);
 

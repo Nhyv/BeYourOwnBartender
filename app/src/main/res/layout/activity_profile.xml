@@ -33,15 +33,21 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="#323232"
         android:text="Panneau Admin"
-        android:textColor="#D8D8D8" />
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/btDemandeIngredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
         android:text="Ajouter un nouvel ingrédient"
-        android:textColor="#D8D8D8" />
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold" />
     <Button
         android:id="@+id/btProfileRecipes"
         android:layout_width="match_parent"

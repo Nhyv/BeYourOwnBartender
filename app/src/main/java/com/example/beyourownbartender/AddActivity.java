@@ -37,12 +37,14 @@ public class AddActivity extends AppCompatActivity {
     RecipeDisplay recipeToDisplay;
 
     MonPhoneReceiver br;
+    AddActivity aa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         br = new MonPhoneReceiver();
+        aa = this;
 
         // Creates the empty ingredient list and sets the recyclerview/adapterlist values for ingredients
         ingredientList = createListIngredients();
@@ -226,14 +228,16 @@ public class AddActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
-
+                        // Finish this app on success
+                        aa.finish();
                     }
 
                     @Override
                     public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
                         // Fails
                         String err;
-
+                        // Finish this app on failure
+                        aa.finish();
                     }
                 });
             }

@@ -18,11 +18,23 @@ public class LoggedInUser {
     @SerializedName("username")
     String username;
 
-    public LoggedInUser(int userId, OffsetDateTime creationDate, String email, String username) {
+    @SerializedName("isAdmin")
+    boolean isAdmin;
+
+    public LoggedInUser(int userId, OffsetDateTime creationDate, String email, String username, boolean isAdmin) {
         this.userId = userId;
         this.creationDate = creationDate;
         this.email = email;
         this.username = username;
+        this.isAdmin = isAdmin;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public int getUserId() {

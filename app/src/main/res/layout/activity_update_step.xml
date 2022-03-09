@@ -9,27 +9,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#272727"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTitleStepUpdate"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
 
-        <EditText
-            android:id="@+id/tbNewStep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:maxLines="20"
-            android:minLines="2"/>
+            <TextView
+                android:id="@+id/tvTitleStepUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#AFAEAE"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/tbNewStep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#AFAEAE"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:maxLines="20"
+                android:minLines="2"
+                android:textColor="#AFAEAE"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btSubmitUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirmer la modification" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="#323232"
+            android:text="Confirmer la modification"
+            android:textColor="#AFAEAE"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

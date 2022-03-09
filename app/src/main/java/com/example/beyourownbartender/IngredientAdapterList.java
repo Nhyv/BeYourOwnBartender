@@ -20,6 +20,7 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     List<IngredientDisplay> ingredientList;
     Context context;
 
+
     public IngredientAdapterList(List<IngredientDisplay> ingredientList, Context context) {
         this.ingredientList = ingredientList;
         this.context = context;
@@ -49,7 +50,7 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
         for(int i = 0; i < allIngredients.size(); i++){
             dropDownText.add(allIngredients.get(i).getName());
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, dropDownText);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, dropDownText);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spinnerAllIngredients.setAdapter(dataAdapter);
 
@@ -82,9 +83,9 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
 
+        public Button btRemoveIngredient;
         public TextView tvTitleCardIngredient;
         public Spinner spinnerAllIngredients;
-        public Button btRemoveIngredient;
 
         public AdapterListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,7 +115,5 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
                 }
             });
         }
-
-
     }
 }

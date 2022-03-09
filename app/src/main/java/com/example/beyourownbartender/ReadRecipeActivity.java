@@ -28,7 +28,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReadRecipeActivity extends AppCompatActivity {
+public class
+ReadRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CommentAdapterList adapterList;
     int authorId;
@@ -45,8 +46,8 @@ public class ReadRecipeActivity extends AppCompatActivity {
     UserDisplay author;
     FloatingActionButton fabLike;
     SharedPreferences pref;
-    boolean isLiked;
-
+    LikeDisplay like;
+    int rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
                 String name = recipe.getName();
                 List<String> tags = recipe.getTags();
                 List<String> steps = recipe.getSteps();
+                rating = recipe.getRating();
                 String toShowTags = "";
                 String toShowSteps = "";
 
@@ -106,7 +108,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
                 readTags.setText(toShowTags);
                 readSteps.setText(toShowSteps);
                 readTitre.setText(name);
-                readRating.setText(recipe.getRating() + " ❤");
+                readRating.setText(rating + " ❤");
             }
 
             @Override
@@ -140,7 +142,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<CommentDisplay>> call, Response<List<CommentDisplay>> response) {
                 comments = response.body();
-                adapterList = new CommentAdapterList(comments);
+                adapterList = new CommentAdapterList(comments, getReadRecipeActivity());
                 recyclerView.setAdapter(adapterList);
             }
 
@@ -213,7 +215,7 @@ public class ReadRecipeActivity extends AppCompatActivity {
                 String username = pref.getString("username", "N/A");
 
                 CommentCreate commentToAdd = new CommentCreate(userId, username,
-                        etComment.getText().toString(), 1);
+                        etComment.getText().toString(), recipeId);
                 Call<CommentDisplay> callAdd = server.addComment(commentToAdd);
                 callAdd.enqueue(new Callback<CommentDisplay>() {
                     @Override
@@ -237,30 +239,39 @@ public class ReadRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int userId = pref.getInt("userId", 1);
-                Call<Boolean> callToggleLike = server.toggleLikeRecipe(recipeId, userId);
+                Call<LikeDisplay> callToggleLike = server.toggleLikeRecipe(recipeId, userId);
 
-                callToggleLike.enqueue(new Callback<Boolean>() {
+                callToggleLike.enqueue(new Callback<LikeDisplay>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        isLiked = response.body();
+                    public void onResponse(Call<LikeDisplay> call, Response<LikeDisplay> response) {
+                        like = response.body();
 
-                        if (isLiked) {
+                        if (like.isLiked()) {
                             fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(221,74,74)));
                             fabLike.setImageTintList(ColorStateList.valueOf(Color.rgb(161,34,34)));
+                            readRating.setText(like.getRating() + " ❤");
                         }
                         else {
                             fabLike.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                             fabLike.setImageTintList(ColorStateList.valueOf(Color.DKGRAY));
+                            readRating.setText(like.getRating() + " ❤");
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<LikeDisplay> call, Throwable t) {
 
                     }
                 });
             }
         });
 
+    }
+    public ReadRecipeActivity getReadRecipeActivity() {
+        return this;
+    }
+
+    public int getCurrentUserId() {
+        return pref.getInt("userId", 0);
     }
 }

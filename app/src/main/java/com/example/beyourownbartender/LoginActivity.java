@@ -26,6 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences pref;
 
     @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -104,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             editor.putInt("userId", user.getUserId());
                             editor.putString("username", user.getUsername());
+                            editor.putBoolean("isAdmin", user.isAdmin());
                             editor.commit();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
@@ -131,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 
                 startActivity(intent);
-                finish();
             }
         });
     }

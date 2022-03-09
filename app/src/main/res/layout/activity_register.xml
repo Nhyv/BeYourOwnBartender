@@ -21,6 +21,15 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tvErreurRegi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:text="Mot de passes non identiques"
+        android:textColor="@color/white" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -38,6 +47,7 @@
 
     <EditText
         android:id="@+id/etUsername"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -53,6 +63,7 @@
 
     <EditText
         android:id="@+id/etPassword"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -68,6 +79,7 @@
 
     <EditText
         android:id="@+id/etPasswordConfirm"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -92,5 +104,4 @@
         android:enabled="false"
         android:text="S'inscrire"
         android:textColor="#FFFFFF" />
-
 </LinearLayout>

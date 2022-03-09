@@ -8,52 +8,55 @@
 
     <ScrollView
         android:layout_width="412dp"
-        android:layout_height="533dp"
+        android:layout_height="730dp"
+        android:background="#272727"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="5dp"
-                android:layout_marginStart="5dp"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/labelTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="120dp"
+                    android:gravity="center"
                     android:labelFor="@id/etbName"
-                    android:text="Titre" />
+                    android:text="Nom"
+                    android:textColor="#AFAEAE"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etbName"
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:layout_marginTop="44dp"
+                    android:layout_width="295dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="45dp"
+                    android:backgroundTint="#AFAEAE"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:textColorHint="#000000" />
+                    android:textColor="#AFAEAE"
+                    android:textColorHint="#AFAEAE" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="5dp"
-                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -63,16 +66,27 @@
 
                     <TextView
                         android:id="@+id/labelIngredients"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Ingredients" />
+                        android:text="Ingredients"
+                        android:textColor="#AFAEAE"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/btAddIngredients"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="#888484" />
+                        android:layout_marginLeft="140dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#323232"
+                        app:icon="@drawable/ic_add"
+                        app:iconTint="#AFAEAE"
+                        app:rippleColor="#717171"
+                        app:tint="#66B1B8"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
 
                 </LinearLayout>
@@ -80,7 +94,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvIngredients"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
@@ -89,9 +104,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="5dp"
-                android:layout_marginStart="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -101,31 +113,51 @@
 
                     <TextView
                         android:id="@+id/labelSteps"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Etapes" />
+                        android:text="Etapes"
+                        android:textColor="#AFAEAE"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/btAddSteps"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="#888484" />
+                        android:layout_marginLeft="140dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#323232"
+                        app:icon="@drawable/ic_add"
+                        app:iconTint="#AFAEAE"
+                        app:rippleColor="#717171"
+                        app:tint="#66B1B8"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSteps"
                     android:layout_width="match_parent"
-                    android:layout_height="236dp">
+                    android:layout_height="match_parent">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btAddRecipe"
-                android:layout_width="213dp"
-                android:layout_height="81dp"
-                android:background="#888484" />
+                android:layout_width="363dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#323232"
+                android:gravity="center"
+                android:text="Ajouter recette"
+                android:textColor="#AFAEAE"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
     </ScrollView>
 

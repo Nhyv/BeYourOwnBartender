@@ -14,17 +14,40 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".DemandeIngredientActivity"
             android:exported="false" />
+        <activity
+            android:name=".RobotActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".MyLikesActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".MyRecipesActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfileActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".MyRecipesActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".ReadRecipeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MyRecipesActivity" />
         <activity
             android:name=".AddActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MyRecipesActivity" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
@@ -33,10 +56,11 @@
             android:exported="true" />
         <activity
             android:name=".UpdateStep"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".AddActivity" />
         <activity
             android:name=".LoadingActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

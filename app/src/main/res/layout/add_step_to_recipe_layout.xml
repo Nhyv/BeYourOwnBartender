@@ -8,12 +8,16 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginRight="20dp"
+        android:background="#888484"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#CAC9C9"
+            android:background="#323232"
             android:orientation="vertical">
 
             <LinearLayout
@@ -24,16 +28,23 @@
                     android:id="@+id/tvTitleStep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Etape No:" />
+                    android:text="Etape No:"
+                    android:textColor="#AFAEAE"
+                    android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:id="@+id/btRemoveStep"
-                    android:layout_width="match_parent"
+                    android:layout_width="5dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:background="#B30101"
-                    android:text="Supprimer" />
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:icon="@drawable/ic_remove"
+                    app:iconSize="35dp"
+                    app:iconTint="#DC2121"
+                    app:tint="#66B1B8"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
             <LinearLayout
@@ -48,27 +59,41 @@
 
                     <TextView
                         android:id="@+id/labelStepInfo"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description de l'etape" />
+                        android:layout_marginLeft="10dp"
+                        android:text="Description de l'etape:"
+                        android:textColor="#AFAEAE"
+                        android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <Button
                         android:id="@+id/btUpdateStep"
-                        android:layout_width="match_parent"
+                        android:layout_width="5dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#FFEB3B"
-                        android:text="Modifier" />
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF"
+                        app:icon="@drawable/ic_modify_step"
+                        app:iconSize="35dp"
+                        app:iconTint="#AFAEAE"
+                        app:tint="#66B1B8"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/mtbStepInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#1B1B1B"
                     android:gravity="top|left"
                     android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
                     android:lines="2"
                     android:maxLines="10"
-                    android:minLines="2" />
+                    android:minHeight="48dp"
+                    android:minLines="2"
+                    android:padding="5dp"
+                    android:textColor="#AFAEAE"
+                    android:textColorHint="#AFAEAE" />
             </LinearLayout>
 
         </LinearLayout>

@@ -33,7 +33,6 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="#323232"
         android:text="Panneau Admin"
-<<<<<<< Updated upstream
         android:textColor="#D8D8D8" />
     <Button
         android:id="@+id/btDemandeIngredient"
@@ -43,13 +42,6 @@
         android:layout_marginBottom="10dp"
         android:text="Ajouter un nouvel ingrédient"
         android:textColor="#D8D8D8" />
-=======
-        android:textColor="#AFAEAE"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:rippleColor="#717171" />
-
->>>>>>> Stashed changes
     <Button
         android:id="@+id/btProfileRecipes"
         android:layout_width="match_parent"

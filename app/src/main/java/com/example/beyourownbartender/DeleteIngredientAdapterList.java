@@ -15,18 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapterList.AdapterListViewHolder>{
+public class DeleteIngredientAdapterList extends RecyclerView.Adapter<DeleteIngredientAdapterList.AdapterListViewHolder>{
 
     List<IngredientDisplay> ingredientList;
     Context context;
 
 
-    public IngredientAdapterList(List<IngredientDisplay> ingredientList, Context context) {
+    public DeleteIngredientAdapterList(List<IngredientDisplay> ingredientList, Context context) {
         this.ingredientList = ingredientList;
         this.context = context;
     }
 
-    public IngredientAdapterList(List<IngredientDisplay> ingredientList) {
+    public DeleteIngredientAdapterList(List<IngredientDisplay> ingredientList) {
         this.ingredientList = ingredientList;
     }
 
@@ -34,15 +34,15 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
     @Override
     public AdapterListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.add_ingredient_to_recipe_layout, parent, false);
+        View view = inflater.inflate(R.layout.delete_layout, parent, false);
         return new AdapterListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngredientAdapterList.AdapterListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DeleteIngredientAdapterList.AdapterListViewHolder holder, int position) {
 
         // Sets the card title text
-        String titleCardIngredientString = "Ingredient No: "+(position+1);
+        String titleCardIngredientString = "Ingredient:";
         holder.tvTitleCardIngredient.setText(titleCardIngredientString);
 
         List<IngredientDisplay> allIngredients = ingredientList.get(position).getAllIngredients();
@@ -83,7 +83,6 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
 
     public class AdapterListViewHolder extends RecyclerView.ViewHolder {
 
-        public Button btRemoveIngredient;
         public TextView tvTitleCardIngredient;
         public Spinner spinnerAllIngredients;
 
@@ -92,15 +91,6 @@ public class IngredientAdapterList extends RecyclerView.Adapter<IngredientAdapte
 
             tvTitleCardIngredient = itemView.findViewById(R.id.tvTitleCardIngredient);
             spinnerAllIngredients = itemView.findViewById(R.id.spinnerAllIngredients);
-            btRemoveIngredient = itemView.findViewById(R.id.btRemoveIngredient);
-
-            btRemoveIngredient.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deleteIngredient(getLayoutPosition());
-                    refreshAll();
-                }
-            });
 
             spinnerAllIngredients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

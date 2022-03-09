@@ -17,7 +17,7 @@ public class AdminActivity extends AppCompatActivity {
     private RecyclerView rvDeleteIngr;
     private List<IngredientDisplay> ingredients;
     private List<IngredientDisplay> allIngredients;
-    private IngredientAdapterList adapterList;
+    private DeleteIngredientAdapterList adapterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         ingredients = new ArrayList<>();
-        adapterList = new IngredientAdapterList(ingredients, this);
+        adapterList = new DeleteIngredientAdapterList(ingredients, this);
 
         rvDeleteIngr = findViewById(R.id.rvDeleteIngr);
         rvDeleteIngr.setLayoutManager(new LinearLayoutManager(this));

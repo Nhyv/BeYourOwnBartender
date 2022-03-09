@@ -46,6 +46,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        br = new MonPhoneReceiver();
 
         // Creates the empty ingredient list and sets the recyclerview/adapterlist values for ingredients
         ingredientList = createListIngredients();
@@ -123,10 +124,10 @@ public class AddActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         int authorID = pref.getInt("userId", 0);
         List<String> listTags = new ArrayList<>();
-        // TestLine: RecipeCreate recipeToCreateTest = new RecipeCreate("testRecipe", 1,listTags, listTags);
         RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, listSteps, listTags);
         int recipeID;
-        //int[] idIngredientDisplayToLink = new ();
+        List<Integer> idIngredientDisplayToLink = new ArrayList<>();
+        int[] listInInt;
 
         // Trying to post it to the DB
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
@@ -134,7 +135,6 @@ public class AddActivity extends AppCompatActivity {
         callAdd.enqueue(new Callback<RecipeDisplay>() {
             @Override
             public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
-                int resp = response.code();
                 recipeToDisplay = response.body();
                 if (response.code() == 200) {
                     // Sets the recipeToDisplay to the response body
@@ -144,16 +144,15 @@ public class AddActivity extends AppCompatActivity {
                     for(int j = 0; j<listIngredients.size(); j++){
                         for(int k = 0; k<allIngredientList.size(); k++){
                             if(listIngredients.get(j).name == allIngredientList.get(k).name){
-                                //idIngredientDisplayToLink.add(listIngredients.get(j).id);
+                                idIngredientDisplayToLink.add(allIngredientList.get(k).id);
                             }
                         }
                     }
-
+                    int[] idsToSend = idIngredientDisplayToLink.stream().mapToInt(i->i).toArray();
                     Intent intent = new Intent();
-                    intent.setAction("com.info.lesreceivers.MON_ACTION");
+                    intent.setAction("com.info.broadcast.linkIngredients");
                     intent.putExtra("id",recipeID);
-                    intent.putIntegerArrayListExtra("listIngredient", ingredientDisplayToLink);
-
+                    intent.putExtra("listIngredient", idsToSend);
                     sendBroadcast(intent);
                 }
                 else{
@@ -195,7 +194,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.info.lesreceivers.MON_ACTION");
+        filter.addAction("com.info.broadcast.linkIngredients");
         this.registerReceiver(br, filter);
 
     }
@@ -212,12 +211,35 @@ public class AddActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             String action = intent.getAction();
-            Toast.makeText(context, action, Toast.LENGTH_LONG).show();
 
             Bundle extras = intent.getExtras();
             if (extras != null) {
+                int[]idList = intent.getIntArrayExtra("listIngredient");
+                int recipeID = intent.getIntExtra("id", -1);
+                List<IngredientDisplay> listIngredientsToLink = new ArrayList<>();
+                for(int l=0; l<idList.length; l++){
+                    for(int m=0; m<allIngredientList.size(); m++){
+                        if(idList[l] == allIngredientList.get(m).id){
+                            listIngredientsToLink.add(allIngredientList.get(m));
+                        }
+                    }
+                }
+                ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+                Call<List<IngredientDisplay>> callLinkIngredient = server.addIngredientToRecipe(recipeID, listIngredientsToLink);
+                callLinkIngredient.enqueue(new Callback<List<IngredientDisplay>>() {
 
+                    @Override
+                    public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
+                        if(response.code() == 200){
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
+                        // Fails
+                        String err;
+                    }
+                });
             }
         }
     }

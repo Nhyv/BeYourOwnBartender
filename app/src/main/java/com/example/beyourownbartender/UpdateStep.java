@@ -29,6 +29,10 @@ public class UpdateStep extends AppCompatActivity {
         titleTV = findViewById(R.id.tvTitleStepUpdate);
         String titleText = "Etape no : "+Integer.toString(posInt+1);
         titleTV.setText(titleText);
+        stepTb = findViewById(R.id.tbNewStep);
+        if(intent.getStringExtra("oldStep") != null){
+            stepTb.setText(intent.getStringExtra("oldStep"));
+        }
 
         btSubmitUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

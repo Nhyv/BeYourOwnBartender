@@ -47,6 +47,12 @@ public interface ServerInterface {
     @POST("/api/recipes/{id}/like/{userId}")
     Call<LikeDisplay> toggleLikeRecipe(@Path("id") int id, @Path("userId") int userId);
 
+    @POST("/api/recipes/add")
+    Call<RecipeDisplay> addRecipe(@Body RecipeCreate recipe);
+
+    @POST("/api/recipes/{id}/ingredients/add")
+    Call<List<IngredientDisplay>> addIngredientToRecipe(@Path("id") int id, @Body List<IngredientDisplay> ingredientDisplayToLink);
+
     @GET("/api/recipes/user/{id}")
     Call<ArrayList<RecipeDisplay>> getUserRecipes(@Path("id") int id);
 

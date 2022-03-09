@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+        pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         if (pref.contains("username")) {
             String username = pref.getString("username", "N/A");
             if (!username.equals("N/A")) {

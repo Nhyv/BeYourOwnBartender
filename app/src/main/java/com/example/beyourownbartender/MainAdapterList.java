@@ -134,6 +134,11 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         return recipes.size();
     }
 
+    public void updateDisplayedData(List<RecipeDisplay> listRecipes){
+        recipes = listRecipes;
+        notifyDataSetChanged();
+    }
+
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvRecipeName, tvAuthor, tvTags;

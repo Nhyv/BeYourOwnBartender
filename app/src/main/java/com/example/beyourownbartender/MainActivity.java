@@ -63,6 +63,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // When the application loads it forces the adapterList to update the DOM if it exists
+        if(adapterList != null){
+            // It updates from the DB each time
+            ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+            Call<List<RecipeDisplay>> call = server.getRecipes();
+
+            call.enqueue(new Callback<List<RecipeDisplay>>() {
+                @Override
+                public void onResponse(Call<List<RecipeDisplay>> call, Response<List<RecipeDisplay>> response) {
+                    recipes = response.body();
+                    // On success updates the adapterList data
+                    if(recipes != null){
+                        adapterList.updateDisplayedData(recipes);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<RecipeDisplay>> call, Throwable t) {
+                    // Failed need to display the issue
+                }
+            });
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu_layout, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);

@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#CAC9C9"
+            android:background="#323232"
             android:orientation="vertical">
 
             <LinearLayout
@@ -30,7 +30,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Etape No:" />
+                    android:text="Etape No:"
+                    android:textColor="#AFAEAE"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btRemoveStep"
@@ -60,7 +62,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="Description de l'etape:" />
+                        android:text="Description de l'etape:"
+                        android:textColor="#AFAEAE"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/btUpdateStep"
@@ -70,7 +74,7 @@
                         android:background="#00FFFFFF"
                         app:icon="@drawable/ic_modify_step"
                         app:iconSize="35dp"
-                        app:iconTint="#717171"
+                        app:iconTint="#AFAEAE"
                         app:tint="#66B1B8"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
@@ -80,14 +84,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#9E9E9E"
+                    android:background="#1B1B1B"
                     android:gravity="top|left"
                     android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
                     android:lines="2"
                     android:maxLines="10"
                     android:minHeight="48dp"
                     android:minLines="2"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:textColor="#AFAEAE"
+                    android:textColorHint="#AFAEAE" />
             </LinearLayout>
 
         </LinearLayout>

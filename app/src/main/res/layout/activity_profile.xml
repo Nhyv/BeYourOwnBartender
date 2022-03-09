@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#272727"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingLeft="15dp"
@@ -18,9 +19,10 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingBottom="80dp"
         android:text="Username Goes Here"
-        android:textSize="20dp"
+        android:textColor="#AFAEAE"
+        android:textSize="40dp"
         android:textStyle="bold" />
 
     <Button
@@ -29,7 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
         android:text="Panneau Admin"
+<<<<<<< Updated upstream
         android:textColor="#D8D8D8" />
     <Button
         android:id="@+id/btDemandeIngredient"
@@ -39,14 +43,25 @@
         android:layout_marginBottom="10dp"
         android:text="Ajouter un nouvel ingrédient"
         android:textColor="#D8D8D8" />
+=======
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#717171" />
+
+>>>>>>> Stashed changes
     <Button
         android:id="@+id/btProfileRecipes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
         android:text="Mes Recettes"
-        android:textColor="#D8D8D8" />
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#717171" />
 
     <Button
         android:id="@+id/btProfileLikes"
@@ -54,8 +69,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
         android:text="Mes ❤"
-        android:textColor="#D8D8D8" />
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#717171" />
 
     <Button
         android:id="@+id/btProfileRobot"
@@ -63,17 +82,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
         android:text="Espace Janus"
-        android:textColor="#D8D8D8" />
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#717171" />
 
     <Button
         android:id="@+id/btDisconnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="#FF0000"
         android:text="Se déconnecter"
-        android:textColor="#290000" />
+        android:textColor="#3E0101"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#3E0101" />
 
 </LinearLayout>

@@ -8,7 +8,12 @@
 
     <ScrollView
         android:layout_width="412dp"
-        android:layout_height="730dp">
+        android:layout_height="730dp"
+        android:background="#272727"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,19 +36,21 @@
                     android:gravity="center"
                     android:labelFor="@id/etbName"
                     android:text="Nom"
+                    android:textColor="#AFAEAE"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/etbName"
                     android:layout_width="295dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginBottom="45dp"
+                    android:backgroundTint="#AFAEAE"
                     android:ems="10"
-                    android:gravity="center"
                     android:inputType="textPersonName"
-                    android:textColorHint="#000000" />
+                    android:textColor="#AFAEAE"
+                    android:textColorHint="#AFAEAE" />
             </LinearLayout>
 
             <LinearLayout
@@ -63,19 +70,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Ingredients"
-                        android:textSize="20dp"
+                        android:textColor="#AFAEAE"
+                        android:textSize="30dp"
                         android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/btAddIngredients"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="120dp"
+                        android:layout_marginLeft="140dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#C1C1C1"
+                        android:backgroundTint="#323232"
                         app:icon="@drawable/ic_add"
-                        app:iconTint="#686868"
+                        app:iconTint="#AFAEAE"
                         app:tint="#66B1B8"
                         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -108,19 +116,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Etapes"
-                        android:textSize="20dp"
+                        android:textColor="#AFAEAE"
+                        android:textSize="30dp"
                         android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/btAddSteps"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="120dp"
+                        android:layout_marginLeft="140dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#C1C1C1"
+                        android:backgroundTint="#323232"
                         app:icon="@drawable/ic_add"
-                        app:iconTint="#686868"
+                        app:iconTint="#AFAEAE"
                         app:tint="#66B1B8"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
@@ -140,9 +149,12 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="#9F9F9F"
+                android:background="#323232"
                 android:gravity="center"
                 android:text="Ajouter recette"
+                android:textColor="#AFAEAE"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
     </ScrollView>

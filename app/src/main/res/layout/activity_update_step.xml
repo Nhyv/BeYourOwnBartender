@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#272727"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,16 +25,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#AFAEAE"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/tbNewStep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#AFAEAE"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:maxLines="20"
                 android:minLines="2"
+                android:textColor="#AFAEAE"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -45,6 +49,9 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
-            android:text="Confirmer la modification" />
+            android:background="#323232"
+            android:text="Confirmer la modification"
+            android:textColor="#AFAEAE"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

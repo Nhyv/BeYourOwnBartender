@@ -35,7 +35,8 @@
         android:text="Panneau Admin"
         android:textColor="#AFAEAE"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:rippleColor="#717171"/>
 
     <Button
         android:id="@+id/btDemandeIngredient"
@@ -47,7 +48,8 @@
         android:text="Ajouter un nouvel ingrédient"
         android:textColor="#AFAEAE"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:rippleColor="#717171"/>
     <Button
         android:id="@+id/btProfileRecipes"
         android:layout_width="match_parent"

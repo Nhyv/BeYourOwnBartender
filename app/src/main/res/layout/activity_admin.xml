@@ -8,18 +8,18 @@
     tools:context=".AdminActivity">
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Historique d'actions" />
+        android:text="Supprimer un Ingrédient" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDeleteIngr"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/btAdminDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Supprimer un ingrédient" />
+        android:text="Supprimer" />
 </LinearLayout>

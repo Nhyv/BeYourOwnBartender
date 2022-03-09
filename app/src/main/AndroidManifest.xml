@@ -14,9 +14,6 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DeleteIngredientActivity"
-            android:exported="false" />
-        <activity
             android:name=".DemandeIngredientActivity"
             android:exported="false" />
         <activity

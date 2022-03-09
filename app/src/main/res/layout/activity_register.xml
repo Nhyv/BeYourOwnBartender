@@ -47,6 +47,7 @@
 
     <EditText
         android:id="@+id/etUsername"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -62,6 +63,7 @@
 
     <EditText
         android:id="@+id/etPassword"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -77,6 +79,7 @@
 
     <EditText
         android:id="@+id/etPasswordConfirm"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -101,5 +104,4 @@
         android:enabled="false"
         android:text="S'inscrire"
         android:textColor="#FFFFFF" />
-
 </LinearLayout>

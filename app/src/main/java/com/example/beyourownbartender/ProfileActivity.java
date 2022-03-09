@@ -27,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btProfileRecipes;
     Button btProfileLikes;
     Button btProfileRobot;
+    Button btDemandeIngredient;
     TextView profileUsername;
 
     UserDisplay user;
@@ -47,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         btProfileLikes = findViewById(R.id.btProfileLikes);
         btProfileRecipes = findViewById(R.id.btProfileRecipes);
         btProfileRobot = findViewById(R.id.btProfileRobot);
+        btDemandeIngredient = findViewById(R.id.btDemandeIngredient);
 
         pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         editor = pref.edit();
@@ -128,6 +130,16 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btDemandeIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, DemandeIngredientActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
         btAdminMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

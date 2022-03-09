@@ -32,6 +32,9 @@ public interface ServerInterface {
     @POST("/api/comments/add")
     Call<CommentDisplay> addComment(@Body CommentCreate comment);
 
+    @POST("/api/ingredients/add")
+    Call<IngredientDisplay> addIngredient(@Body IngredientCreate ingredient);
+
     @GET("/api/comments/recipe_{id}")
     Call<List<CommentDisplay>> getCommentsByRecipeId(@Path("id") int id);
 

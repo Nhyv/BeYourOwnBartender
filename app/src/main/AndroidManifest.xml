@@ -14,52 +14,49 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DemandeIngredientActivity"
+            android:name=".Profile.DemandeIngredientActivity"
             android:exported="false" />
         <activity
-            android:name=".RobotActivity"
+            android:name=".Profile.MyLikesActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
+            android:parentActivityName=".Profile.ProfileActivity" />
         <activity
-            android:name=".MyLikesActivity"
+            android:name=".Profile.MyRecipesActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
+            android:parentActivityName=".Profile.ProfileActivity" />
         <activity
-            android:name=".MyRecipesActivity"
+            android:name=".Profile.AdminActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
+            android:parentActivityName=".Profile.ProfileActivity" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".Profile.ProfileActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
+            android:parentActivityName=".Profile.MyRecipesActivity" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Startup.RegisterActivity"
             android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
+            android:parentActivityName=".Startup.LoginActivity" />
         <activity
-            android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:name=".Welcome.ReadRecipeActivity"
             android:exported="false"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".Profile.MyRecipesActivity" />
         <activity
-            android:name=".ReadRecipeActivity"
+            android:name=".Creation.AddActivity"
             android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
+            android:parentActivityName=".Profile.MyRecipesActivity" />
         <activity
-            android:name=".AddActivity"
-            android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
-        <activity
-            android:name=".LoginActivity"
+            android:name=".Startup.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Welcome.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".UpdateStep"
+            android:name=".Creation.UpdateStep"
             android:exported="true"
-            android:parentActivityName=".AddActivity" />
+            android:parentActivityName=".Creation.AddActivity" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".Startup.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

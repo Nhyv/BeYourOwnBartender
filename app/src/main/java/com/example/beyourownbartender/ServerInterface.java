@@ -1,5 +1,16 @@
 package com.example.beyourownbartender;
 
+import com.example.beyourownbartender.Comments.CommentCreate;
+import com.example.beyourownbartender.Comments.CommentDisplay;
+import com.example.beyourownbartender.Creation.IngredientCreate;
+import com.example.beyourownbartender.Creation.IngredientDisplay;
+import com.example.beyourownbartender.Profile.LikeDisplay;
+import com.example.beyourownbartender.Startup.LoggedInUser;
+import com.example.beyourownbartender.Startup.Login;
+import com.example.beyourownbartender.Startup.Registration;
+import com.example.beyourownbartender.Startup.UserDisplay;
+import com.example.beyourownbartender.Welcome.RecipeCreate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +69,6 @@ public interface ServerInterface {
 
     @GET("/api/recipes/user/{id}/liked")
     Call<ArrayList<RecipeDisplay>> getUserLikedRecipes(@Path("id") int id);
-
-    @GET("/api/logs")
-    Call<List<LogDisplay>> getLogs();
 
     @DELETE("/api/recipes/delete/{id}")
     Call<Void> deleteRecipeById(@Path("id") int id);

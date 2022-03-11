@@ -5,18 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.beyourownbartender.Welcome.MainActivity;
 import com.example.beyourownbartender.R;
 import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
+
+import java.nio.charset.Charset;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     LoggedInUser user;
     Context context;
     SharedPreferences pref;
+    TextView tvForgot;
+    UserDisplay userForgot;
 
     @Override
     public void onBackPressed() {
@@ -55,6 +63,27 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
+        tvForgot = findViewById(R.id.tvForgot);
+
+        tvForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+                Call<UserDisplay> call = server.getUserByUsername("Nhyv");
+                call.enqueue(new Callback<UserDisplay>() {
+                    @Override
+                    public void onResponse(Call<UserDisplay> call, Response<UserDisplay> response) {
+                        userForgot = response.body();
+
+                    }
+                    @Override
+                    public void onFailure(Call<UserDisplay> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
 
         username.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putInt("userId", user.getUserId());
                             editor.putString("username", user.getUsername());
                             editor.putBoolean("isAdmin", user.isAdmin());
+                            editor.putString("email", user.getEmail());
                             editor.commit();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
@@ -144,5 +174,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public String generateRandomString() {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+
+        return generatedString;
     }
 }

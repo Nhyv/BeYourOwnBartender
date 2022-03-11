@@ -52,6 +52,9 @@ public interface ServerInterface {
     @GET("/api/users/{id}")
     Call<UserDisplay> getUserById(@Path("id") int id);
 
+    @GET("/api/users/{username}")
+    Call<UserDisplay> getUserByUsername(@Path("username") String username);
+
     @GET("/api/users/{id}/liked")
     Call<List<Integer>> getUserLiked(@Path("id") int id);
 

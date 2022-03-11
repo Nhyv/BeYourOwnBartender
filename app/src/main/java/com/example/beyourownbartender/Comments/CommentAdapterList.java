@@ -35,6 +35,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
     ServerInterface server;
     UserDisplay currentUser;
 
+    // Je passe l'activité dans le constructeur pour facilement accéder au Context.
     public CommentAdapterList(List<CommentDisplay> comments, ReadRecipeActivity rr) {
         this.comments = comments;
         this.rr = rr;
@@ -48,6 +49,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.read_comment_layout, parent, false);
         server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        // Dès le départ, j'accède aux préférences pour déterminer les permissions
         pref = rr.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
 
         return new CommentViewHolder(view);
@@ -61,7 +63,7 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
         long days = ChronoUnit.DAYS.between(comment.creationTime, OffsetDateTime.now());
         long months = 0;
         long years = 0;
-
+        // Affiche le temps depuis le commentaire.
         if (days >= 28) {
             months = days / 28;
             if (months >= 12) {
@@ -96,16 +98,6 @@ public class CommentAdapterList extends RecyclerView.Adapter<CommentAdapterList.
             cUsername = itemView.findViewById(R.id.cUsername);
             cContent = itemView.findViewById(R.id.cContent);
             cTime = itemView.findViewById(R.id.cTime);
-            cCounter = itemView.findViewById(R.id.cCounter);
-            btHelpful = itemView.findViewById(R.id.btHelpful);
-
-            btHelpful.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    
-                }
-            });
-
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

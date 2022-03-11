@@ -66,8 +66,8 @@ public class ProfileActivity extends AppCompatActivity {
         boolean isAdmin = pref.getBoolean("isAdmin", false);
         profileUsername.setText(username);
         getSupportActionBar().setTitle("Paramètres");
-        if (!isAdmin) {
-            btAdminMode.setVisibility(View.INVISIBLE);
+        if (isAdmin) {
+            btAdminMode.setVisibility(View.VISIBLE);
         }
 
         btDisconnect.setOnClickListener(new View.OnClickListener() {

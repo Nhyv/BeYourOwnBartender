@@ -77,19 +77,6 @@
         app:rippleColor="#717171" />
 
     <Button
-        android:id="@+id/btProfileRobot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#323232"
-        android:text="Espace Janus"
-        android:textColor="#AFAEAE"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:rippleColor="#717171" />
-
-    <Button
         android:id="@+id/btDisconnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

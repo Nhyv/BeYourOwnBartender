@@ -78,4 +78,7 @@ public interface ServerInterface {
 
     @DELETE("/api/comments/delete/{id}")
     Call<Void> deleteCommentById(@Path("id") int id);
+
+    @DELETE("/api/ingredients/delete/{id}")
+    Call<Void> deleteIngredientById(@Path("id") int id);
 }

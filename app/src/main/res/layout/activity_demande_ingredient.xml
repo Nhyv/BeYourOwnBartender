@@ -17,6 +17,7 @@
         android:ems="10"
         android:hint="Nom d'ingrédient"
         android:inputType="textPersonName"
+        android:textColor="@color/text_basic_color"
         android:textColorHint="@color/text_basic_color" />
 
     <Button

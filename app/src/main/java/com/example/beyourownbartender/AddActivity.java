@@ -10,13 +10,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +47,7 @@ public class AddActivity extends AppCompatActivity {
 
     MonPhoneReceiver br;
     AddActivity aa;
+    ImageView ivSelectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +70,11 @@ public class AddActivity extends AppCompatActivity {
         stepAdapterList = new StepAdapterList(stepList, this, rvSteps);
         rvSteps.setAdapter(stepAdapterList);
 
+        // Button to change the selected image
+        Button buttonChangeSelectedImage;
+
         // Button to push to the DB
-        Button btAddRecipe;
+        Button buttonAddRecipe;
 
 
         // This is used to pull the ingredients data from the DB
@@ -96,6 +107,17 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        // Creates a onClickListener for the changeSelectedImageButton
+        buttonChangeSelectedImage = findViewById(R.id.btChangeImage);
+        buttonChangeSelectedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Opens the image gallery for the user to select an image
+                onPickPhoto(view);
+            }
+        });
+
+
         // Creates a onClickListener for the addStep button
         buttonAddStep = findViewById(R.id.btAddSteps);
         buttonAddStep.setOnClickListener(new View.OnClickListener() {
@@ -107,14 +129,13 @@ public class AddActivity extends AppCompatActivity {
         });
 
         etbName = findViewById(R.id.etbName);
-        btAddRecipe = findViewById(R.id.btAddRecipe);
-        btAddRecipe.setOnClickListener(new View.OnClickListener() {
+        buttonAddRecipe = findViewById(R.id.btAddRecipe);
+        buttonAddRecipe.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 pushToDB(ingredientList, stepList, etbName.getText().toString());
             }
-
         });
     }
 
@@ -156,7 +177,7 @@ public class AddActivity extends AppCompatActivity {
                     sendBroadcast(intent);
                 }
                 else{
-                    // Where response code is not 200 AKA Api is having a seizure
+                    // Where response code is not 200 A.K.A Api is having a seizure
                 }
             }
             @Override
@@ -166,6 +187,61 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
+
+    // This is a static integer
+    public final static int PICK_PHOTO_CODE = 1046;
+
+    // Function to start the activity to access the gallery
+    public void onPickPhoto(View view) {
+        // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        // It think it can crash if no app to access the gallery is installed on the phone
+        startActivityForResult(intent, PICK_PHOTO_CODE);
+    }
+
+
+    // Function to load the image selected
+    public Bitmap loadFromUri(Uri photoUri) {
+        Bitmap image = null;
+        try {
+            // check version of Android on device
+            if(Build.VERSION.SDK_INT > 27){
+                // on newer versions of Android, use the new decodeBitmap method
+                ImageDecoder.Source source = ImageDecoder.createSource(this.getContentResolver(), photoUri);
+                image = ImageDecoder.decodeBitmap(source);
+            } else {
+                // support older versions of Android by using getBitmap
+                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    // Function listens for the result of the end of the activity to select the image
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                stepAdapterList.concludeUpdate(Integer.parseInt(data.getStringExtra("pos")), data.getStringExtra("newStep"));
+            }
+        } else {
+            if ((data != null) && requestCode == PICK_PHOTO_CODE) {
+                Uri photoUri = data.getData();
+
+                // Load the image located at photoUri into selectedImage
+                Bitmap selectedImage = loadFromUri(photoUri);
+
+                // Load the selected image into a preview
+                ivSelectedImage = findViewById(R.id.ivSelectedImage);
+                ivSelectedImage.setImageBitmap(selectedImage);
+            }
+        }
+    }
+
 
     // Creates the empty ingredient list
     private List<IngredientDisplay> createListIngredients(){
@@ -177,16 +253,6 @@ public class AddActivity extends AppCompatActivity {
         List<String> stepList = new ArrayList<>();
         stepList.add("");
         return(stepList);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                stepAdapterList.concludeUpdate(Integer.parseInt(data.getStringExtra("pos")),data.getStringExtra("newStep"));
-            }
-        }
     }
 
 

@@ -12,10 +12,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,8 +25,10 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,6 +52,7 @@ public class AddActivity extends AppCompatActivity {
     MonPhoneReceiver br;
     AddActivity aa;
     ImageView ivSelectedImage;
+    String imageBase64 = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +150,7 @@ public class AddActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         int authorID = pref.getInt("userId", 0);
         List<String> listTags = new ArrayList<>();
-        RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, listSteps, listTags);
+        RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, imageBase64, listSteps, listTags); // Image base 64 is null is it wasn't selected
         int recipeID;
         List<Integer> idIngredientDisplayToLink = new ArrayList<>();
         int[] listInInt;
@@ -234,12 +239,24 @@ public class AddActivity extends AppCompatActivity {
 
                 // Load the image located at photoUri into selectedImage
                 Bitmap selectedImage = loadFromUri(photoUri);
+                imageBase64 = encodeToBase64(selectedImage);
+
 
                 // Load the selected image into a preview
                 ivSelectedImage = findViewById(R.id.ivSelectedImage);
                 ivSelectedImage.setImageBitmap(selectedImage);
             }
         }
+    }
+
+    // Converts a bitmap to a base64 String
+    public static String encodeToBase64(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String output = Base64.getEncoder().encodeToString(b);
+        Log.e("test", output);
+        return(output);
     }
 
 

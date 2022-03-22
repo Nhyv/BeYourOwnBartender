@@ -29,13 +29,6 @@ public class RecipeCreate {
         this.tags = tags;
     }
 
-    public RecipeCreate(String name, int authorId, List<String> steps, List<String> tags) {
-        this.name = name;
-        this.authorId = authorId;
-        this.steps = steps;
-        this.tags = tags;
-    }
-
     public String getName() {
         return name;
     }

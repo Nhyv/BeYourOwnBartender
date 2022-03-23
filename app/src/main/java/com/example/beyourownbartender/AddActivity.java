@@ -252,11 +252,11 @@ public class AddActivity extends AppCompatActivity {
     // Converts a bitmap to a base64 String
     public static String encodeToBase64(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bm.compress(Bitmap.CompressFormat.PNG, 10, baos);
         byte[] b = baos.toByteArray();
         String output = Base64.getEncoder().encodeToString(b);
-        Log.e("test", output);
-        return(output);
+        String prefix = "data:image/png;base64,";
+        return(prefix+output);
     }
 
 

@@ -63,27 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
-        tvForgot = findViewById(R.id.tvForgot);
-
-        tvForgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
-                Call<UserDisplay> call = server.getUserByUsername("Nhyv");
-                call.enqueue(new Callback<UserDisplay>() {
-                    @Override
-                    public void onResponse(Call<UserDisplay> call, Response<UserDisplay> response) {
-                        userForgot = response.body();
-
-                    }
-                    @Override
-                    public void onFailure(Call<UserDisplay> call, Throwable t) {
-
-                    }
-                });
-
-            }
-        });
 
         username.addTextChangedListener(new TextWatcher() {
             @Override

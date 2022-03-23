@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -233,6 +234,9 @@ ReadRecipeActivity extends AppCompatActivity {
                     public void onResponse(Call<CommentDisplay> call, Response<CommentDisplay> response) {
                         if (response.code() == 200)
                             commentToDisplay = response.body();
+                            etComment.setText("");
+                            InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                             adapterList.addComment(commentToDisplay);
                             adapterList.notifyItemChanged(comments.size() - 1);
 

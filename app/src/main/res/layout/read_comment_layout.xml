@@ -63,29 +63,6 @@
                     android:textColor="#AFAEAE"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/cCounter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="2 sheep found this helpful."
-                    android:textColor="#AFAEAE"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btHelpful"
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF"
-                    app:icon="@drawable/ic_helpful"
-                    app:iconTint="#AFAEAE"
-                    app:tint="#66B1B8"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
             </LinearLayout>
 
         </LinearLayout>

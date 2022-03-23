@@ -29,7 +29,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/tbNewStep"
+                android:id="@+id/tbNewTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#AFAEAE"

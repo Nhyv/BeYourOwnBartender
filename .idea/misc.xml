@@ -20,8 +20,10 @@
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_register.xml" value="0.2957427536231884" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_scrolling.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_test.xml" value="0.20520833333333333" />
+        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_update_tag.xml" value="0.28940217391304346" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_ingredient_to_recipe_layout.xml" value="0.33" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_step_to_recipe_layout.xml" value="0.33" />
+        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_tag_to_recipe_layout.xml" value="0.28940217391304346" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/content_scrolling.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/main_recipe_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/read_comment_layout.xml" value="0.33" />

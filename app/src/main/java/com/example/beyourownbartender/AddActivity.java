@@ -39,13 +39,17 @@ public class AddActivity extends AppCompatActivity {
 
     private RecyclerView rvIngredients;
     private RecyclerView rvSteps;
+    private RecyclerView rvTags;
     private IngredientAdapterList ingredientAdapterList;
     private StepAdapterList stepAdapterList;
+    private TagAdapterList tagAdapterList;
     private List<IngredientDisplay> ingredientList;
     private List<IngredientDisplay> allIngredientList;
     private List<String> stepList;
+    private List<String> tagList;
     private Button buttonAddIngredient;
     private Button buttonAddStep;
+    private Button buttonAddTag;
     private TextView etbName;
     RecipeDisplay recipeToDisplay;
 
@@ -74,6 +78,13 @@ public class AddActivity extends AppCompatActivity {
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
         stepAdapterList = new StepAdapterList(stepList, this, rvSteps);
         rvSteps.setAdapter(stepAdapterList);
+
+        /// Creates the empty String list and sets the recyclerview/adapterlist values for tags
+        tagList = createListTags();
+        rvTags = findViewById(R.id.rvTags);
+        rvTags.setLayoutManager(new LinearLayoutManager(this));
+        tagAdapterList = new TagAdapterList(tagList, this, rvTags);
+        rvTags.setAdapter(tagAdapterList);
 
         // Button to change the selected image
         Button buttonChangeSelectedImage;
@@ -130,6 +141,16 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Adds an empty step
                 stepAdapterList.addStep("");
+            }
+        });
+
+        // Creates a onClickListener for the addTag button
+        buttonAddTag = findViewById(R.id.btAddTag);
+        buttonAddTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Adds an empty Tag
+                tagAdapterList.addTag("");
             }
         });
 
@@ -267,6 +288,12 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private List<String> createListSteps(){
+        List<String> stepList = new ArrayList<>();
+        stepList.add("");
+        return(stepList);
+    }
+
+    private List<String> createListTags(){
         List<String> stepList = new ArrayList<>();
         stepList.add("");
         return(stepList);

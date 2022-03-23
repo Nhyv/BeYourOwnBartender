@@ -3,16 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/drawable-anydpi/ic_create.xml" value="0.3671875" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.36153846153846153" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/drawable/login_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23560910307898258" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout-w936dp/activity_login.xml" value="0.22301912568306012" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_admin.xml" value="0.33" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_loading.xml" value="0.20520833333333333" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_my_recipes.xml" value="0.1716485507246377" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_profile.xml" value="0.1716485507246377" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_read_recipe.xml" value="0.20520833333333333" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/fragment_profile.xml" value="0.20520833333333333" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/main_recipe_layout.xml" value="0.22" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/read_comment_layout.xml" value="0.2223731884057971" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/spinner_layout.xml" value="0.1707193515704154" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/menu/bottom_nav.xml" value="0.35104166666666664" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20520833333333333" />
+        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/menu/main_menu_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/xml/network_config.xml" value="0.28940217391304346" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23560910307898258" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout-w936dp/activity_login.xml" value="0.20833333333333334" />
-        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_add.xml" value="0.33" />
+        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_add.xml" value="0.18958333333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_loading.xml" value="0.276268115942029" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_login.xml" value="0.276268115942029" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
@@ -20,40 +34,26 @@
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_register.xml" value="0.2957427536231884" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_scrolling.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_test.xml" value="0.20520833333333333" />
-        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_ingredient_to_recipe_layout.xml" value="0.33" />
-        <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_step_to_recipe_layout.xml" value="0.33" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/content_scrolling.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/main_recipe_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/layout/read_comment_layout.xml" value="0.33" />
         <entry key="..\:/GitHub/BeYourOwnBartender/app/src/main/res/menu/main_menu_layout.xml" value="0.18958333333333333" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/drawable-anydpi/ic_create.xml" value="0.3828125" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4036458333333333" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/drawable/customborder.xml" value="0.3828125" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/layout/activity_login.xml" value="0.2817028985507246" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/layout/activity_main.xml" value="0.28804347826086957" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/layout/activity_register.xml" value="0.2817028985507246" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/layout/main_recipe_layout.xml" value="0.2817028985507246" />
-        <entry key="..\:/Users/1773411/Desktop/BYOB/app/src/main/res/menu/main_menu_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1773411/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23560910307898258" />
         <entry key="..\:/Users/1773411/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout-w936dp/activity_login.xml" value="0.275" />
         <entry key="..\:/Users/1773411/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_add.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1773411/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_admin.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_delete_ingredient.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_demande_ingredient.xml" value="0.36666666666666664" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_loading.xml" value="0.36666666666666664" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_profile.xml" value="0.25" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_read_recipe.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/temp/app/src/main/res/layout/add_ingredient_to_recipe_layout.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/add_step_to_recipe_layout.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/delete_layout.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/layout/settings_activity.xml" value="0.20520833333333333" />
-        <entry key="..\:/temp/app/src/main/res/mipmap-anydpi-v26/BYOB_icon.xml" value="0.2947916666666667" />
-        <entry key="..\:/temp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2947916666666667" />
-        <entry key="..\:/temp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2947916666666667" />
-        <entry key="..\:/temp/app/src/main/res/xml/root_preferences.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_add.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_admin.xml" value="0.25" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_demande_ingredient.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_my_recipes.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_profile.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_read_recipe.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_robot.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_update_step.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_ingredient_to_recipe_layout.xml" value="0.2740036231884058" />
+        <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/spinner_layout.xml" value="0.27445652173913043" />
       </map>
     </option>
   </component>
@@ -66,7 +66,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.36666666666666664" />
+        <option name="scale" value="0.22" />
       </ProjectState>
     </option>
   </component>

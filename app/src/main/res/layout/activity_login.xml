@@ -53,7 +53,7 @@
         android:layout_width="153dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="64dp"
         android:background="#23D3631E"
         android:backgroundTint="#23D3631E"
@@ -66,7 +66,25 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.152" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="64dp"
+        android:background="#23D3631E"
+        android:backgroundTint="#23D3631E"
+        android:text="S'inscrire"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.363" />
 
     <EditText
         android:id="@+id/settingsUsername"

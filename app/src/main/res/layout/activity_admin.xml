@@ -4,22 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#272727"
     android:orientation="vertical"
     tools:context=".Profile.AdminActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Supprimer un Ingrédient" />
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Supprimer un Ingrédient"
+        android:textColor="@color/text_basic_color"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDeleteIngr"
+    <Spinner
+        android:id="@+id/spinnerDelete"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/text_basic_color"
+        android:gravity="center"
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/btAdminDelete"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Supprimer" />
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#323232"
+        android:text="Supprimer ingredient"
+        android:textColor="#AFAEAE"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:rippleColor="#717171" />
 </LinearLayout>

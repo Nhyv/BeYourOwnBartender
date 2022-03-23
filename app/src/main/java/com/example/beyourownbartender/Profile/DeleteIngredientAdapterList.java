@@ -14,15 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beyourownbartender.Creation.IngredientDisplay;
 import com.example.beyourownbartender.R;
+import com.example.beyourownbartender.RetrofitInstance;
+import com.example.beyourownbartender.ServerInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DeleteIngredientAdapterList extends RecyclerView.Adapter<DeleteIngredientAdapterList.AdapterListViewHolder>{
 
     List<IngredientDisplay> ingredientList;
     Context context;
-
 
     public DeleteIngredientAdapterList(List<IngredientDisplay> ingredientList, Context context) {
         this.ingredientList = ingredientList;

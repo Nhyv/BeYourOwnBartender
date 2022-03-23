@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Profile.DemandeIngredientActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Profile.ProfileActivity" />
         <activity
             android:name=".Profile.MyLikesActivity"
             android:exported="false"
@@ -44,7 +45,8 @@
         <activity
             android:name=".Creation.AddActivity"
             android:exported="false"
-            android:parentActivityName=".Profile.MyRecipesActivity" />
+            android:parentActivityName=".Profile.MyRecipesActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Startup.LoginActivity"
             android:exported="false" />

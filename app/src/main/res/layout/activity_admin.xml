@@ -25,7 +25,8 @@
         android:layout_margin="10dp"
         android:backgroundTint="@color/text_basic_color"
         android:gravity="center"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btAdminDelete"

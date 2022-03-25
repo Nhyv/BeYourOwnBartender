@@ -61,6 +61,10 @@
             android:exported="true"
             android:parentActivityName=".AddActivity" />
         <activity
+            android:name=".UpdateTag"
+            android:exported="true"
+            android:parentActivityName=".AddActivity" />
+        <activity
             android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>

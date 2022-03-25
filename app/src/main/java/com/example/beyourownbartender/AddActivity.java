@@ -160,17 +160,16 @@ public class AddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                pushToDB(ingredientList, stepList, etbName.getText().toString());
+                pushToDB(ingredientList, stepList, etbName.getText().toString(), tagList);
             }
         });
     }
 
     // Used to push to the DB
-    private void pushToDB(List<IngredientDisplay> listIngredients, List<String> listSteps, String title) {
+    private void pushToDB(List<IngredientDisplay> listIngredients, List<String> listSteps, String title, List<String> listTags) {
         // Creating the recipe to create
         SharedPreferences pref = getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
         int authorID = pref.getInt("userId", 0);
-        List<String> listTags = new ArrayList<>();
         RecipeCreate recipeToCreate = new RecipeCreate(title, authorID, imageBase64, listSteps, listTags); // Image base 64 is null is it wasn't selected
         int recipeID;
         List<Integer> idIngredientDisplayToLink = new ArrayList<>();
@@ -254,7 +253,13 @@ public class AddActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 stepAdapterList.concludeUpdate(Integer.parseInt(data.getStringExtra("pos")), data.getStringExtra("newStep"));
             }
-        } else {
+        }
+        else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                tagAdapterList.concludeUpdate(Integer.parseInt(data.getStringExtra("pos")), data.getStringExtra("newTag"));
+            }
+        }
+        else {
             if ((data != null) && requestCode == PICK_PHOTO_CODE) {
                 Uri photoUri = data.getData();
 

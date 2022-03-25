@@ -70,7 +70,7 @@ public class TagAdapterList extends RecyclerView.Adapter<TagAdapterList.AdapterL
         Intent intent =  new Intent(context, UpdateTag.class);
         intent.putExtra("pos", pos);
         intent.putExtra("oldTag", oldTag);
-        ((Activity)context).startActivityForResult(intent, 1);
+        ((Activity)context).startActivityForResult(intent, 2);
     }
 
     public void concludeUpdate(int pos, String newTag){

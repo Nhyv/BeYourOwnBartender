@@ -23,6 +23,8 @@ import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
 import com.squareup.picasso.Picasso;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     boolean isMain = true;
     boolean isMr, isMl;
     SharedPreferences pref;
+    MqttAndroidClient client;
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
@@ -46,6 +49,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         isMain = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
         pref = main.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
+        client = main.client;
     }
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MyRecipesActivity mr) {
@@ -182,7 +186,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             btRobot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    
+
                 }
             });
 

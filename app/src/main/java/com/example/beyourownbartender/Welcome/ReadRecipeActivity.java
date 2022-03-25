@@ -121,6 +121,10 @@ ReadRecipeActivity extends AppCompatActivity {
                 readSteps.setText(toShowSteps);
                 readTitre.setText(name);
                 readRating.setText(rating + " ❤");
+
+                if (recipe.getImageUrl() == null)
+                    imgRead.setVisibility(View.INVISIBLE);
+
             }
 
             @Override

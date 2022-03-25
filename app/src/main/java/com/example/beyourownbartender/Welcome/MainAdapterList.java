@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -96,12 +97,18 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         if (recipe.getImageUrl() != null) {
             Picasso.get().load(recipe.getImageUrl()).into(holder.imgMain);
         }
+        else {
+            holder.imgMain.setVisibility(View.INVISIBLE);
+        }
         if (recipe.getAuthorid() != 1) {
             holder.tvAuthor.setText("TODO");
         }
         else {
             holder.tvAuthor.setText("Choix de BeYourOwnBartender");
         }
+
+        if (recipe.isHasRobotHelp())
+            holder.btRobot.setVisibility(View.VISIBLE);
     }
 
     private Filter Searched_Filter = new Filter() {
@@ -149,6 +156,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
         TextView tvRecipeName, tvAuthor, tvTags;
         ImageView imgMain;
+        Button btRobot;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -157,6 +165,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             tvAuthor = itemView.findViewById(R.id.tvAuteur);
             tvTags = itemView.findViewById(R.id.tvTags);
             imgMain = itemView.findViewById(R.id.imgMain);
+            btRobot = itemView.findViewById(R.id.btRobot);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,6 +176,13 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
                         ml.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                     if (isMain)
                         main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                }
+            });
+
+            btRobot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    
                 }
             });
 

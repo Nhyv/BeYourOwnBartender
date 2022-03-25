@@ -67,7 +67,7 @@
                 android:textColor="#AFAEAE" />
 
             <Button
-                android:id="@+id/btPrepare"
+                android:id="@+id/btRobot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Préparer"

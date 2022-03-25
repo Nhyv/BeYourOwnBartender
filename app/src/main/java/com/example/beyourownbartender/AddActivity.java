@@ -158,6 +158,7 @@ public class AddActivity extends AppCompatActivity {
         buttonAddRecipe = findViewById(R.id.btAddRecipe);
         buttonAddRecipe.setOnClickListener(new View.OnClickListener() {
 
+
             @Override
             public void onClick(View view) {
                 pushToDB(ingredientList, stepList, etbName.getText().toString(), tagList);

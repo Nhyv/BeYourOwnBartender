@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/select_background_test"
     android:orientation="vertical"
-    tools:context=".MyLikesActivity">
+    tools:context=".Profile.MyLikesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mlRecipe"

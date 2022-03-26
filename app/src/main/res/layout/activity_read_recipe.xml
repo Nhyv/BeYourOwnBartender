@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FF272727"
     android:orientation="vertical"
-    tools:context=".ReadRecipeActivity">
+    tools:context=".Welcome.ReadRecipeActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -125,38 +125,45 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvComments"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/etComment"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="#1B1B1B"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Commentaire"
-                android:inputType="textMultiLine"
-                android:padding="5dp"
-                android:textColor="#AFAEAE"
-                android:textColorHint="#AFAEAE"
-                android:textSize="16sp"
-                tools:ignore="SpeakableTextPresentCheck" />
+            </androidx.recyclerview.widget.RecyclerView>
 
-            <Button
-                android:id="@+id/btComment"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:backgroundTint="#323232"
-                android:enabled="false"
-                android:text="Envoyer commentaire"
-                android:textColor="#AFAEAE"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etComment"
+                    android:layout_width="333dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="#1B1B1B"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Commentaire"
+                    android:inputType="textMultiLine"
+                    android:padding="5dp"
+                    android:textColor="#AFAEAE"
+                    android:textColorHint="#AFAEAE"
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/btComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="#1B1B1B"
+                    app:srcCompat="@drawable/ic_send" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -3,8 +3,6 @@
     package="com.example.beyourownbartender">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,56 +14,55 @@
         android:theme="@style/Theme.BeYourOwnBartender"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DemandeIngredientActivity"
+            android:name=".Profile.DemandeIngredientActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.ProfileActivity" />
+        <activity
+            android:name=".Profile.MyLikesActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.ProfileActivity" />
+        <activity
+            android:name=".Profile.MyRecipesActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.ProfileActivity" />
+        <activity
+            android:name=".Profile.AdminActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.ProfileActivity" />
+        <activity
+            android:name=".Profile.ProfileActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.MyRecipesActivity" />
+        <activity
+            android:name=".Startup.RegisterActivity"
+            android:exported="false"
+            android:parentActivityName=".Startup.LoginActivity" />
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".Welcome.ReadRecipeActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.MyRecipesActivity" />
+        <activity
+            android:name=".Creation.AddActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.MyRecipesActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Startup.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RobotActivity"
-            android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
-        <activity
-            android:name=".MyLikesActivity"
-            android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
-        <activity
-            android:name=".MyRecipesActivity"
-            android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
-        <activity
-            android:name=".AdminActivity"
-            android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false"
-            android:parentActivityName=".LoginActivity" />
-        <activity
-            android:name=".ReadRecipeActivity"
-            android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
-        <activity
-            android:name=".AddActivity"
-            android:exported="false"
-            android:parentActivityName=".MyRecipesActivity" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Welcome.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".UpdateStep"
+            android:name=".Creation.UpdateStep"
             android:exported="true"
-            android:parentActivityName=".AddActivity" />
+            android:parentActivityName=".Creation.AddActivity" />
         <activity
-            android:name=".UpdateTag"
+            android:name=".Creation.UpdateTag"
             android:exported="true"
-            android:parentActivityName=".AddActivity" />
+            android:parentActivityName=".Creation.AddActivity" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".Startup.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

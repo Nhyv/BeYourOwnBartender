@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
+    tools:context=".Startup.LoginActivity">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -30,12 +30,12 @@
 
     <EditText
         android:id="@+id/password"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:autofillHints="@string/prompt_password"
         android:background="#6A000000"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:hint="Mot de passe"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
@@ -53,7 +53,7 @@
         android:layout_width="153dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="64dp"
         android:background="#23D3631E"
         android:backgroundTint="#23D3631E"
@@ -66,7 +66,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.152" />
 
     <EditText
         android:id="@+id/settingsUsername"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/registerLogin"
         android:layout_width="152dp"
         android:layout_height="48dp"
         android:layout_gravity="start"

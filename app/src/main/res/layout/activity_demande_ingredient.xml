@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#272727"
     android:orientation="vertical"
-    tools:context=".DemandeIngredientActivity">
+    tools:context=".Profile.DemandeIngredientActivity">
 
     <EditText
         android:id="@+id/etNomIngr"
@@ -17,6 +17,7 @@
         android:ems="10"
         android:hint="Nom d'ingrédient"
         android:inputType="textPersonName"
+        android:textColor="@color/text_basic_color"
         android:textColorHint="@color/text_basic_color" />
 
     <Button

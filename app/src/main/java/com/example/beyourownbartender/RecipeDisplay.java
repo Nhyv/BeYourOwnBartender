@@ -33,7 +33,10 @@ public class RecipeDisplay {
     @SerializedName("tags")
     List<String> tags;
 
-    public RecipeDisplay(int id, String name, int rating, int authorId, String imageUrl, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps) {
+    @SerializedName("hasRobotHelp")
+    boolean hasRobotHelp;
+
+    public RecipeDisplay(int id, String name, int rating, int authorId, String imageUrl, OffsetDateTime creationTime, OffsetDateTime modifiedTime, List<String> tags, List<String> steps, boolean hasRobotHelp) {
         this.id = id;
         this.name = name;
         this.rating = rating;
@@ -43,6 +46,7 @@ public class RecipeDisplay {
         this.modifiedTime = modifiedTime;
         this.tags = tags;
         this.steps = steps;
+        this.hasRobotHelp = hasRobotHelp;
     }
 
     public List<String> getTags() {
@@ -59,6 +63,10 @@ public class RecipeDisplay {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isRobotHelp() {
+        return hasRobotHelp;
     }
 
     public int getRating() {

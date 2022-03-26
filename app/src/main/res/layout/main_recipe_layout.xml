@@ -65,6 +65,14 @@
                 android:paddingBottom="20dp"
                 android:textColor="#AFAEAE" />
 
+            <Button
+                android:id="@+id/btRobot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Préparer"
+                android:textColor="#AFAEAE"
+                android:visibility="invisible" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

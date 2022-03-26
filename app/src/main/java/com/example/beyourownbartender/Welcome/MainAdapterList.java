@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,6 +82,8 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         RecipeDisplay recipe = recipes.get(position);
+        if (recipe.getImageUrl() == null)
+            holder.imgMain.setVisibility(View.INVISIBLE);
         List<String> tags = recipe.getTags();
         String toShow = "";
 
@@ -93,9 +96,11 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
         holder.tvTags.setText(toShow);
         holder.tvRecipeName.setText(recipe.getName());
-        if (recipe.getImageUrl() != null) {
-            Picasso.get().load(recipe.getImageUrl()).into(holder.imgMain);
-        }
+
+        Picasso.get().load(recipe.getImageUrl()).into(holder.imgMain);
+
+        if (recipe.isRobotHelp())
+            holder.btRobot.setVisibility(View.VISIBLE);
         if (recipe.getAuthorid() != 1) {
             holder.tvAuthor.setText("TODO");
         }
@@ -149,6 +154,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
         TextView tvRecipeName, tvAuthor, tvTags;
         ImageView imgMain;
+        Button btRobot;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -157,6 +163,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             tvAuthor = itemView.findViewById(R.id.tvAuteur);
             tvTags = itemView.findViewById(R.id.tvTags);
             imgMain = itemView.findViewById(R.id.imgMain);
+            btRobot = itemView.findViewById(R.id.btRobot);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

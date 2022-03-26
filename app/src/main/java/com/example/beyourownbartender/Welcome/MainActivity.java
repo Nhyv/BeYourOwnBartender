@@ -24,6 +24,12 @@ import com.example.beyourownbartender.RecipeDisplay;
 import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapterList adapterList;
     Context context;
     ArrayList<RecipeDisplay> recipes;
+    MqttAndroidClient client;
 
     @Override
     public void onBackPressed() {
@@ -49,6 +56,25 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        String clientId = MqttClient.generateClientId();
+        client = new MqttAndroidClient(this.getApplicationContext(), "TCP CONNECTION URL THINGY", clientId);
+        try {
+            IMqttToken token = client.connect();
+
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
         Call<ArrayList<RecipeDisplay>> call = server.getRecipes();

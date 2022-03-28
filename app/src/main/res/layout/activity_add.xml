@@ -139,7 +139,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvSteps"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
@@ -184,7 +184,7 @@
                 <ImageView
                     android:id="@+id/ivSelectedImage"
                     android:layout_width="match_parent"
-                    android:layout_height="233dp"
+                    android:layout_height="wrap_content"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             </LinearLayout>
@@ -229,7 +229,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTags"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
 

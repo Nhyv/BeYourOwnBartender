@@ -62,14 +62,31 @@ public class UpdateActivity extends AppCompatActivity {
     UpdateActivity ua;
     ImageView ivSelectedImage;
     String imageBase64 = null;
+    String base64FromServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Reuse the add activity layout for the update
         setContentView(R.layout.activity_add);
         ua = this;
         Intent intent = getIntent();
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+
+        // This is used to pull the ingredients data from the DB
+        Call<List<IngredientDisplay>> call = server.getIngredients();
+
+        call.enqueue(new Callback<List<IngredientDisplay>>() {
+            @Override
+            public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
+                allIngredientList = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
+
+            }
+        });
 
         // Recreate the recipe from the intent
         int id = intent.getIntExtra("id", 0);
@@ -80,6 +97,8 @@ public class UpdateActivity extends AppCompatActivity {
             public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
                 // Sets the recipeDisplay
                 recipeDisplay = response.body();
+
+                //Only happens on response
 
                 /// Creates the empty String list and sets the recyclerview/adapterlist values for steps
                 stepList = pullStepList();
@@ -94,6 +113,9 @@ public class UpdateActivity extends AppCompatActivity {
                 rvTags.setLayoutManager(new LinearLayoutManager(ua));
                 tagAdapterList = new TagAdapterList(tagList, ua, rvTags);
                 rvTags.setAdapter(tagAdapterList);
+
+                ///  Sets the name of the recipe
+                etbName.setText(recipeDisplay.getName());
             }
 
             @Override
@@ -130,22 +152,6 @@ public class UpdateActivity extends AppCompatActivity {
         // Button to change the selected image
         Button buttonChangeSelectedImage;
 
-
-
-        // This is used to pull the ingredients data from the DB
-        Call<List<IngredientDisplay>> call = server.getIngredients();
-
-        call.enqueue(new Callback<List<IngredientDisplay>>() {
-            @Override
-            public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
-                allIngredientList = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
-
-            }
-        });
 
         rvSteps = findViewById(R.id.rvSteps);
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
@@ -269,16 +275,26 @@ public class UpdateActivity extends AppCompatActivity {
     // These functions create the lists of Ingredient, Tags and Steps
     public List<IngredientDisplay> pullIngredientList(){
         List<IngredientDisplay> ingredientList = new ArrayList<>();
+        for(int i = 0; i < ingredientDisplay.size(); i++){
+            IngredientDisplay filledIngredient = new IngredientDisplay(ingredientDisplay.get(i).getId(),ingredientDisplay.get(i).getName(), allIngredientList);
+            ingredientList.add(filledIngredient);
+        }
         return(ingredientList);
     }
 
     public List<String> pullStepList(){
         List<String> stepList = new ArrayList<>();
+        for(int i = 0; i < recipeDisplay.getSteps().size(); i++){
+            stepList.add(recipeDisplay.getSteps().get(i));
+        }
         return(stepList);
     }
 
     public List<String> pullTagList(){
         List<String> tagList = new ArrayList<>();
+        for(int i = 0; i < recipeDisplay.getTags().size(); i++){
+            tagList.add(recipeDisplay.getTags().get(i));
+        }
         return(tagList);
     }
 

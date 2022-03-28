@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="20dp"
-                    android:text="Etape No:"
+                    android:text="Tag No:"
                     android:textColor="#AFAEAE"
                     android:textStyle="bold" />
 

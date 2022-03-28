@@ -18,35 +18,46 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btModify"
+            <LinearLayout
+                android:id="@+id/main_view_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:visibility="visible"
-                app:backgroundTint="#888888"
-                app:fabSize="auto"
-                app:srcCompat="@drawable/ic_modify_step"
-                app:tint="#4A4A4A"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_above="@+id/main_view_layout2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal"
+                android:padding="15dp">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabLike"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:visibility="visible"
-                app:backgroundTint="#888888"
-                app:fabSize="auto"
-                app:srcCompat="@drawable/heart"
-                app:tint="#4A4A4A"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabLike"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    app:backgroundTint="#888888"
+                    app:fabSize="auto"
+                    app:srcCompat="@drawable/heart"
+                    app:tint="#4A4A4A"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btModify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    app:backgroundTint="#888888"
+                    app:fabSize="auto"
+                    app:srcCompat="@drawable/ic_modify_step"
+                    app:tint="#4A4A4A"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/readTitre"

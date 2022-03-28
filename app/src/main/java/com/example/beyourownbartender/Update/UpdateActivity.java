@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.beyourownbartender.Creation.AddActivity;
 import com.example.beyourownbartender.Creation.IngredientAdapterList;
 import com.example.beyourownbartender.Creation.IngredientDisplay;
 import com.example.beyourownbartender.Creation.StepAdapterList;
@@ -63,23 +64,35 @@ public class UpdateActivity extends AppCompatActivity {
     ImageView ivSelectedImage;
     String imageBase64 = null;
     String base64FromServer;
+    MonPhoneReceiver br;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Reuse the add activity layout for the update
         setContentView(R.layout.activity_add);
+        // Context
         ua = this;
         Intent intent = getIntent();
+        // Recreate the recipe from the intent
+        int id = intent.getIntExtra("id", 0);
+        // Broadcast
+        br = new MonPhoneReceiver();
+        // Server variable
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
 
         // This is used to pull the ingredients data from the DB
         Call<List<IngredientDisplay>> call = server.getIngredients();
-
         call.enqueue(new Callback<List<IngredientDisplay>>() {
             @Override
             public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
                 allIngredientList = response.body();
+
+                Intent intent = new Intent();
+                intent.setAction("com.info.broadcast.pullIngredientList");
+                intent.putExtra("id",id);
+                sendBroadcast(intent);
+
             }
 
             @Override
@@ -88,8 +101,6 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
-        // Recreate the recipe from the intent
-        int id = intent.getIntExtra("id", 0);
         // Call the server to get the recipe
         Call<RecipeDisplay> callRecipeById = server.getRecipeById(id);
         callRecipeById.enqueue(new Callback<RecipeDisplay>() {
@@ -121,31 +132,6 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RecipeDisplay> call, Throwable t) {
 
-            }
-        });
-
-        // Call the server to get the ingredients associated with the recipe
-        Call<List<IngredientDisplay>> callIngredientsById = server.getIngredientsByRecipeId(id);
-        callIngredientsById.enqueue(new Callback<List<IngredientDisplay>>() {
-            @Override
-            public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
-                ingredientDisplay = response.body();
-
-                //Only happens on response
-
-                // Creates the empty ingredient list and sets the recyclerview/adapterlist values for ingredients
-                ingredientList = pullIngredientList();
-                rvIngredients = findViewById(R.id.rvIngredients);
-                rvIngredients.setLayoutManager(new LinearLayoutManager(ua));
-                ingredientAdapterList = new IngredientAdapterList(ingredientList, ua);
-                rvIngredients.setAdapter(ingredientAdapterList);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
-                //Log error
             }
         });
 
@@ -302,12 +288,46 @@ public class UpdateActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.info.broadcast.pullIngredientList");
+        this.registerReceiver(br, filter);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        unregisterReceiver(br);
+    }
+
+    public class MonPhoneReceiver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+            // Call the server to get the ingredients associated with the recipe
+            int recipeID = intent.getIntExtra("id", -1);
+            Call<List<IngredientDisplay>> callIngredientsById = server.getIngredientsByRecipeId(recipeID);
+            callIngredientsById.enqueue(new Callback<List<IngredientDisplay>>() {
+                @Override
+                public void onResponse(Call<List<IngredientDisplay>> call, Response<List<IngredientDisplay>> response) {
+                    ingredientDisplay = response.body();
+
+                    //Only happens on response
+
+                    // Creates the empty ingredient list and sets the recyclerview/adapterlist values for ingredients
+                    ingredientList = pullIngredientList();
+                    rvIngredients = findViewById(R.id.rvIngredients);
+                    rvIngredients.setLayoutManager(new LinearLayoutManager(ua));
+                    ingredientAdapterList = new IngredientAdapterList(ingredientList, ua);
+                    rvIngredients.setAdapter(ingredientAdapterList);
+                }
+                @Override
+                public void onFailure(Call<List<IngredientDisplay>> call, Throwable t) {
+                    //Log error
+                }
+            });
+        }
     }
 
 }

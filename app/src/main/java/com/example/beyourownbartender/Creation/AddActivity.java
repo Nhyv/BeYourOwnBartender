@@ -90,6 +90,12 @@ public class AddActivity extends AppCompatActivity {
         // Button to change the selected image
         Button buttonChangeSelectedImage;
 
+        // Button to remove the selected image
+        Button buttonRemoveImage;
+
+        // Button to reset the image to the server image (useless in addActivity)
+        Button buttonResetImage;
+
         // Button to push to the DB
         Button buttonAddRecipe;
 
@@ -124,6 +130,21 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        // Creates a onClickListener for the removeImageButton
+        buttonRemoveImage = findViewById(R.id.btRemoveImage);
+        buttonRemoveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Removes the image
+                imageBase64 = null;
+                ivSelectedImage.setImageBitmap(null);
+            }
+        });
+
+        // Sets the reset button to invisible (used in the update to reset to the server base64)
+        buttonResetImage = findViewById(R.id.btResetImage);
+        buttonResetImage.setVisibility(View.INVISIBLE);
+
         // Creates a onClickListener for the changeSelectedImageButton
         buttonChangeSelectedImage = findViewById(R.id.btChangeImage);
         buttonChangeSelectedImage.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +177,8 @@ public class AddActivity extends AppCompatActivity {
         });
 
         etbName = findViewById(R.id.etbName);
+
+        // Sends the form to the DB
         buttonAddRecipe = findViewById(R.id.btAddRecipe);
         buttonAddRecipe.setOnClickListener(new View.OnClickListener() {
 

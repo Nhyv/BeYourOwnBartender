@@ -8,8 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.beyourownbartender.Creation.AddActivity;
 import com.example.beyourownbartender.Creation.IngredientAdapterList;
 import com.example.beyourownbartender.Creation.IngredientDisplay;
 import com.example.beyourownbartender.Creation.StepAdapterList;
@@ -127,6 +126,12 @@ public class UpdateActivity extends AppCompatActivity {
 
                 ///  Sets the name of the recipe
                 etbName.setText(recipeDisplay.getName());
+
+                /// Sets the serverBase64 and the base64 then set the imageview
+                base64FromServer = recipeDisplay.getImageUrl();
+                imageBase64 = recipeDisplay.getImageUrl();
+                setImage(recipeDisplay.getImageUrl());
+
             }
 
             @Override
@@ -137,6 +142,12 @@ public class UpdateActivity extends AppCompatActivity {
 
         // Button to change the selected image
         Button buttonChangeSelectedImage;
+
+        // Button to remove the selected image
+        Button buttonRemoveImage;
+
+        // Button to reset the image to the server image
+        Button buttonResetImage;
 
 
         rvSteps = findViewById(R.id.rvSteps);
@@ -162,6 +173,30 @@ public class UpdateActivity extends AppCompatActivity {
             }
         });
 
+        // Creates a onClickListener for the removeImageButton
+        buttonRemoveImage = findViewById(R.id.btRemoveImage);
+        buttonRemoveImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Removes the image
+                imageBase64 = null;
+                ivSelectedImage.setImageBitmap(null);
+            }
+        });
+
+        // Creates a onClickListener for resetImageButton
+        buttonResetImage = findViewById(R.id.btResetImage);
+        buttonResetImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Resets the image to the server image
+                imageBase64 = base64FromServer;
+
+                // Sets the imageView
+                setImage(base64FromServer);
+            }
+        });
+
 
         // Creates a onClickListener for the addStep button
         buttonAddStep = findViewById(R.id.btAddSteps);
@@ -184,6 +219,13 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
         etbName = findViewById(R.id.etbName);
+    }
+
+    // Function to display the image from a base64
+    public void setImage(String base64Str){
+        byte[] imageBytes = Base64.getDecoder().decode(base64Str);
+        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        ivSelectedImage.setImageBitmap(decodedImage);
     }
 
     // This is a static integer

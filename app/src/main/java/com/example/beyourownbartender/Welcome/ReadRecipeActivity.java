@@ -29,10 +29,13 @@ import com.example.beyourownbartender.R;
 import com.example.beyourownbartender.RecipeDisplay;
 import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
+import com.example.beyourownbartender.Startup.LoginActivity;
 import com.example.beyourownbartender.Startup.UserDisplay;
+import com.example.beyourownbartender.Update.UpdateActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,6 +59,7 @@ ReadRecipeActivity extends AppCompatActivity {
     CommentDisplay commentToDisplay;
     UserDisplay author;
     FloatingActionButton fabLike;
+    FloatingActionButton btModify;
     SharedPreferences pref;
     LikeDisplay like;
     int rating;
@@ -200,6 +204,27 @@ ReadRecipeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Integer>> call, Throwable t) {
 
+            }
+        });
+
+        // Author : Thomas Valois
+        // This section is used to determine if the edit button should be visible
+        btModify = findViewById(R.id.btModify);
+        if(userId == authorId){
+            btModify.setVisibility(View.VISIBLE);
+        }
+        else{
+            btModify.setVisibility(View.INVISIBLE);
+        }
+
+        // Author : Thomas Valois
+        // This section is used to add an onclick event to the btModify to send the user to the modify page
+        btModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ReadRecipeActivity.this, UpdateActivity.class);
+                intent.putExtra("id", recipe.getId());
+                startActivity(intent);
             }
         });
 

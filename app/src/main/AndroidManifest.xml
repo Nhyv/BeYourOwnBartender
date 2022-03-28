@@ -52,6 +52,11 @@
             android:parentActivityName=".Profile.MyRecipesActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity
+            android:name=".Update.UpdateActivity"
+            android:exported="false"
+            android:parentActivityName=".Profile.MyRecipesActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".Startup.LoginActivity"
             android:exported="false" />
         <activity

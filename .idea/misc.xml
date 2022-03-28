@@ -15,7 +15,6 @@
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_my_recipes.xml" value="0.1716485507246377" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_profile.xml" value="0.1716485507246377" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/activity_read_recipe.xml" value="0.20520833333333333" />
-        <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/delete_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/fragment_profile.xml" value="0.20520833333333333" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/main_recipe_layout.xml" value="0.22" />
         <entry key="..\:/Codin/BeYourOwnBartender/app/src/main/res/layout/read_comment_layout.xml" value="0.2223731884057971" />
@@ -62,9 +61,10 @@
         <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/activity_update_step.xml" value="0.2740036231884058" />
         <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/add_ingredient_to_recipe_layout.xml" value="0.2740036231884058" />
         <entry key="..\:/Users/Samuel/Documents/GitHub/BeYourOwnBartender/app/src/main/res/layout/spinner_layout.xml" value="0.27445652173913043" />
-        <entry key="..\:/temp/app/src/main/res/layout/activity_login.xml" value="0.24094202898550723" />
-        <entry key="..\:/temp/app/src/main/res/layout/main_recipe_layout.xml" value="0.24094202898550723" />
-        <entry key="..\:/temp/app/src/main/res/layout/read_comment_layout.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/Thomas/Desktop/BeYourOwnBartender/app/src/main/res/layout/activity_add.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/Thomas/Desktop/BeYourOwnBartender/app/src/main/res/layout/activity_my_recipes.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Thomas/Desktop/BeYourOwnBartender/app/src/main/res/layout/activity_read_recipe.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Thomas/Desktop/BeYourOwnBartender/app/src/main/res/layout/activity_update.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>

@@ -19,6 +19,21 @@
             android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btModify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:backgroundTint="#888888"
+                app:fabSize="auto"
+                app:srcCompat="@drawable/ic_modify_step"
+                app:tint="#4A4A4A"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabLike"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

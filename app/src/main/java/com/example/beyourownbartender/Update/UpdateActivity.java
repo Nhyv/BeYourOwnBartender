@@ -28,6 +28,7 @@ import com.example.beyourownbartender.R;
 import com.example.beyourownbartender.RecipeDisplay;
 import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class UpdateActivity extends AppCompatActivity {
     UpdateActivity ua;
     ImageView ivSelectedImage;
     String imageBase64 = null;
-    String base64FromServer;
+    String urlFromServer;
     MonPhoneReceiver br;
 
     @Override
@@ -77,6 +78,8 @@ public class UpdateActivity extends AppCompatActivity {
         int id = intent.getIntExtra("id", 0);
         // Broadcast
         br = new MonPhoneReceiver();
+        // Set the image view
+        ivSelectedImage = findViewById(R.id.ivSelectedImage);
         // Server variable
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
 
@@ -128,9 +131,9 @@ public class UpdateActivity extends AppCompatActivity {
                 etbName.setText(recipeDisplay.getName());
 
                 /// Sets the serverBase64 and the base64 then set the imageview
-                base64FromServer = recipeDisplay.getImageUrl();
+                urlFromServer = recipeDisplay.getImageUrl();
                 imageBase64 = recipeDisplay.getImageUrl();
-                setImage(recipeDisplay.getImageUrl());
+                Picasso.get().load(urlFromServer).into(ivSelectedImage);
 
             }
 
@@ -190,10 +193,10 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Resets the image to the server image
-                imageBase64 = base64FromServer;
+                //imageBase64 = base64FromServer;
 
                 // Sets the imageView
-                setImage(base64FromServer);
+                //setImage(base64FromServer);
             }
         });
 

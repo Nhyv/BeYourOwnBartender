@@ -84,6 +84,9 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
         RecipeDisplay recipe = recipes.get(position);
         if (recipe.getImageUrl() == null)
             holder.imgMain.setVisibility(View.INVISIBLE);
+        else
+            holder.imgMain.setVisibility(View.VISIBLE);
+        
         List<String> tags = recipe.getTags();
         String toShow = "";
 
@@ -101,6 +104,9 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
 
         if (recipe.isRobotHelp())
             holder.btRobot.setVisibility(View.VISIBLE);
+        else
+            holder.btRobot.setVisibility(View.INVISIBLE);
+
         if (recipe.getAuthorid() != 1) {
             holder.tvAuthor.setText("TODO");
         }

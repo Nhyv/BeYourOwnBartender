@@ -63,6 +63,7 @@ public class UpdateActivity extends AppCompatActivity {
     UpdateActivity ua;
     ImageView ivSelectedImage;
     String imageBase64 = null;
+    Boolean imageChange = false;
     String urlFromServer;
     MonPhoneReceiver br;
 
@@ -132,7 +133,6 @@ public class UpdateActivity extends AppCompatActivity {
 
                 /// Sets the serverBase64 and the base64 then set the imageview
                 urlFromServer = recipeDisplay.getImageUrl();
-                imageBase64 = recipeDisplay.getImageUrl();
                 Picasso.get().load(urlFromServer).into(ivSelectedImage);
 
             }
@@ -152,6 +152,17 @@ public class UpdateActivity extends AppCompatActivity {
         // Button to reset the image to the server image
         Button buttonResetImage;
 
+        // Button to call the update function
+        Button buttonUpdateRecipe;
+        buttonUpdateRecipe = findViewById(R.id.btAddRecipe);
+
+        buttonUpdateRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Calls the function to update
+                updateRecipe(id, etbName.getText().toString(), recipeDisplay.getRating(), imageBase64, tagList, stepList);
+            }
+        });
 
         rvSteps = findViewById(R.id.rvSteps);
         rvSteps.setLayoutManager(new LinearLayoutManager(this));
@@ -173,6 +184,7 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Opens the image gallery for the user to select an image
                 onPickPhoto(view);
+
             }
         });
 
@@ -184,6 +196,8 @@ public class UpdateActivity extends AppCompatActivity {
                 // Removes the image
                 imageBase64 = null;
                 ivSelectedImage.setImageBitmap(null);
+                // This means we dont have the same image as on the server
+                imageChange = true;
             }
         });
 
@@ -192,11 +206,14 @@ public class UpdateActivity extends AppCompatActivity {
         buttonResetImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Resets the image to the server image
-                //imageBase64 = base64FromServer;
+                // Empty the base64 string
+                imageBase64 = null;
+
+                // Set the imageChange to false as it is the same as the server image
+                imageChange = false;
 
                 // Sets the imageView
-                //setImage(base64FromServer);
+                Picasso.get().load(urlFromServer).into(ivSelectedImage);
             }
         });
 
@@ -222,13 +239,6 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
         etbName = findViewById(R.id.etbName);
-    }
-
-    // Function to display the image from a base64
-    public void setImage(String base64Str){
-        byte[] imageBytes = Base64.getDecoder().decode(base64Str);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        ivSelectedImage.setImageBitmap(decodedImage);
     }
 
     // This is a static integer
@@ -289,6 +299,9 @@ public class UpdateActivity extends AppCompatActivity {
                 // Load the selected image into a preview
                 ivSelectedImage = findViewById(R.id.ivSelectedImage);
                 ivSelectedImage.setImageBitmap(selectedImage);
+
+                // Set the imagechanges to true
+                imageChange = true;
             }
         }
     }
@@ -301,6 +314,39 @@ public class UpdateActivity extends AppCompatActivity {
         String output = Base64.getEncoder().encodeToString(b);
         String prefix = "data:image/png;base64,";
         return(prefix+output);
+    }
+
+    // Function to update the recipe
+    public void updateRecipe(int id, String name, int rating, String imageUrl, List<String> tags, List<String> steps){
+        ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
+        Call<RecipeDisplay> callPatch = null;
+        if(imageChange){
+            // Image has changed
+            RecipePatchWithImage recipePatch = new RecipePatchWithImage(id, name, rating, imageUrl, tags, steps);
+            callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
+        }
+        else if(!imageChange){
+            // Image didnt change
+            RecipePatchNoImage recipePatch = new RecipePatchNoImage(id, name, rating, tags, steps);
+            callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
+        }
+        else{
+            // Log error (null)
+        }
+
+        if(callPatch != null){
+            callPatch.enqueue((new Callback<RecipeDisplay>() {
+                @Override
+                public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
+                    RecipeDisplay test = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<RecipeDisplay> call, Throwable t) {
+
+                }
+            }));
+        }
     }
 
     // These functions create the lists of Ingredient, Tags and Steps

@@ -9,6 +9,8 @@ import com.example.beyourownbartender.Startup.LoggedInUser;
 import com.example.beyourownbartender.Startup.Login;
 import com.example.beyourownbartender.Startup.Registration;
 import com.example.beyourownbartender.Startup.UserDisplay;
+import com.example.beyourownbartender.Update.RecipePatchNoImage;
+import com.example.beyourownbartender.Update.RecipePatchWithImage;
 import com.example.beyourownbartender.Welcome.RecipeCreate;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -81,4 +84,10 @@ public interface ServerInterface {
 
     @DELETE("/api/ingredients/delete/{id}")
     Call<Void> deleteIngredientById(@Path("id") int id);
+
+    @PATCH("/api/recipes/{id}/modify")
+    Call<RecipeDisplay> patchRecipeById(@Path("id") int id, @Body RecipePatchNoImage patchRecipe);
+
+    @PATCH("/api/recipes/{id}/modify")
+    Call<RecipeDisplay> patchRecipeById(@Path("id") int id, @Body RecipePatchWithImage recipeDisplay);
 }

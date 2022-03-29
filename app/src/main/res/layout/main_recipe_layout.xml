@@ -69,9 +69,12 @@
                 android:id="@+id/btRobot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Préparer"
                 android:textColor="#AFAEAE"
-                android:visibility="invisible" />
+                android:visibility="visible"
+                app:cornerRadius="10dp"
+                app:rippleColor="#717171" />
 
         </LinearLayout>
 

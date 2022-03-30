@@ -29,6 +29,27 @@
         app:layout_constraintVertical_bias="0.712" />
 
     <EditText
+        android:id="@+id/settingsUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="284dp"
+        android:autofillHints="@string/prompt_email"
+        android:background="#6A000000"
+        android:backgroundTint="#000000"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        android:hint="Nom d'utilisateur"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:nextFocusForward="@+id/password"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B5FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,6 +63,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:textColor="#FFFFFF"
         android:textColorHint="#B5FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,25 +89,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.152" />
-
-    <EditText
-        android:id="@+id/settingsUsername"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="284dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="#6A000000"
-        android:backgroundTint="#000000"
-        android:hint="Nom d'utilisateur"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:selectAllOnFocus="true"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#B5FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/registerLogin"

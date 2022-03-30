@@ -39,6 +39,7 @@
                     android:visibility="visible"
                     app:backgroundTint="#888888"
                     app:fabSize="auto"
+                    app:rippleColor="#6A0D0D"
                     app:srcCompat="@drawable/heart"
                     app:tint="#4A4A4A"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -54,6 +55,7 @@
                     android:visibility="visible"
                     app:backgroundTint="#888888"
                     app:fabSize="auto"
+                    app:rippleColor="#717171"
                     app:srcCompat="@drawable/ic_modify_step"
                     app:tint="#4A4A4A"
                     tools:ignore="SpeakableTextPresentCheck" />

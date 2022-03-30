@@ -1,5 +1,8 @@
 package com.example.beyourownbartender.Welcome;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -105,6 +110,9 @@ ReadRecipeActivity extends AppCompatActivity {
 
                 if (recipe.getImageUrl() != null) {
                     Picasso.get().load(recipe.getImageUrl()).into(imgRead);
+                }
+                else{
+                    imgRead.setImageBitmap(null);
                 }
 
                 for (int i = 0; i < tags.size(); i++) {
@@ -224,7 +232,32 @@ ReadRecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ReadRecipeActivity.this, UpdateActivity.class);
                 intent.putExtra("id", recipe.getId());
-                startActivity(intent);
+                startActivityForResult(intent, 11);
+
+//                ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+//                        new ActivityResultContracts.StartActivityForResult(),
+//                        new ActivityResultCallback<UpdateActivity>() {
+//                            @Override
+//                            public void onActivityResult(ActivityResult result) {
+//                                if (result.getResultCode() == Activity.RESULT_OK) {
+//                                    int position = -1;
+//
+//                                    Intent intent = result.getData();
+//                                    String titre = intent.getStringExtra("titre");
+//                                    String contenu = intent.getStringExtra("contenu");
+//                                    Note note = new Note(titre, contenu);
+//                                    if (isModify) {
+//                                        position = intent.getIntExtra("position", -1);
+//                                        adapterList.modifierNote(position, note);
+//                                        isModify = false;
+//                                        return;
+//                                    }
+//
+//                                    adapterList.ajouterNote(note);
+//                                }
+//                            }
+//                        }
+//                );
             }
         });
 
@@ -306,6 +339,16 @@ ReadRecipeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 11) {
+            if (resultCode == RESULT_OK) {
+                this.finish();
+            }
+        }
     }
     public ReadRecipeActivity getReadRecipeActivity() {
         return this;

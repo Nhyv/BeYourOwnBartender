@@ -160,7 +160,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Calls the function to update
-                updateRecipe(id, etbName.getText().toString(), imageBase64, tagList, stepList);
+                updateRecipe(id, etbName.getText().toString(), imageBase64, tagList, stepList, ingredientList);
             }
         });
 
@@ -194,7 +194,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Removes the image
-                imageBase64 = null;
+                imageBase64 = "delete";
                 ivSelectedImage.setImageBitmap(null);
                 // This means we dont have the same image as on the server
                 imageChange = true;
@@ -317,17 +317,28 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     // Function to update the recipe
-    public void updateRecipe(int id, String name, String imageUrl, List<String> tags, List<String> steps){
+    public void updateRecipe(int id, String name, String imageUrl, List<String> tags, List<String> steps, List<IngredientDisplay> ingredients){
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
         Call<RecipeDisplay> callPatch = null;
+
+        // Was used to convert the name of ingredient to an id
+//        List<IngredientDisplay> idIngredientDisplayToLink = new ArrayList<>();
+//        for(int j = 0; j<ingredients.size(); j++){
+//            for(int k = 0; k<allIngredientList.size(); k++){
+//                if(ingredients.get(j).getName() == allIngredientList.get(k).getName()){
+//                    idIngredientDisplayToLink.add(new IngredientDisplay(allIngredientList.get(k).getId(), null));
+//                }
+//            }
+//        }
+
         if(imageChange){
             // Image has changed
-            RecipePatchWithImage recipePatch = new RecipePatchWithImage(name, imageUrl, tags, steps);
+            RecipePatchWithImage recipePatch = new RecipePatchWithImage(name, imageUrl, tags, steps, ingredients);
             callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
         }
         else if(!imageChange){
             // Image didnt change
-            RecipePatchNoImage recipePatch = new RecipePatchNoImage(name, tags, steps);
+            RecipePatchNoImage recipePatch = new RecipePatchNoImage(name, tags, steps, ingredients);
             callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
         }
         else{
@@ -338,7 +349,8 @@ public class UpdateActivity extends AppCompatActivity {
             callPatch.enqueue((new Callback<RecipeDisplay>() {
                 @Override
                 public void onResponse(Call<RecipeDisplay> call, Response<RecipeDisplay> response) {
-                    RecipeDisplay test = response.body();
+                    setResult(RESULT_OK);
+                    ua.finish();
                 }
 
                 @Override

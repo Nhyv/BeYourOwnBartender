@@ -160,7 +160,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Calls the function to update
-                updateRecipe(id, etbName.getText().toString(), recipeDisplay.getRating(), imageBase64, tagList, stepList);
+                updateRecipe(id, etbName.getText().toString(), imageBase64, tagList, stepList);
             }
         });
 
@@ -317,17 +317,17 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     // Function to update the recipe
-    public void updateRecipe(int id, String name, int rating, String imageUrl, List<String> tags, List<String> steps){
+    public void updateRecipe(int id, String name, String imageUrl, List<String> tags, List<String> steps){
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
         Call<RecipeDisplay> callPatch = null;
         if(imageChange){
             // Image has changed
-            RecipePatchWithImage recipePatch = new RecipePatchWithImage(id, name, rating, imageUrl, tags, steps);
+            RecipePatchWithImage recipePatch = new RecipePatchWithImage(name, imageUrl, tags, steps);
             callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
         }
         else if(!imageChange){
             // Image didnt change
-            RecipePatchNoImage recipePatch = new RecipePatchNoImage(id, name, rating, tags, steps);
+            RecipePatchNoImage recipePatch = new RecipePatchNoImage(name, tags, steps);
             callPatch = server.patchRecipeById(recipeDisplay.getId(), recipePatch);
         }
         else{

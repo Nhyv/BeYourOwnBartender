@@ -5,17 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class RecipePatchWithImage {
-    @SerializedName("id")
-    int id;
-
     @SerializedName("name")
     String name;
 
-    @SerializedName("rating")
-    int rating;
-
-    @SerializedName("imageUrl")
-    String imageUrl;
+    @SerializedName("imageData")
+    String imageData;
 
     @SerializedName("steps")
     List<String> steps;
@@ -23,21 +17,11 @@ public class RecipePatchWithImage {
     @SerializedName("tags")
     List<String> tags;
 
-    public RecipePatchWithImage(int id, String name, int rating, String imageUrl, List<String> tags, List<String> steps) {
-        this.id = id;
+    public RecipePatchWithImage(String name, String imageData, List<String> tags, List<String> steps) {
         this.name = name;
-        this.rating = rating;
-        this.imageUrl = imageUrl;
+        this.imageData = imageData;
         this.tags = tags;
         this.steps = steps;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -48,20 +32,12 @@ public class RecipePatchWithImage {
         this.name = name;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
     public String getImageUrl() {
-        return imageUrl;
+        return imageData;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.imageData = imageUrl;
     }
 
     public List<String> getSteps() {

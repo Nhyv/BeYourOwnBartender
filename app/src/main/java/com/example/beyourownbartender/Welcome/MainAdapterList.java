@@ -3,26 +3,43 @@ package com.example.beyourownbartender.Welcome;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.beyourownbartender.Profile.AdminActivity;
 import com.example.beyourownbartender.Profile.MyLikesActivity;
 import com.example.beyourownbartender.Profile.MyRecipesActivity;
+import com.example.beyourownbartender.Profile.ProfileActivity;
 import com.example.beyourownbartender.R;
 import com.example.beyourownbartender.RecipeDisplay;
 import com.example.beyourownbartender.RetrofitInstance;
 import com.example.beyourownbartender.ServerInterface;
+import com.example.beyourownbartender.Startup.LoggedInUser;
+import com.example.beyourownbartender.Startup.Login;
 import com.squareup.picasso.Picasso;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +56,7 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     boolean isMain = true;
     boolean isMr, isMl;
     SharedPreferences pref;
+    MqttAndroidClient client;
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
@@ -180,6 +198,70 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
                         ml.startReadRecipeActivity(recipes.get(getLayoutPosition()));
                     if (isMain)
                         main.startReadRecipeActivity(recipes.get(getLayoutPosition()));
+                }
+            });
+
+            btRobot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(main);
+                    alert.setTitle("Connexion MQTT");
+                    alert.setMessage("Entrez votre TCP: ");
+                    EditText input = new EditText(main);
+                    alert.setView(input);
+                    String text = input.getText().toString();
+
+                    alert.setPositiveButton("Accéder", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String clientId = MqttClient.generateClientId();
+                            client = new MqttAndroidClient(main.getApplicationContext(), "172.16.207.66:1883", clientId);
+
+                            try {
+                                Toast.makeText(main, "Tu tentes de te connecter", Toast.LENGTH_LONG);
+                                IMqttToken token = client.connect();
+                                Toast.makeText(main, "Tu t'es connecté", Toast.LENGTH_LONG);
+                                String topic = "firstStep";
+                                String payload = "ginTonic";
+                                byte[] encodedPayload = new byte[0];
+                                try {
+                                    encodedPayload = payload.getBytes("UTF-8");
+                                    MqttMessage message = new MqttMessage(encodedPayload);
+                                    client.publish(topic, message);
+
+                                } catch (UnsupportedEncodingException | MqttException e) {
+                                    Toast.makeText(main, e.getMessage(), Toast.LENGTH_LONG);
+                                }
+
+                                token.setActionCallback(new IMqttActionListener() {
+                                    @Override
+                                    public void onSuccess(IMqttToken asyncActionToken) {
+                                        Toast.makeText(main, "Haha, i connected fr fr", Toast.LENGTH_LONG);
+                                    }
+
+                                    @Override
+                                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                                        Toast.makeText(main, exception.getMessage(), Toast.LENGTH_LONG);
+
+                                    }
+                                });
+                            } catch (MqttException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+                        }
+                    });
+
+                    alert.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+
+                    alert.show();
                 }
             });
 

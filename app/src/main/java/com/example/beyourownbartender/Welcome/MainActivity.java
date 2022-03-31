@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapterList adapterList;
     Context context;
     ArrayList<RecipeDisplay> recipes;
-    MqttAndroidClient client;
+
 
     @Override
     public void onBackPressed() {
@@ -56,25 +56,6 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "TCP CONNECTION URL THINGY", clientId);
-        try {
-            IMqttToken token = client.connect();
-
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
 
         ServerInterface server = RetrofitInstance.getInstance().create(ServerInterface.class);
         Call<ArrayList<RecipeDisplay>> call = server.getRecipes();

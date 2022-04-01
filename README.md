@@ -6,5 +6,7 @@ Be Your Own Bartender est une application mobile où il est possible de partager
 
 ## Besoin d'aide?
 Il est possible d'accéder au wiki en appuyant sur le lien ci-dessous. <br/>
+<br/>
 https://github.com/Nhyv/BeYourOwnBartender.wiki.git <br/>
+<br/>
 Ce dernier contient toutes les fonctionnalités de l'application ainsi qu'une explication détaillé de comment ceux-ci fonctionnent.

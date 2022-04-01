@@ -26,9 +26,11 @@ import com.example.beyourownbartender.ServerInterface;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<RecipeDisplay> recipes;
 
 
+
     @Override
     public void onBackPressed() {
         return;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         getSupportActionBar().setTitle("Liste de recettes");
         context = this;
         recyclerView = findViewById(R.id.rvRecipe);
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume(){
         super.onResume();
         // When the application loads it forces the adapterList to update the DOM if it exists
         if(adapterList != null){

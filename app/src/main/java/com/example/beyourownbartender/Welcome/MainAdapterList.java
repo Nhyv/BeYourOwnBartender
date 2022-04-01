@@ -2,6 +2,7 @@ package com.example.beyourownbartender.Welcome;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,11 +57,13 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     boolean isMain = true;
     boolean isMr, isMl;
     SharedPreferences pref;
-    MqttAndroidClient client;
+    ClientMQTT client;
+    Context context;
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
+        context = main;
         isMain = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
         pref = main.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
@@ -204,64 +207,8 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             btRobot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(main);
-                    alert.setTitle("Connexion MQTT");
-                    alert.setMessage("Entrez votre TCP: ");
-                    EditText input = new EditText(main);
-                    alert.setView(input);
-                    String text = input.getText().toString();
-
-                    alert.setPositiveButton("Accéder", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            String clientId = MqttClient.generateClientId();
-                            client = new MqttAndroidClient(main.getApplicationContext(), "172.16.207.66:1883", clientId);
-
-                            try {
-                                Toast.makeText(main, "Tu tentes de te connecter", Toast.LENGTH_LONG);
-                                IMqttToken token = client.connect();
-                                Toast.makeText(main, "Tu t'es connecté", Toast.LENGTH_LONG);
-                                String topic = "firstStep";
-                                String payload = "ginTonic";
-                                byte[] encodedPayload = new byte[0];
-                                try {
-                                    encodedPayload = payload.getBytes("UTF-8");
-                                    MqttMessage message = new MqttMessage(encodedPayload);
-                                    client.publish(topic, message);
-
-                                } catch (UnsupportedEncodingException | MqttException e) {
-                                    Toast.makeText(main, e.getMessage(), Toast.LENGTH_LONG);
-                                }
-
-                                token.setActionCallback(new IMqttActionListener() {
-                                    @Override
-                                    public void onSuccess(IMqttToken asyncActionToken) {
-                                        Toast.makeText(main, "Haha, i connected fr fr", Toast.LENGTH_LONG);
-                                    }
-
-                                    @Override
-                                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                                        Toast.makeText(main, exception.getMessage(), Toast.LENGTH_LONG);
-
-                                    }
-                                });
-                            } catch (MqttException e) {
-                                e.printStackTrace();
-                            }
-
-
-
-                        }
-                    });
-
-                    alert.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            return;
-                        }
-                    });
-
-                    alert.show();
+                    client = new ClientMQTT(context);
+                    client.publishMessage("ginTonic");
                 }
             });
 

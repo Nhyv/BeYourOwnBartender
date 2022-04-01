@@ -37,7 +37,6 @@ public class ClientMQTT {
     public ClientMQTT(Context context, String serverTTN, int portTTN, String applicationId, String deviceId, String password)
     {
         this.context = context;
-        this.serverUri = "tcp://" + serverTTN + ":" + portTTN;
         this.portTTN = portTTN;
         this.clientId = applicationId;
         this.subscriptionTopic = applicationId + "/devices/" + deviceId + "/up";
@@ -96,17 +95,7 @@ public class ClientMQTT {
             MqttMessage message = new MqttMessage();
             message.setPayload(payload.getBytes());
             message.setQos(0);
-            mqttAndroidClient.publish("firstStep", message,null, new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.i(TAG, "publish succeeded!") ;
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.i(TAG, "publish failed!") ;
-                }
-            });
+            mqttAndroidClient.publish("firstStep", message);
         } catch (MqttException e) {
             Log.e(TAG, e.toString());
             e.printStackTrace();
@@ -124,8 +113,6 @@ public class ClientMQTT {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        //mqttConnectOptions.setUserName(username);
-        //mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
             mqttAndroidClient.connect(mqttConnectOptions, context, new IMqttActionListener()
@@ -235,7 +222,6 @@ public class ClientMQTT {
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
                     Log.w(TAG,"souscrire : onSuccess");
-                    //publishMessage("Bonjour tout le monde");
                 }
 
                 @Override

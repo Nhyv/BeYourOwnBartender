@@ -57,13 +57,10 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
     boolean isMain = true;
     boolean isMr, isMl;
     SharedPreferences pref;
-    ClientMQTT client;
-    Context context;
 
     public MainAdapterList(ArrayList<RecipeDisplay> recipes, MainActivity main) {
         this.recipes = recipes;
         this.main = main;
-        context = main;
         isMain = true;
         fullList = new ArrayList<RecipeDisplay>(recipes);
         pref = main.getSharedPreferences("BYOBPreferences", MODE_PRIVATE);
@@ -207,8 +204,9 @@ public class MainAdapterList extends RecyclerView.Adapter<MainAdapterList.MainVi
             btRobot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    client = new ClientMQTT(context);
-                    client.publishMessage("ginTonic");
+                    //main.client.publishMessage("ginTonic");
+                    main.sendMsg("ginTonic");
+                    //Toast.makeText(btRobot.getContext(), "sendMsg", Toast.LENGTH_SHORT).show();
                 }
             });
 

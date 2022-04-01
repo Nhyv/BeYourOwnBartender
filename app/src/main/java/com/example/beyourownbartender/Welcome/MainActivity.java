@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapterList adapterList;
     Context context;
     ArrayList<RecipeDisplay> recipes;
-
+    ClientMQTT client;
+    boolean co;
 
 
     @Override
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Liste de recettes");
         context = this;
+        client = new ClientMQTT(getApplicationContext());
         recyclerView = findViewById(R.id.rvRecipe);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -78,6 +80,44 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        mqttInfo();
+    }
+
+    private void mqttInfo()
+    {
+        client.reconnecter();
+
+        client.mqttAndroidClient.setCallback(new MqttCallbackExtended()
+        {
+            @Override
+            public void connectComplete(boolean b, String s)
+            {
+                Log.w("A","connectComplete");
+                co = true;
+            }
+
+            @Override
+            public void connectionLost(Throwable throwable)
+            {
+                Log.w("A","connectionLost");
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception
+            {
+                Log.w("A", "messageArrived : " + mqttMessage.toString());
+            }
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken)
+            {
+                Log.w("A", "deliveryComplete");
+            }
+        });
+    }
+
+    public void sendMsg(String msg) {
+        client.publishMessage(msg);
     }
 
     @Override

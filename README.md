@@ -1,12 +1,11 @@
 # Be Your Own Bartender
 ![Colors_yay](https://user-images.githubusercontent.com/49006747/161283481-bc4b3176-289d-4e9f-823c-b89177bc5fab.png)
 
-## Détails de l'application et fonctionnalités
-Be Your Own Bartender est une application mobile où il est possible de partager ses connaissances avec d’autres amateurs d’alcool. On peut y trouver de nombreuses recettes de toutes complexités. Le but est d’apprendre tous ensemble à devenir de meilleurs barmans. 
-
-## Besoin d'aide?
-Il est possible d'accéder au wiki en appuyant sur le lien ci-dessous. <br/>
+## Application details and functionalities
+Be Your Own Bartender is a mobile application where you can share your knowledge with other alcohol amateurs. You can find recipes ranging from easy to complex. The goal is to learn together and become better Bartenders.
+## Need Help?
+It is possible to access the wiki by clicking the link below. <br/>
 <br/>
 https://github.com/Nhyv/BeYourOwnBartender/wiki <br/>
 <br/>
-Ce dernier contient toutes les fonctionnalités de l'application ainsi qu'une explication détaillé de comment ceux-ci fonctionnent.
+The following contains every functionality of the application as well as a detailed explanation of how they work.

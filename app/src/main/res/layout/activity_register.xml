@@ -15,7 +15,7 @@
         android:layout_marginTop="75dp"
         android:layout_marginBottom="75dp"
         android:fontFamily="monospace"
-        android:text="Création de compte"
+        android:text="Account Creation"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="5dp"
-        android:text="Mot de passes non identiques"
+        android:text="Password fields do not match."
         android:textColor="@color/white" />
 
     <EditText
@@ -47,15 +47,15 @@
 
     <EditText
         android:id="@+id/etUsername"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
         android:background="#6A000000"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:ems="10"
-        android:hint="Nom d'utilisateur"
+        android:hint="Username"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColor="#FFFFFF"
@@ -63,15 +63,15 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
         android:background="#6A000000"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:ems="10"
-        android:hint="Mot de passe"
+        android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColor="#FFFFFF"
@@ -79,15 +79,15 @@
 
     <EditText
         android:id="@+id/etPasswordConfirm"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
         android:background="#6A000000"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         android:ems="10"
-        android:hint="Confirmation mot de passe"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColor="#FFFFFF"
@@ -102,6 +102,6 @@
         android:background="#23D3631E"
         android:backgroundTint="#23D3631E"
         android:enabled="false"
-        android:text="S'inscrire"
+        android:text="Create"
         android:textColor="#FFFFFF" />
 </LinearLayout>
